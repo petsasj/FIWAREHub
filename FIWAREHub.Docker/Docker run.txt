@@ -1,0 +1,10 @@
+docker run \
+  --privileged \
+  --restart unless-stopped \
+  --net dockernet \
+  --name=iot-json \
+  -it \
+  --init \
+  -p 7896:7896 \
+  -e IOTA_HTTP_PORT=7896 \
+  fiware/iotagent-json
