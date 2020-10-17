@@ -1,15 +1,24 @@
 version: "3.6"
+
+volumes:
+    mongo_volume:
+      external:
+        name: mongodb
+
 services:
   mongo:
-    image: mongo:2.6
+    image: mongo:4.4
     container_name: ${DBHOST}
     hostname: mongo
     expose:
-    - "27017"
+      - "27017"
     ports:
-    - "27017:27017"
+      - "27017:27017"
     
     network_mode: ${NETWORKMODE}
+    volumes:
+      - mongo_volume:/data
+    
   orion:
     image: fiware/orion:latest
     container_name: ${ORIONHOST}
@@ -17,39 +26,96 @@ services:
     depends_on:
       - mongo
     links:
-    - mongo
+      - mongo
     network_mode: ${NETWORKMODE}
     ports:
-    - "1026:1026"
+      - "1026:1026"
     command: -dbhost ${DBHOST}
-  iot-agent:
+    
+  iot-agent-json:
     image: fiware/iotagent-json:latest
-    hostname: iot-agent
+    hostname: iot-agent-json
     container_name: thesis-iota-json
     depends_on:
-        - mongo
-        - orion
+      - mongo
+      - orion
     links:
-    - mongo
+      - mongo
+      - orion
     network_mode: ${NETWORKMODE}
     expose:
-        - "4041"
-        - "7896"
+      - "4041"
+      - "7896"
     ports:
-        - "4041:4041"
-        - "7896:7896"
+      - "4041:4041"
+      - "7896:7896"
     environment:
-        - IOTA_CB_HOST=${ORIONHOST}
-        - IOTA_CB_PORT=1026
-        - IOTA_NORTH_PORT=4041
-        - IOTA_REGISTRY_TYPE=mongodb
-        - IOTA_LOG_LEVEL=DEBUG
-        - IOTA_TIMESTAMP=true
-        - IOTA_CB_NGSI_VERSION=v2
-        - IOTA_AUTOCAST=true
-        - IOTA_MONGO_HOST=${DBHOST}
-        - IOTA_MONGO_PORT=27017
-        - IOTA_MONGO_DB=${JSONCOLLECTION}
-        - IOTA_HTTP_PORT=7896
-        - IOTA_PROVIDER_URL=http://iot-agent:4041
-        - IOTA_DEFAULT_RESOURCE=/iot/json
+      - IOTA_CB_HOST=${ORIONHOST}
+      - IOTA_CB_PORT=1026
+      - IOTA_NORTH_PORT=4041
+      - IOTA_REGISTRY_TYPE=mongodb
+      - IOTA_LOG_LEVEL=DEBUG
+      - IOTA_TIMESTAMP=true
+      - IOTA_CB_NGSI_VERSION=v2
+      - IOTA_AUTOCAST=true
+      - IOTA_MONGO_HOST=${DBHOST}
+      - IOTA_MONGO_PORT=27017
+      - IOTA_MONGO_DB=${JSONDB}
+      - IOTA_HTTP_PORT=7896
+      - IOTA_PROVIDER_URL=http://iot-agent:4041
+      - IOTA_DEFAULT_RESOURCE=/iot/json
+    
+  iot-agent-ul:
+    image: fiware/iotagent-ul:latest
+    hostname: iot-agent-ul
+    container_name: thesis-iota-ul
+    depends_on:
+      - mongo
+      - orion
+    links:
+      - mongo
+      - orion
+    network_mode: ${NETWORKMODE}
+    expose:
+      - "4041"
+      - "7896"
+    ports:
+      - "4061:4041"
+      - "7897:7896"
+    environment:
+      - IOTA_CB_HOST=${ORIONHOST}
+      - IOTA_CB_PORT=1026
+      - IOTA_NORTH_PORT=4041
+      - IOTA_REGISTRY_TYPE=mongodb
+      - IOTA_MONGO_HOST=${DBHOST}
+      - IOTA_MONGO_PORT=27017
+      - IOTA_MONGO_DB=${ULDB}
+      - IOTA_HTTP_PORT=7896
+      - IOTA_PROVIDER_URL=http://iot-agent:4061
+    
+  iot-agent-lwm2m:
+    image: fiware/lightweightm2m-iotagent:latest
+    hostname: iot-agent-lwm2m
+    container_name: thesis-iota-lwm2m
+    depends_on:
+      - mongo
+      - orion
+    links:
+      - mongo
+      - orion
+    network_mode: ${NETWORKMODE}
+    expose:
+      - "4041"
+      - "7896"
+    ports:
+      - "4081:4041"
+      - "7898:7896"
+    environment:
+      - IOTA_CB_HOST=${ORIONHOST}
+      - IOTA_CB_PORT=1026
+      - IOTA_NORTH_PORT=4041
+      - IOTA_REGISTRY_TYPE=mongodb
+      - IOTA_MONGO_HOST=${DBHOST}
+      - IOTA_MONGO_PORT=27017
+      - IOTA_MONGO_DB=${LWM2MDB}
+      - LWM2M_PORT=7896
