@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.Web", "FIWAREHub.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.Parsers", "FIWAREHub.Parsers\FIWAREHub.Parsers.csproj", "{554BB884-7D81-4D79-A00F-78FC83F8FC51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIWAREHub.ContextBroker", "FIWAREHub.ContextBroker\FIWAREHub.ContextBroker.csproj", "{E6005366-50A6-46A3-98DC-57DBBE31829B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.CBDaemon", "FIWAREHub.CBDaemon\FIWAREHub.CBDaemon.csproj", "{E6005366-50A6-46A3-98DC-57DBBE31829B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
