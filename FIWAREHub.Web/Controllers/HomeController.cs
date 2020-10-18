@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using FIWAREHub.Parsers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FIWAREHub.Web.Models;
@@ -20,6 +21,8 @@ namespace FIWAREHub.Web.Controllers
 
         public IActionResult Index()
         {
+            var test = new FileParser();
+            test.ParseAccidents();
             return View();
         }
 
