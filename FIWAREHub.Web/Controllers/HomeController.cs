@@ -21,9 +21,9 @@ namespace FIWAREHub.Web.Controllers
 
         public IActionResult Index()
         {
-            var fileParser = new FileParser();
+            //var fileParser = new FileParser();
             //fileParser.ParseWeatherEvents();
-            fileParser.ParseAccidentsDataset();
+            //fileParser.ParseAccidentsDataset();
             return View();
         }
 
