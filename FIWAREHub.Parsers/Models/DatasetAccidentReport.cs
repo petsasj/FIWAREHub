@@ -6,7 +6,7 @@ using FileHelpers;
 namespace FIWAREHub.Parsers.Models
 {
     [DelimitedRecord(","), IgnoreFirst(1)]
-    public class AccidentReport
+    public class DatasetAccidentReport
     {
         public string Id { get; set; }
 

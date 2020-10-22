@@ -6,7 +6,7 @@ using FileHelpers;
 namespace FIWAREHub.Parsers.Models
 {
     [DelimitedRecord(","), IgnoreFirst(1)]
-    public class WeatherEvent
+    public class DatasetWeatherEvent
     {
         public string EventId { get; set; }
 

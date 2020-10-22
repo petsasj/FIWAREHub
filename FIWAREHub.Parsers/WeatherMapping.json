@@ -1,0 +1,370 @@
+{
+  "weatherMappings": [
+    {
+      "name": "Partly Cloudy",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Overcast",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Mostly Cloudy",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Clear",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "None"
+    },
+    {
+      "name": "Snow",
+      "weatherEvent": "Snow",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Rain",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Scattered Clouds",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Light Snow",
+      "weatherEvent": "Snow",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Rain",
+      "weatherEvent": "Rain",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Haze",
+      "weatherEvent": "Haze",
+      "severity": "Light",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Heavy Rain",
+      "weatherEvent": "Rain",
+      "severity": "Heavy",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Drizzle",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Haze",
+      "weatherEvent": "Haze",
+      "severity": "Moderate",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Light Thunderstorms and Rain",
+      "weatherEvent": "Thunderstorm, Rain",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Fog",
+      "weatherEvent": "Fog",
+      "severity": "Moderate",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Patches of Fog",
+      "weatherEvent": "Fog",
+      "severity": "Light",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Mist",
+      "weatherEvent": "Fog",
+      "severity": "Light",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Light Rain Showers",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Cloudy",
+      "weatherEvent": "Clear",
+      "severity": "Moderate",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Fair",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "None"
+    },
+    {
+      "name": "Drizzle",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Heavy Drizzle",
+      "weatherEvent": "Rain",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Rain Showers",
+      "weatherEvent": "Rain",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Volcanic Ash",
+      "weatherEvent": "Dust",
+      "severity": "Moderate",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Showers in the Vicinity",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Thunderstorm",
+      "weatherEvent": "Thunderstorm",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Rain Shower",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Widespread Dust",
+      "weatherEvent": "Dust",
+      "severity": "Heavy",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Fair / Windy",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Shallow Fog",
+      "weatherEvent": "Fog",
+      "severity": "Light",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Light Rain / Windy",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Rain / Windy",
+      "weatherEvent": "Rain",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Heavy Rain / Windy",
+      "weatherEvent": "Rain",
+      "severity": "Heavy",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Freezing Rain",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Squalls",
+      "weatherEvent": "Clear",
+      "severity": "Moderate",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Smoke",
+      "weatherEvent": "Smoke",
+      "severity": "Moderate",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Heavy Snow",
+      "weatherEvent": "Snow",
+      "severity": "Heavy",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Freezing Fog",
+      "weatherEvent": "Fog",
+      "severity": "Light",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Heavy Smoke",
+      "weatherEvent": "Smoke",
+      "severity": "Heavy",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Thunderstorms and Rain",
+      "weatherEvent": "Thunderstorm, Rain",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Heavy Thunderstorms and Rain",
+      "weatherEvent": "Thunderstorm, Rain",
+      "severity": "Heavy",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Mostly Cloudy / Windy",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Light Hail",
+      "weatherEvent": "Hail",
+      "severity": "Light",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Partly Cloudy / Windy",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Cloudy / Windy",
+      "weatherEvent": "Clear",
+      "severity": "None",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Smoke / Windy",
+      "weatherEvent": "Smoke",
+      "severity": "Moderate",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Thunder in the Vicinity",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "T-Storm",
+      "weatherEvent": "Thunderstorm",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Thunderstorm",
+      "weatherEvent": "Thunderstorm",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Snow Showers",
+      "weatherEvent": "Snow",
+      "severity": "Light",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Fog / Windy",
+      "weatherEvent": "Fog",
+      "severity": "Moderate",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Dust Whirls",
+      "weatherEvent": "Dust",
+      "severity": "Moderate",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Light Freezing Drizzle",
+      "weatherEvent": "Rain",
+      "severity": "Light",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Snow Grains",
+      "weatherEvent": "Snow",
+      "severity": "Light",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Light Fog",
+      "weatherEvent": "Fog",
+      "severity": "Light",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Sand",
+      "weatherEvent": "Dust",
+      "severity": "Moderate",
+      "cloudCoverage": "Partly"
+    },
+    {
+      "name": "Heavy Thunderstorms with Small Hail",
+      "weatherEvent": "Thunderstorm, Hail",
+      "severity": "Heavy",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Heavy Rain Showers",
+      "weatherEvent": "Rain",
+      "severity": "Heavy",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Thunderstorms and Snow",
+      "weatherEvent": "Thunderstorm, Snow",
+      "severity": "Moderate",
+      "cloudCoverage": "Full"
+    },
+    {
+      "name": "Light Snow / Windy",
+      "weatherEvent": "Snow",
+      "severity": "Light",
+      "cloudCoverage": "Mostly"
+    },
+    {
+      "name": "Light Ice Pellets",
+      "weatherEvent": "Snow",
+      "severity": "Light",
+      "cloudCoverage": "Mostly"
+    }
+  ]
+}
