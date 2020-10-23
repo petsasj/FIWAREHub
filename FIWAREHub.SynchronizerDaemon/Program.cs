@@ -34,15 +34,17 @@ namespace FIWAREHub.SynchronizerDaemon
             {
                 try
                 {
-                    Daemon.ListenForMongoDBChanges().GetAwaiter().GetResult();
 
-                    //if (DateTime.UtcNow > cron.GetNextOccurrence(lastCheck))
-                    //{
-                    //    lastCheck = DateTime.UtcNow;
-                    //    //currentTask = Task.Factory.StartNew(async () => ScheduleAsync(await ServerTime()),TaskCreationOptions.LongRunning).GetAwaiter();
-                    //    currentTask = Task.Factory.StartNew(async () => Daemon.ListenForMongoDBChanges(),
-                    //        TaskCreationOptions.LongRunning).GetAwaiter();
-                    //}
+                    if (DateTime.UtcNow > cron.GetNextOccurrence(lastCheck))
+                    {
+                        lastCheck = DateTime.UtcNow;
+
+                        if (!Daemon.Running)
+                        {
+                            currentTask = Task.Factory.StartNew(async () => Daemon.ListenForMongoDBChanges(),
+                                TaskCreationOptions.LongRunning).GetAwaiter();
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {

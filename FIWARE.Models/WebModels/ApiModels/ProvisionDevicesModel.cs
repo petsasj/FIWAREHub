@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace FIWAREHub.Web.Models.ApiModels
+namespace FIWAREHub.Models.WebModels.ApiModels
 {
-    public class POSTProvisionDevice
+    public class ProvisionDevicesModel
     {
 
         [JsonProperty("devices")]

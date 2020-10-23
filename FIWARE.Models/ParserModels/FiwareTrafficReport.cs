@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace FIWAREHub.Parsers.Models
+namespace FIWAREHub.Models.ParserModels
 {
-    public class POSTTrafficReport
+    public class FiwareTrafficReport
     {
         // sv
         public string Severity { get; set; }

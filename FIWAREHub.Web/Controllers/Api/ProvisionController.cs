@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using FIWAREHub.Models.WebModels.ApiModels;
 using FIWAREHub.Web.Models;
-using FIWAREHub.Web.Models.ApiModels;
 using FIWAREHub.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-using Attribute = FIWAREHub.Web.Models.ApiModels.Attribute;
+using Attribute = FIWAREHub.Models.WebModels.ApiModels.Attribute;
 
 namespace FIWAREHub.Web.Controllers.Api
 {
@@ -40,7 +40,7 @@ namespace FIWAREHub.Web.Controllers.Api
                 ("Precipitation", "pcpt", "decimal")
             };
 
-            var json = new POSTProvisionDevice
+            var json = new ProvisionDevicesModel
             {
                 Devices = FIWAREUrls.WeatherDeviceIds.Select(id => new Device
                 {
@@ -95,7 +95,7 @@ namespace FIWAREHub.Web.Controllers.Api
                 ("Country", "c", "string")
             };
 
-            var json = new POSTProvisionDevice
+            var json = new ProvisionDevicesModel
             {
                 Devices = FIWAREUrls.RoadTrafficDeviceIds.Select(id => new Device
                 {
@@ -141,7 +141,7 @@ namespace FIWAREHub.Web.Controllers.Api
                 Cbroker = FIWAREUrls.OrionUrl
             };
 
-            var json = new POSTServiceGroupCreation
+            var json = new ProvisionServiceGroupModel
             {
                 Services = new List<Service>
                 {

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using DevExpress.Xpo;
+using DevExpress.Xpo.DB;
+using FIWAREHub.Models.DaemonModels;
+using FIWAREHub.Models.Sql;
 using FIWAREHub.SynchronizerDaemon;
-using FIWAREHub.SynchronizerDaemon.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -18,7 +21,9 @@ namespace FIWAREHub.ContextBroker
 
         public static async Task ListenForMongoDBChanges()
         {
-            Console.WriteLine("Starting Listener");
+            var uow = new UnitOfWork(ConnectionHelper.GetDataLayer(AutoCreateOption.DatabaseAndSchema));
+
+            Report("Starting Listener");
             Running = true;
 
             // or use a connection string
@@ -26,14 +31,17 @@ namespace FIWAREHub.ContextBroker
 
             using (var cursor = orionContext.Entities.Watch())
             {
+                Report("Cursor Watching started");
                 try
                 {
                     foreach (var change in cursor.ToEnumerable())
                     {
+                        Report("Cursor Watch received update");
                         // Do Stuff
                         // Find way to distinguish between weather and roadtraffic data 
                         var weatherUpdates = BsonSerializer.Deserialize<WeatherReportUpdate>(change.UpdateDescription.UpdatedFields);
 
+                        
                     }
 
                 }
@@ -45,7 +53,9 @@ namespace FIWAREHub.ContextBroker
                 Running = false;
             }
 
-            Console.WriteLine("Exiting Listener");
+            Report("Exiting Listener");
         }
+
+        private static void Report(string message) => Console.WriteLine($"{DateTime.UtcNow:dd-MM hh:mm:ss}: {message}");
     }
 }

@@ -5,16 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExpress.Xpo" Version="20.1.8" />
     <PackageReference Include="FileHelpers" Version="3.4.1" />
+    <PackageReference Include="MongoDB.Bson" Version="2.11.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FIWARE.Models\FIWAREHub.Models.csproj" />
+    <None Update="Model.xpo.diagram">
+      <AutoGen>True</AutoGen>
+    </None>
   </ItemGroup>
 
 </Project>

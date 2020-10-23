@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using FileHelpers;
 
-namespace FIWAREHub.Parsers.Models
+namespace FIWAREHub.Models.ParserModels
 {
     [DelimitedRecord(","), IgnoreFirst(1)]
     public class DatasetWeatherEvent

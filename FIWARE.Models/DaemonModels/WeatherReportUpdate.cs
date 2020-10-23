@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace FIWAREHub.SynchronizerDaemon.Models
+namespace FIWAREHub.Models.DaemonModels
 {
     [BsonIgnoreExtraElements]
     public class WeatherReportUpdate

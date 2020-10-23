@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace FIWAREHub.Parsers.Models
+namespace FIWAREHub.Models.ParserModels
 {
-    public class WeatherMappingList
+    public class WeatherMappings
     {
-        public List<WeatherMapping> WeatherMappings { get; set; }
+        public List<WeatherMapping> Mappings { get; set; }
     }
 
     public class WeatherMapping

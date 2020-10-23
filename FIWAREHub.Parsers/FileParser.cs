@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FileHelpers;
+using FIWAREHub.Models.ParserModels;
 using FIWAREHub.Parsers.Extensions;
-using FIWAREHub.Parsers.Models;
-using FIWAREHub.Parsers.ViewModels;
+
 
 namespace FIWAREHub.Parsers
 {
@@ -28,7 +28,7 @@ namespace FIWAREHub.Parsers
             return weatherEvents;
         }
 
-        public IEnumerable<IoTCombinedReport> ParseAccidentsDataset()
+        public IEnumerable<FiwareCombinedReport> ParseAccidentsDataset()
         {
             var currentDirectory = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var mappingsFileLocation = @"..\..\..\..\FIWAREHub.Parsers\WeatherMapping.json";
@@ -39,7 +39,7 @@ namespace FIWAREHub.Parsers
                 throw new ArgumentException("Weather mappings json is missing.");
 
             var fileAsString = System.IO.File.ReadAllText(combined);
-            var weatherMappings = Newtonsoft.Json.JsonConvert.DeserializeObject<WeatherMappingList>(fileAsString);
+            var weatherMappings = Newtonsoft.Json.JsonConvert.DeserializeObject<WeatherMappings>(fileAsString);
 
 
             var engine = new FileHelperEngine<DatasetAccidentReport>();
@@ -59,9 +59,9 @@ namespace FIWAREHub.Parsers
                 .OrderByDescending(g => g.Count())
                 .Take(2)
                 .SelectMany(g => g.ToList())
-                .Select(ar => new IoTCombinedReport
+                .Select(ar => new FiwareCombinedReport
                 {
-                    WeatherReport = new POSTWeatherReport(ar.WeatherCondition, weatherMappings)
+                    FiwareWeatherReport = new FiwareWeatherReport(ar.WeatherCondition, weatherMappings)
                     {
                         Humidity = ar.Humidity,
                         Precipitation = ar.Precipitation,
@@ -73,7 +73,7 @@ namespace FIWAREHub.Parsers
                         WindDirection = ar.WindDirection,
                         WindSpeed = ar.WindSpeed
                     },
-                    TrafficData = new POSTTrafficReport
+                    FiwareTrafficDataReport = new FiwareTrafficReport
                     {
                         StartTime = ar.StartTime,
                         AddressNumber = ar.AddressNumber,

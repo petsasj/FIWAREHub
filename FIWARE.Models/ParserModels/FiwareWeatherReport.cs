@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Newtonsoft.Json;
+using FIWAREHub.Models.ParserModels;
 
-namespace FIWAREHub.Parsers.Models
+namespace FIWAREHub.Models.ParserModels
 {
-    public class POSTWeatherReport
+    public class FiwareWeatherReport
     {
         [JsonProperty("rt")]
         public DateTime? ReportTime { get; set; }
@@ -47,18 +46,18 @@ namespace FIWAREHub.Parsers.Models
         [JsonProperty("pcpt")]
         public decimal? Precipitation { get; set; }
 
+        /// <summary>
+        /// Used only for Test Actions
+        /// </summary>
         [Obsolete]
-        public POSTWeatherReport()
-        {
-            
-        }
+        public FiwareWeatherReport() { }
 
-        public POSTWeatherReport(string weatherCondition, WeatherMappingList weatherMappings)
+        public FiwareWeatherReport(string weatherCondition, WeatherMappings weatherMappings)
         {
             if (string.IsNullOrWhiteSpace(weatherCondition))
                 return;
 
-            setWeatherEventProperties(weatherCondition, weatherMappings);
+            SetWeatherEventProperties(weatherCondition, weatherMappings);
         }
 
 
@@ -67,11 +66,11 @@ namespace FIWAREHub.Parsers.Models
         /// to more statistical appropriate sub-properties
         /// </summary>
         /// <param name="weatherCondition"></param>
-        private void setWeatherEventProperties(string weatherCondition, WeatherMappingList weatherMappings)
+        private void SetWeatherEventProperties(string weatherCondition, WeatherMappings weatherMappings)
         {
             this.OriginalWeatherConditionDescription = weatherCondition;
 
-            var weatherMapping = weatherMappings.WeatherMappings
+            var weatherMapping = weatherMappings.Mappings
                 .SingleOrDefault(wm => wm.Name.ToLower() == weatherCondition.ToLower());
 
             if (weatherMapping == null)

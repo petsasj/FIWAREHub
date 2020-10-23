@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44f06be-70c9-4896-8814-5c73f84ff08d" namespace="FIWAREHub.Models.Sql" dataBaseShemaInfo="H4sIAAAAAAAEAMVV227aQBB9r9R/sHjO+m5sR8ZRA2katY0iIG1fZ71jWNUXtLsG8vddgyFAkl7UKn3znDmjuZzxbHKxLgtjiULyuhr0HNPuXaRv3ySXIHGiagEzvKny2tCsSp6vJR/05kotzi1rtVqZK8+sxcxybduxvn3+NMnmWALhlVRQZdjbR7FfR/V0VsNIpkALlG3Kjb1DDoAddAslpl8R1BzFGBe1UIn16Nhzr6oWS5VoMLE6Y+8ccdkC9wsGCtMcCqlJx+Cee91wdsNSB3PIaeYSx7eB+F7eJ9RhlLAwzKAPUZ/SMLE68j54WBdNWcmjNl6EtaPtYetMPzQlZ1w9JNYBeET+WYt/2uZhq1FgB4A5JbYTOcSnsUfACW3Sh4Ayj7II/eBJqzrceq6t59BOsN9We1wDmwrIc569ouKUemEeuxkBm8bEDyAgQH2PhBRcmsVuzNjTMfyN4hMlENXr6+26NM7CPCR2xBjxHeYS6DMkToQexOCGLIv+qd6d/UhJ2pOD7E7U2QY0rC38ZXuf0hEur9YLgVKaI1BgLl3bdM6Mzj1oLTM07TNj2BSqETiosFECijPjrqEFzz7iw7T+jtWARhFzwsBnoW2jH0Ni7VJs8g0LkBJlK8C42U83ecd0aZjzdVfXFpo0+RE0xrJe4ilxi55yh/rMpvdVNodqhkzPrLW3o3muhkRPZoFC8f9c2wtlJNdYodDrNazLEislux19Ah+RRyj5TH++53oVTiKOfZuw26Yo2q25xDkseS30UuSg5db/y6lHv2PWyUOW/gAMPwPm8QYAAA==" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="FiwareHub" createdInVersion="20.1.7.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="true" lastModifiedInVersion="20.1.7.0" name="FiwareHub" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
+  <classes>
+    <dataBaseObjectModelHasClasses Id="f6cb01a9-ef6f-4622-9cf5-da9040ebc454">
+      <xpObject Id="1efafbc2-140a-43f6-b1db-d77ca6a86bb7" name="WeatherReport" baseClass="XPObject" userFileName="WeatherReport" designerFileName="WeatherReport.Designer" className="WeatherReport" virtualName="WeatherReport">
+        <fields>
+          <generalXpObjectHasFields Id="455f3105-5c5f-4733-8bba-70bbe911ab90">
+            <field Id="8505aefb-0181-4b93-a170-6a5bd3bd8e45" name="Humidity" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+        </fields>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+    <dataBaseObjectModelHasClasses Id="c960c87d-fe4e-4671-9116-ad1cbc83f882">
+      <xpObject Id="bb37f92c-a0b9-45a5-ab43-7ba2bc929dd5" name="RoadTrafficReport" baseClass="XPObject" userFileName="RoadTrafficReport" designerFileName="RoadTrafficReport.Designer" className="RoadTrafficReport" virtualName="RoadTrafficReport">
+        <fields>
+          <generalXpObjectHasFields Id="b189879e-6f7a-4909-812d-80aab38d0651">
+            <field Id="22b9c7f7-08dd-41d2-a6de-18e3a9a27dc8" name="Street" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+        </fields>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+  </classes>
+</dataBaseObjectModel>

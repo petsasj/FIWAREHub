@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExpress.Xpo" Version="20.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FIWARE.Models\FIWAREHub.Models.csproj" />
     <ProjectReference Include="..\FIWAREHub.Parsers\FIWAREHub.Parsers.csproj" />
   </ItemGroup>
 

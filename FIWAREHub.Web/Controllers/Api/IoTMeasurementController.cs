@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FIWAREHub.Parsers.Models;
+using FIWAREHub.Models.ParserModels;
 using FIWAREHub.Web.Models;
 using FIWAREHub.Web.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +15,7 @@ namespace FIWAREHub.Web.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> PostTestWeatherMeasurement()
         {
-            var weatherEvent = new POSTWeatherReport
+            var weatherEvent = new FiwareWeatherReport
             {
                 Temperature = 12,
                 WindChill = 0,
@@ -39,7 +39,7 @@ namespace FIWAREHub.Web.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> PostTestRoadTrafficReport()
         {
-            var roadTraffic = new POSTTrafficReport
+            var roadTraffic = new FiwareTrafficReport
             {
                 StartTime = DateTime.UtcNow,
                 City = "Random",
