@@ -3,18 +3,16 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DevExpress.Data.Utils;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using DevExpress.Xpo.Metadata;
-using FIWAREHub.SynchronizerDaemon;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
 using FIWAREHub.Models.DaemonModels;
 using FIWAREHub.Models.Enums;
 using FIWAREHub.Models.Sql;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 
-namespace FIWAREHub.ContextBroker
+namespace FIWAREHub.SynchronizerDaemon
 {
     public static class Daemon
     {
@@ -94,44 +92,45 @@ namespace FIWAREHub.ContextBroker
 
                         idRow.TryGetValue("id", out var deviceId);
 
+                        // creates instace of DTO Object and adds to ConcurrentQueue
                         if (entityTypeEnum == EntityTypeEnum.WeatherReport)
                         {
                             Report($"Received Weather Report from device {deviceId}");
-                            var uow = getUnitOfWork();
+                            
                             var weatherUpdate = BsonSerializer.Deserialize<WeatherReportUpdate>(change.UpdateDescription.UpdatedFields);
 
                             if (weatherUpdate == null)
                                 continue;
 
-                            var weatherReport = new WeatherReport(uow, weatherUpdate) {DeviceId = deviceId?.ToString()};
+                            var uow = getUnitOfWork();
 
-                            while (_unitOfWorkLock)
+                            while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true|| uow.IsObjectsSaving)
                             {
                                 Report("Lists are locked, waiting");
                                 System.Threading.Thread.Sleep(50);
                             }
+
+                            var weatherReport = new WeatherReport(uow, weatherUpdate) {DeviceId = deviceId?.ToString()};
 
                             WeatherReports.Enqueue(weatherReport);
                         }
                         else if (entityTypeEnum == EntityTypeEnum.RoadTrafficReport)
                         {
                             Report($"Received Road Traffic Report from device {deviceId}");
-                            var uow = getUnitOfWork();
                             var roadTrafficUpdate = BsonSerializer.Deserialize<RoadTrafficReportUpdate>(change.UpdateDescription.UpdatedFields);
 
                             if (roadTrafficUpdate == null)
                                 continue;
 
-                            var roadTrafficReport = new RoadTrafficReport(uow, roadTrafficUpdate)
-                            {
-                                DeviceId = deviceId?.ToString(),
-                            };
+                            var uow = getUnitOfWork();
 
-                            while (_unitOfWorkLock)
+                            while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true|| uow.IsObjectsSaving)
                             {
                                 Report("Lists are locked, waiting");
                                 System.Threading.Thread.Sleep(50);
                             }
+
+                            var roadTrafficReport = new RoadTrafficReport(uow, roadTrafficUpdate) {DeviceId = deviceId?.ToString()};
 
                             RoadTrafficReports.Enqueue(roadTrafficReport);
                         }
@@ -140,6 +139,7 @@ namespace FIWAREHub.ContextBroker
                 catch (Exception ex)
                 {
                     Running = false;
+                    Report($"EXCEPTION: {ex.Message}");
                     throw new Exception(ex.Message);
                 }
 

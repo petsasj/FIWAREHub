@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using FIWAREHub.ContextBroker;
 using Microsoft.Extensions.DependencyInjection;
 using NCrontab;
 
