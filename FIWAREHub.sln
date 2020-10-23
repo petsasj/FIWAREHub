@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.SynchronizerDaemon", "FIWAREHub.SynchronizerDaemon\FIWAREHub.SynchronizerDaemon.csproj", "{05AE5381-0E5A-4DEE-906D-728C9A1B972D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.Models", "FIWARE.Models\FIWAREHub.Models.csproj", "{50FE93C5-8771-4217-BA81-722A5E7C5873}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.Models", "FIWAREHub.Models\FIWAREHub.Models.csproj", "{50FE93C5-8771-4217-BA81-722A5E7C5873}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

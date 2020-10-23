@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FIWARE.Models\FIWAREHub.Models.csproj" />
+    <ProjectReference Include="..\FIWAREHub.Models\FIWAREHub.Models.csproj" />
     <ProjectReference Include="..\FIWAREHub.Parsers\FIWAREHub.Parsers.csproj" />
   </ItemGroup>
 

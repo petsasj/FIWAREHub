@@ -3,12 +3,12 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
-using FIWAREHub.Models.DaemonModels;
-using FIWAREHub.Models.Sql;
 using FIWAREHub.SynchronizerDaemon;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using FIWAREHub.Models.DaemonModels;
+using FIWAREHub.Models.Sql;
 
 namespace FIWAREHub.ContextBroker
 {
