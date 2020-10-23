@@ -18,11 +18,90 @@ namespace FIWAREHub.Models.Sql
 
     public partial class WeatherReport : XPObject
     {
-        decimal fHumidity;
-        public decimal Humidity
+        string fDeviceId;
+        public string DeviceId
+        {
+            get { return fDeviceId; }
+            set { SetPropertyValue<string>(nameof(DeviceId), ref fDeviceId, value); }
+        }
+        DateTime? fReportTime;
+        public DateTime? ReportTime
+        {
+            get { return fReportTime; }
+            set { SetPropertyValue<DateTime?>(nameof(ReportTime), ref fReportTime, value); }
+        }
+        string fWeatherEvent;
+        public string WeatherEvent
+        {
+            get { return fWeatherEvent; }
+            set { SetPropertyValue<string>(nameof(WeatherEvent), ref fWeatherEvent, value); }
+        }
+        string fSeverity;
+        public string Severity
+        {
+            get { return fSeverity; }
+            set { SetPropertyValue<string>(nameof(Severity), ref fSeverity, value); }
+        }
+        string fOriginalWeatherDescription;
+        [Size(SizeAttribute.Unlimited)]
+        public string OriginalWeatherDescription
+        {
+            get { return fOriginalWeatherDescription; }
+            set { SetPropertyValue<string>(nameof(OriginalWeatherDescription), ref fOriginalWeatherDescription, value); }
+        }
+        decimal? fTemperature;
+        public decimal? Temperature
+        {
+            get { return fTemperature; }
+            set { SetPropertyValue<decimal?>(nameof(Temperature), ref fTemperature, value); }
+        }
+        decimal? fHumidity;
+        public decimal? Humidity
         {
             get { return fHumidity; }
-            set { SetPropertyValue<decimal>(nameof(Humidity), ref fHumidity, value); }
+            set { SetPropertyValue<decimal?>(nameof(Humidity), ref fHumidity, value); }
+        }
+        decimal? fPressure;
+        public decimal? Pressure
+        {
+            get { return fPressure; }
+            set { SetPropertyValue<decimal?>(nameof(Pressure), ref fPressure, value); }
+        }
+        decimal? fVisibility;
+        public decimal? Visibility
+        {
+            get { return fVisibility; }
+            set { SetPropertyValue<decimal?>(nameof(Visibility), ref fVisibility, value); }
+        }
+        string fCloudCoverage;
+        public string CloudCoverage
+        {
+            get { return fCloudCoverage; }
+            set { SetPropertyValue<string>(nameof(CloudCoverage), ref fCloudCoverage, value); }
+        }
+        string fWindDirection;
+        public string WindDirection
+        {
+            get { return fWindDirection; }
+            set { SetPropertyValue<string>(nameof(WindDirection), ref fWindDirection, value); }
+        }
+        decimal? fWindChill;
+        public decimal? WindChill
+        {
+            get { return fWindChill; }
+            set { SetPropertyValue<decimal?>(nameof(WindChill), ref fWindChill, value); }
+        }
+        decimal? fWindSpeed;
+        public decimal? WindSpeed
+        {
+            get { return fWindSpeed; }
+            set { SetPropertyValue<decimal?>(nameof(WindSpeed), ref fWindSpeed, value); }
+        }
+        decimal? fPrecipitation;
+        public decimal? Precipitation
+        {
+            get { return fPrecipitation; }
+            set { SetPropertyValue<decimal?>(nameof(Precipitation), ref fPrecipitation, value); }
         }
     }
 

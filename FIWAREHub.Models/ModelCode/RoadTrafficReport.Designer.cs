@@ -18,11 +18,90 @@ namespace FIWAREHub.Models.Sql
 
     public partial class RoadTrafficReport : XPObject
     {
+        string fDeviceId;
+        public string DeviceId
+        {
+            get { return fDeviceId; }
+            set { SetPropertyValue<string>(nameof(DeviceId), ref fDeviceId, value); }
+        }
+        string fSeverity;
+        public string Severity
+        {
+            get { return fSeverity; }
+            set { SetPropertyValue<string>(nameof(Severity), ref fSeverity, value); }
+        }
+        DateTime? fStartTime;
+        public DateTime? StartTime
+        {
+            get { return fStartTime; }
+            set { SetPropertyValue<DateTime?>(nameof(StartTime), ref fStartTime, value); }
+        }
+        string fGeoLocation;
+        public string GeoLocation
+        {
+            get { return fGeoLocation; }
+            set { SetPropertyValue<string>(nameof(GeoLocation), ref fGeoLocation, value); }
+        }
+        decimal? fDistance;
+        public decimal? Distance
+        {
+            get { return fDistance; }
+            set { SetPropertyValue<decimal?>(nameof(Distance), ref fDistance, value); }
+        }
+        string fDescription;
+        [Size(SizeAttribute.Unlimited)]
+        public string Description
+        {
+            get { return fDescription; }
+            set { SetPropertyValue<string>(nameof(Description), ref fDescription, value); }
+        }
+        string fAddressNumber;
+        public string AddressNumber
+        {
+            get { return fAddressNumber; }
+            set { SetPropertyValue<string>(nameof(AddressNumber), ref fAddressNumber, value); }
+        }
         string fStreet;
         public string Street
         {
             get { return fStreet; }
             set { SetPropertyValue<string>(nameof(Street), ref fStreet, value); }
+        }
+        string fSide;
+        public string Side
+        {
+            get { return fSide; }
+            set { SetPropertyValue<string>(nameof(Side), ref fSide, value); }
+        }
+        string fCity;
+        public string City
+        {
+            get { return fCity; }
+            set { SetPropertyValue<string>(nameof(City), ref fCity, value); }
+        }
+        string fCounty;
+        public string County
+        {
+            get { return fCounty; }
+            set { SetPropertyValue<string>(nameof(County), ref fCounty, value); }
+        }
+        string fState;
+        public string State
+        {
+            get { return fState; }
+            set { SetPropertyValue<string>(nameof(State), ref fState, value); }
+        }
+        string fZipCode;
+        public string ZipCode
+        {
+            get { return fZipCode; }
+            set { SetPropertyValue<string>(nameof(ZipCode), ref fZipCode, value); }
+        }
+        string fCountry;
+        public string Country
+        {
+            get { return fCountry; }
+            set { SetPropertyValue<string>(nameof(Country), ref fCountry, value); }
         }
     }
 

@@ -44,20 +44,4 @@ namespace FIWAREHub.Models.DaemonModels
         [BsonElement("attrs.Precipitation")]
         public UpdateValue Precipitation { get; set; }
     }
-
-    [BsonIgnoreExtraElements]
-    public class UpdateValue
-    {
-        [BsonElement("value")]
-        public dynamic Value { get; set; }
-
-        [BsonElement("type")]
-        public string Type { get; set; }
-
-        [BsonElement("creDate")]
-        public double CreationDate { get; set; }
-
-        [BsonElement("modDate")]
-        public double ModifiedDate { get; set; }
-    }
 }

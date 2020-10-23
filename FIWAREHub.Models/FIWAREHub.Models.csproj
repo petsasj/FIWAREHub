@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="DevExpress.Xpo" Version="20.1.8" />
     <PackageReference Include="FileHelpers" Version="3.4.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.11.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>

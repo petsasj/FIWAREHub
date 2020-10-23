@@ -45,7 +45,7 @@ namespace FIWAREHub.Web.Controllers.Api
                 City = "Random",
                 AddressNumber = "AddrNr",
                 StartLatitude = "37.9600965",
-                StartLongitude = "23.8576042"
+                StartLongitude = "23.8576043"
             };
 
             using var fiwareClient = new FIWAREClient();

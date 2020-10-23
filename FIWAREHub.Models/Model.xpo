@@ -1,11 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44f06be-70c9-4896-8814-5c73f84ff08d" namespace="FIWAREHub.Models.Sql" dataBaseShemaInfo="H4sIAAAAAAAEAMVV227aQBB9r9R/sHjO+m5sR8ZRA2katY0iIG1fZ71jWNUXtLsG8vddgyFAkl7UKn3znDmjuZzxbHKxLgtjiULyuhr0HNPuXaRv3ySXIHGiagEzvKny2tCsSp6vJR/05kotzi1rtVqZK8+sxcxybduxvn3+NMnmWALhlVRQZdjbR7FfR/V0VsNIpkALlG3Kjb1DDoAddAslpl8R1BzFGBe1UIn16Nhzr6oWS5VoMLE6Y+8ccdkC9wsGCtMcCqlJx+Cee91wdsNSB3PIaeYSx7eB+F7eJ9RhlLAwzKAPUZ/SMLE68j54WBdNWcmjNl6EtaPtYetMPzQlZ1w9JNYBeET+WYt/2uZhq1FgB4A5JbYTOcSnsUfACW3Sh4Ayj7II/eBJqzrceq6t59BOsN9We1wDmwrIc569ouKUemEeuxkBm8bEDyAgQH2PhBRcmsVuzNjTMfyN4hMlENXr6+26NM7CPCR2xBjxHeYS6DMkToQexOCGLIv+qd6d/UhJ2pOD7E7U2QY0rC38ZXuf0hEur9YLgVKaI1BgLl3bdM6Mzj1oLTM07TNj2BSqETiosFECijPjrqEFzz7iw7T+jtWARhFzwsBnoW2jH0Ni7VJs8g0LkBJlK8C42U83ecd0aZjzdVfXFpo0+RE0xrJe4ilxi55yh/rMpvdVNodqhkzPrLW3o3muhkRPZoFC8f9c2wtlJNdYodDrNazLEislux19Ah+RRyj5TH++53oVTiKOfZuw26Yo2q25xDkseS30UuSg5db/y6lHv2PWyUOW/gAMPwPm8QYAAA==" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="FiwareHub" createdInVersion="20.1.7.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="true" lastModifiedInVersion="20.1.7.0" name="FiwareHub" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
+<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44f06be-70c9-4896-8814-5c73f84ff08d" namespace="FIWAREHub.Models.Sql" dataBaseShemaInfo="H4sIAAAAAAAEAN1ZbW/URhD+jsR/iPKZze37C7oElQulqJSiJNCq32Z3ZxOrd/bJ9iXh33ecHIEk0FLhxlKFFOHZtezHM/PM8+zNn12uljvn2HZVU+/vij2+++zg8aP5c+jwuG9aOMVXdWl2aFfdPb3sqv3ds75fP53NLi4u9i7UXtOeziTnYvb7L6+P0xmugFV110OdcPfmrvzPd+3SU3d25icQl9gNj7y6/hj5LPAx9AZWePAbQn+G7RGum7afzz4t3Ox9UQ+xg77d4Hy2vbhZPKy6IfBunaHHgwLLjjbdDt7sfbmp8qt8ILBAiUkyoTkwrYplUeTIsnMJLHgbo5vPtptvbl40y82q7m7B+GqYFgYM14sHP21WVa76D/PZZ8Fbm/8O4r+F+TlUb7gBLJFx4QXTMSgGwnFmwcSsYvaozT2odPvsO9Ae4nmV8FV+eLROoNaG0ql9KvSHc+YF18xYo4yKjptgx0Z7Xbcn1QonwAvFZp84G1JJeDNnQfnAeIrJS+N4BBgb77ZdX5xj3T88YoEpe6Uic9F7ppNPzHOTWSnOocoy+RLGRnyMxK2TdG+QSiAGy2ROlN8YEwNVCgtRJ108Kh5G795f2+q0qmG5zfMhdqmt1j2NlofHD9oKa3lhOaFiWjjNoKTAQkDkRrnktRgb/wmu1thCv2knaGjBQ+RAbVyMNkxnlCyYRHymZZI+GgtFjw34bYtdNwlar2Xk3CXm5EDXlmocpJfMRxdLLJ4r4GOjfV91VayWk7SzUh6j0pnJUIi8LDFYNEWxmG3JmitedBob72LZbPKiIQYjGfjwkIvVQcYEBFRGYjDkLJK6oqp2QRBzO4Nq9AlV1fmwajFNQ1pOgUqlIFNJEGRjia+8yywFojMq8iKz/C8gL86q5XKCGRVJhCSk/o2ciCpLYN5QTyekAi9cRGlGn1ED3OM14gQSMxFDC58FUzaXAS6N5BItc0knGelDgBk9u8TQqVpXPUxT0AqKyTFIFpV0pLkMsKA9siIK4ffKQf52lfml6Nb0fbNjPGogn7RQSpUe0DXGqFwJQ755DNTXYBhErUiJAjFckCHn+4X+Pa7xuG8RJ9DYUsaQXHGM+0yqU2TJwGZkggQnBJAuJ///8YyJi5JROVakGfjrajilyESCwR6Dynl0tNM5iilye9zDZAaZk76IgnpWWE0qmkciMYUsgAEnMiSTR5cfL7F53aSJuJpjERJyJLUxcHWRZCACiWvjDc1oss7Bjn/eU12fFU5QzRroH1J6gZySDpy0R8k0noxJIVvkWuH4TDWhISY1LTIn30BWgdRHyo5FrgWzVpO2NjnxOHr7/pDz4BDfbFYR2wlMoiLjC9S9HBPl2JK0hOgKEzkA1bpWWoxuiY+rPEE1R5dIS2jNMBMta5+QDU6C0myd4IHy7O4fS3+vPZxkCoFSQZnMmQgIA0uRRUJCSvQkvC+JGxi9jBfNpp4CK1kgjRYyQxVo4qrB9EtbGKCQ1grrpBj9DIsmbj9BARvgXgtlGNl6mrbeChb1IC6Czpa8gw1hdG/0R7VeNFN0q4GAIhVNbjcZUlKGkyvigblSoiB3UKIZPa9XNdxOUMSJNJRR5Plc8NSwvESCHRNTXBdUWiuR46gWcHv9act8+CUT89u2SVfBndl1+P31z56DgXhxuR4G1d4h9LB3LvmeeLKzXd4frvbcHn+ys9gsh7Pd/Ro3fQvLJztvN3FZpZ/xw0nzJ9b70ZO7p/rNjnPUgZztx0dcPW+xhK7DbkjA0ebm685pSJJLL9Xl9r2uQ8ebcit0hKvmHO9uvI7e3buADg/e1ekM6tPhoOPq+vrTfOkd5vRl1tj21cTv9pXXmL/EejhVp6pdrbDuu22N3gvf2kxaqzql//5YUSncueP22tVtbzbL5VA1z/EMzqumpaIoQOmmfrm78vjRfHbn9/GDvwDgx9zWSB8AAA==" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="FiwareHub" createdInVersion="20.1.7.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="true" lastModifiedInVersion="20.1.7.0" name="FiwareHub" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
   <classes>
     <dataBaseObjectModelHasClasses Id="f6cb01a9-ef6f-4622-9cf5-da9040ebc454">
       <xpObject Id="1efafbc2-140a-43f6-b1db-d77ca6a86bb7" name="WeatherReport" baseClass="XPObject" userFileName="WeatherReport" designerFileName="WeatherReport.Designer" className="WeatherReport" virtualName="WeatherReport">
         <fields>
+          <generalXpObjectHasFields Id="e4a1fea0-b5b7-4048-af70-0543dd086b35">
+            <field Id="71e445f6-48cf-4800-8104-565353b70596" name="DeviceId" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="46745c47-0760-47ad-93f8-7b26d07aa90d">
+            <field Id="7af6d8c0-d3bd-48d0-9389-0cbc82570baa" name="ReportTime" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="491dfed5-50d0-4ab2-9269-10e3f79ac40c">
+            <field Id="1ecd833b-7b88-4c8c-805d-ff77e3d2c8f9" name="WeatherEvent" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="b871c1fc-462f-497b-806a-2d3903be31d4">
+            <field Id="9231ee96-2dcd-4bbc-a3ff-9b4c4f8e3095" name="Severity" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="72296475-93a5-4262-b8b7-f83203c66b77">
+            <field Id="a461660f-dce3-4174-afc9-99ee0537c841" name="OriginalWeatherDescription" virtualColumnType="String" delayedUpdateModifiedOnly="false" size="Unlimited" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="82a8b754-3abe-4681-a8da-8c7a73276e79">
+            <field Id="109b0ad0-f545-4de2-95c6-442c28b56af4" name="Temperature" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="455f3105-5c5f-4733-8bba-70bbe911ab90">
-            <field Id="8505aefb-0181-4b93-a170-6a5bd3bd8e45" name="Humidity" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" />
+            <field Id="8505aefb-0181-4b93-a170-6a5bd3bd8e45" name="Humidity" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="1022b49e-1e3d-47ae-b7b7-390f0a16741f">
+            <field Id="842b007c-72cf-46cd-a282-8b7bfbf803a0" name="Pressure" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="46939cf5-6879-4e1b-9883-1fa8ebb2f982">
+            <field Id="338eb34d-29f8-4688-b5f3-bd6fd4030f4c" name="Visibility" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="92abb85b-8046-4271-8f4b-18b196c5ccfb">
+            <field Id="f6492bca-b52b-4be0-bbb7-9579180575e3" name="CloudCoverage" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="0f00b9e7-663d-477d-850e-d2780cf174ac">
+            <field Id="73a3cffe-3c1b-4569-987d-c9a4646cf2d2" name="WindDirection" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="a24aa548-8ff8-425a-a15b-9cfabb81cc01">
+            <field Id="9baf6cef-4b06-4d2a-857c-ce468f01b255" name="WindChill" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="b0100013-4a42-45ff-af65-dec6d16363fb">
+            <field Id="c09b18d1-36df-4d2c-afb6-7c4c2b6cea52" name="WindSpeed" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="bc2e0d7b-f618-45c9-87cc-d3bac86e1adc">
+            <field Id="3af5db92-b327-4c5a-948e-f1f4d2837ada" name="Precipitation" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
         </fields>
       </xpObject>
@@ -13,8 +52,47 @@
     <dataBaseObjectModelHasClasses Id="c960c87d-fe4e-4671-9116-ad1cbc83f882">
       <xpObject Id="bb37f92c-a0b9-45a5-ab43-7ba2bc929dd5" name="RoadTrafficReport" baseClass="XPObject" userFileName="RoadTrafficReport" designerFileName="RoadTrafficReport.Designer" className="RoadTrafficReport" virtualName="RoadTrafficReport">
         <fields>
+          <generalXpObjectHasFields Id="be6e9690-35a6-429c-9f0e-4edf0ec4893e">
+            <field Id="c01fde37-f256-4db7-95cb-1cabd8ea3dd8" name="DeviceId" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="b189879e-6f7a-4909-812d-80aab38d0651">
-            <field Id="22b9c7f7-08dd-41d2-a6de-18e3a9a27dc8" name="Street" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+            <field Id="22b9c7f7-08dd-41d2-a6de-18e3a9a27dc8" name="Severity" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="677aee56-d35c-4ef0-8f71-40b8e05893e5">
+            <field Id="705e3b1c-a164-440b-b33e-9a5a71dac5d3" name="StartTime" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="ba910d0c-1245-4b43-b621-865e884a87d0">
+            <field Id="0ef12adb-c927-4f22-99cf-585cefd83965" name="GeoLocation" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="4bde5c01-3a8c-405b-8636-bafcace27931">
+            <field Id="24a4a4ec-aae2-490a-8fda-955c9d6e043e" name="Distance" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="bfcd865a-da81-43a6-90b4-ed6e03cc0802">
+            <field Id="6491d088-0f4f-4cd7-b041-6644be5dc0b8" name="Description" virtualColumnType="String" delayedUpdateModifiedOnly="false" size="Unlimited" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="46d49a28-ab73-4dc4-92cf-2c65fef66be4">
+            <field Id="8328ba64-0ec2-467c-ab7f-1d9af1243414" name="AddressNumber" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="5b454e9e-ea45-41f0-be8e-3a6af5ae9261">
+            <field Id="8ef0dbee-2bde-417e-9230-17e4b2f1e03e" name="Street" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="0ca2ce41-2319-4806-bfcc-9e333d42374b">
+            <field Id="b7c7ba44-edd2-48ce-a3cf-4c6710904177" name="Side" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="a5dcead4-67ba-41f0-a2b5-78980983ad6c">
+            <field Id="a33935d0-19ea-4f29-9ecf-839188fc05a8" name="City" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="3c79bc7b-abab-4a8f-8d6a-f234b67ea7e6">
+            <field Id="f014e6ad-e39d-4388-b26f-ae1266167211" name="County" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="1999efb5-6b3f-41cc-bb2f-58cad4aa4323">
+            <field Id="5a084135-5754-4861-b4de-194d63276992" name="State" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="a88065c0-5265-4a74-8375-d506943dccc5">
+            <field Id="5a9e1cf4-85c5-4150-9409-7ffb145afb51" name="ZipCode" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="7232cf27-21db-4263-8c67-83af78e4914f">
+            <field Id="cb1c538e-798a-40fb-85bc-304fe34431db" name="Country" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
         </fields>
       </xpObject>

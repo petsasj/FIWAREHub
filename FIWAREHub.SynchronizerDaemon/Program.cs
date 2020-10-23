@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using FIWAREHub.ContextBroker;
+using Microsoft.Extensions.DependencyInjection;
 using NCrontab;
 
 namespace FIWAREHub.SynchronizerDaemon
@@ -14,6 +15,11 @@ namespace FIWAREHub.SynchronizerDaemon
 
         static void Main(string[] args)
         {
+            //var serviceProvider = new ServiceCollection()
+            //    .AddLogging()
+            //    .AddSingleton<Daemon>()
+            //    .BuildServiceProvider();
+
             Start();
             
             var command = "";
