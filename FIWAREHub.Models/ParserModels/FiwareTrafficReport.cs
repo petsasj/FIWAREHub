@@ -57,9 +57,13 @@ namespace FIWAREHub.Models.ParserModels
                 PopulateMappings();
 
             var nonNullProperties = this.GetType().GetProperties()
-                .Where(p => p.GetValue(this) != null && _ultraLightMappings.ContainsKey(p.Name)).ToList();
+                .Where(p =>
+                {
+                    var value = p.GetValue(this);
+                    return (value != null && !string.IsNullOrWhiteSpace(value.ToString())) && _ultraLightMappings.ContainsKey(p.Name);
+                }).ToList();
 
-            var ulSyntax = string.Join("|", nonNullProperties.Select(nnp => $"{_ultraLightMappings[nnp.Name]}|{nnp.GetValue(this)}"));
+            var ulSyntax = string.Join("|", nonNullProperties.Select(nnp => $"{_ultraLightMappings[nnp.Name]}|{nnp.GetValue(this).ToString().Replace("#", "Nr.")}"));
 
             return ulSyntax;
         }

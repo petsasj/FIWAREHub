@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace FIWAREHub.Models.ParserModels
 {
     public class WeatherMappings
     {
+        [JsonProperty("weatherMappings")]
         public List<WeatherMapping> Mappings { get; set; }
     }
 

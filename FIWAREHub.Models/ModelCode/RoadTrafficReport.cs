@@ -16,6 +16,8 @@ namespace FIWAREHub.Models.Sql
             var date = DateTime.Parse(roadTrafficUpdate.StartTime?.Value, null,
                 System.Globalization.DateTimeStyles.RoundtripKind);
 
+            decimal.TryParse(roadTrafficUpdate.Distance?.Value.ToString(), out decimal distance);
+
             StartTime = date;
             Severity = roadTrafficUpdate.Severity?.Value;
             Country = roadTrafficUpdate.Country?.Value;
@@ -27,7 +29,7 @@ namespace FIWAREHub.Models.Sql
             State = roadTrafficUpdate.State?.Value;
             ZipCode = roadTrafficUpdate.ZipCode?.Value;
             GeoLocation = roadTrafficUpdate.GeoLocation?.Value;
-            Distance = (decimal?) roadTrafficUpdate?.Distance?.Value;
+            Distance = distance;
             Description = roadTrafficUpdate.Description?.Value;
         }
     }
