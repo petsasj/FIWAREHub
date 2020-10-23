@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.Web", "FIWAREHub.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.Parsers", "FIWAREHub.Parsers\FIWAREHub.Parsers.csproj", "{554BB884-7D81-4D79-A00F-78FC83F8FC51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIWAREHub.CBDaemon", "FIWAREHub.CBDaemon\FIWAREHub.CBDaemon.csproj", "{E6005366-50A6-46A3-98DC-57DBBE31829B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{4963DB21-3157-4252-8FF7-9C8DEC3036F2}"
 	ProjectSection(SolutionItems) = preProject
 		header.png = header.png
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIWAREHub.SynchronizerDaemon", "FIWAREHub.SynchronizerDaemon\FIWAREHub.SynchronizerDaemon.csproj", "{05AE5381-0E5A-4DEE-906D-728C9A1B972D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{554BB884-7D81-4D79-A00F-78FC83F8FC51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554BB884-7D81-4D79-A00F-78FC83F8FC51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554BB884-7D81-4D79-A00F-78FC83F8FC51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6005366-50A6-46A3-98DC-57DBBE31829B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6005366-50A6-46A3-98DC-57DBBE31829B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6005366-50A6-46A3-98DC-57DBBE31829B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6005366-50A6-46A3-98DC-57DBBE31829B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05AE5381-0E5A-4DEE-906D-728C9A1B972D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05AE5381-0E5A-4DEE-906D-728C9A1B972D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05AE5381-0E5A-4DEE-906D-728C9A1B972D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05AE5381-0E5A-4DEE-906D-728C9A1B972D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

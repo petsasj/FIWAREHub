@@ -22,9 +22,9 @@ namespace FIWAREHub.Web.Controllers.Api
                 Humidity = 02,
                 Pressure = (decimal)33.33,
                 Visibility = 100,
-                WindDirection = "NW",
-                WindSpeed = 100,
-                Precipitation = 30,
+                WindDirection = "NWD",
+                WindSpeed = (decimal)120.1,
+                Precipitation = (decimal)30.5,
                 ReportTime = DateTime.UtcNow
             };
 
