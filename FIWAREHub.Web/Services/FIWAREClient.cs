@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FIWAREHub.Web.Services
@@ -24,7 +25,7 @@ namespace FIWAREHub.Web.Services
                 });
 
             var requestMessage = new HttpRequestMessage(method, url);
-            requestMessage.Content = new StringContent(serializedContent);
+            requestMessage.Content = new StringContent(serializedContent, Encoding.UTF8);
             requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             headers.ForEach(h => requestMessage.Content.Headers.Add(h.headerKey, h.headerValue));
 
@@ -33,10 +34,8 @@ namespace FIWAREHub.Web.Services
 
         public async Task<HttpResponseMessage> SendUltraLight(HttpMethod method, string url, string content)
         {
-
-
             var requestMessage = new HttpRequestMessage(method, url);
-            requestMessage.Content = new StringContent(content);
+            requestMessage.Content = new StringContent(content, Encoding.UTF8);
             requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
             headers.ForEach(h => requestMessage.Content.Headers.Add(h.headerKey, h.headerValue));
 

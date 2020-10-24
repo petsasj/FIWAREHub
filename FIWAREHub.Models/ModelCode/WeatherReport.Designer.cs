@@ -103,6 +103,36 @@ namespace FIWAREHub.Models.Sql
             get { return fPrecipitation; }
             set { SetPropertyValue<decimal?>(nameof(Precipitation), ref fPrecipitation, value); }
         }
+        string fCity;
+        public string City
+        {
+            get { return fCity; }
+            set { SetPropertyValue<string>(nameof(City), ref fCity, value); }
+        }
+        string fCounty;
+        public string County
+        {
+            get { return fCounty; }
+            set { SetPropertyValue<string>(nameof(County), ref fCounty, value); }
+        }
+        string fState;
+        public string State
+        {
+            get { return fState; }
+            set { SetPropertyValue<string>(nameof(State), ref fState, value); }
+        }
+        string fZipCode;
+        public string ZipCode
+        {
+            get { return fZipCode; }
+            set { SetPropertyValue<string>(nameof(ZipCode), ref fZipCode, value); }
+        }
+        string fCountry;
+        public string Country
+        {
+            get { return fCountry; }
+            set { SetPropertyValue<string>(nameof(Country), ref fCountry, value); }
+        }
     }
 
 }

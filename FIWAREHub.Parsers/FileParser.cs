@@ -61,36 +61,8 @@ namespace FIWAREHub.Parsers
                 .SelectMany(g => g.ToList())
                 .Select(ar => new FiwareCombinedReport
                 {
-                    FiwareWeatherReport = new FiwareWeatherReport(ar.WeatherCondition, weatherMappings)
-                    {
-                        Humidity = ar.Humidity,
-                        Precipitation = ar.Precipitation,
-                        Pressure = ar.Pressure,
-                        ReportTime = ar.WeatherTimestamp,
-                        Temperature = ar.Temperature,
-                        Visibility = ar.Visibility,
-                        WindChill = ar.WindChill,
-                        WindDirection = ar.WindDirection,
-                        WindSpeed = ar.WindSpeed
-                    },
-                    FiwareTrafficDataReport = new FiwareTrafficReport
-                    {
-                        StartTime = ar.StartTime,
-                        AddressNumber = ar.AddressNumber,
-                        City = ar.City,
-                        Country = ar.Country,
-                        County = ar.County,
-                        Description = ar.Description,
-                        Distance = ar.Distance,
-                        Severity = ar.Severity,
-                        State = ar.State,
-                        Side = ar.Side,
-                        StartLatitude = ar.StartLatitude,
-                        StartLongitude = ar.StartLongitude,
-                        Street = ar.Street,
-                        ZipCode = ar.ZipCode
-
-                    }
+                    FiwareWeatherReport = new FiwareWeatherReport(ar.WeatherCondition, weatherMappings, ar),
+                    FiwareTrafficDataReport = new FiwareTrafficReport(ar)
                 })
                 .ToList();
 

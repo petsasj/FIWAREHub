@@ -43,5 +43,20 @@ namespace FIWAREHub.Models.DaemonModels
 
         [BsonElement("attrs.Precipitation")]
         public UpdateValue Precipitation { get; set; }
+
+        [BsonElement("attrs.City")]
+        public UpdateValue City { get; set; }
+
+        [BsonElement("attrs.County")]
+        public UpdateValue County { get; set; }
+
+        [BsonElement("attrs.State")]
+        public UpdateValue State { get; set; }
+
+        [BsonElement("attrs.ZipCode")]
+        public UpdateValue ZipCode { get; set; }
+
+        [BsonElement("attrs.Country")]
+        public UpdateValue Country { get; set; }
     }
 }

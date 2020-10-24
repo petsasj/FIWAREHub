@@ -46,18 +46,49 @@ namespace FIWAREHub.Models.ParserModels
         [JsonProperty("pcpt")]
         public decimal? Precipitation { get; set; }
 
+        [JsonProperty("ct")]
+        public string City { get; set; }
+
+        [JsonProperty("cn")]
+        public string County { get; set; }
+
+        [JsonProperty("st")]
+        public string State { get; set; }
+
+        [JsonProperty("zc")]
+        public string ZipCode { get; set; }
+
+        [JsonProperty("c")]
+        public string Country { get; set; }
+
         /// <summary>
         /// Used only for Test Actions
         /// </summary>
         [Obsolete]
         public FiwareWeatherReport() { }
 
-        public FiwareWeatherReport(string weatherCondition, WeatherMappings weatherMappings)
+        public FiwareWeatherReport(string weatherCondition, WeatherMappings weatherMappings, DatasetAccidentReport accidentReport)
         {
             if (string.IsNullOrWhiteSpace(weatherCondition))
                 return;
 
+            // Map weather condition to more statistical-friendly properties
             SetWeatherEventProperties(weatherCondition, weatherMappings);
+
+            Humidity = accidentReport.Humidity;
+            Precipitation = accidentReport.Precipitation;
+            Pressure = accidentReport.Pressure;
+            ReportTime = accidentReport.WeatherTimestamp;
+            Temperature = accidentReport.Temperature;
+            Visibility = accidentReport.Visibility;
+            WindChill = accidentReport.WindChill;
+            WindDirection = accidentReport.WindDirection;
+            WindSpeed = accidentReport.WindSpeed;
+            City = accidentReport.City;
+            Country = accidentReport.Country;
+            County = accidentReport.County;
+            State = accidentReport.State;
+            ZipCode = accidentReport.ZipCode;
         }
 
 

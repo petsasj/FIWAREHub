@@ -28,6 +28,11 @@ namespace FIWAREHub.Models.Sql
             WindSpeed = (decimal?) weatherUpdate.WindSpeed?.Value;
             Temperature = (decimal?) weatherUpdate.Temperature?.Value;
             WeatherEvent = weatherUpdate.WeatherEvent?.Value;
+            Country = weatherUpdate.Country?.Value;
+            County = weatherUpdate.County?.Value;
+            City = weatherUpdate.City?.Value;
+            State = weatherUpdate.State?.Value;
+            ZipCode = weatherUpdate.ZipCode?.Value;
         }
     }
 

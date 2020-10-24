@@ -37,7 +37,12 @@ namespace FIWAREHub.Web.Controllers.Api
                 ("CloudCoverage", "cc", "string"),
                 ("WindDirection", "wd", "string"),
                 ("WindSpeed", "ws", "decimal"),
-                ("Precipitation", "pcpt", "decimal")
+                ("Precipitation", "pcpt", "decimal"),
+                ("City", "ct", "string"),
+                ("County", "cn", "string"),
+                ("State", "st", "string"),
+                ("ZipCode", "zc", "string"),
+                ("Country", "c", "string")
             };
 
             var json = new ProvisionDevicesModel

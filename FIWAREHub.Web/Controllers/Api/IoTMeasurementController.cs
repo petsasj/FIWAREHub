@@ -38,6 +38,17 @@ namespace FIWAREHub.Web.Controllers.Api
             return Ok(success);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PostTestWeatherMeasurement(FiwareWeatherReport model)
+        {
+            using var fiwareClient = new FIWAREClient();
+            var response = await fiwareClient.SendJson(HttpMethod.Post, 
+                FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.FirstOrDefault()), model);
+            var success = response.IsSuccessStatusCode;
+
+            return Ok(success);
+        }
+
         [HttpGet]
         public async Task<IActionResult> PostTestRoadTrafficReport()
         {
@@ -50,10 +61,20 @@ namespace FIWAREHub.Web.Controllers.Api
                 StartLongitude = "23.8576043"
             };
 
-            var testStr = "sv|3|sdt|01-Jan-17 03:29:36|geo|37.318039, -121.940125|dis|0.01|desc|1 lane blocked due to accident on I-880 Northbound at CA-17.|addrnr|5198.0|str|I-880 N|sd|R|ct|San Jose|cn|Santa Clara|st|CA|zc|95128|c|US";
             using var fiwareClient = new FIWAREClient();
             var response = await fiwareClient.SendUltraLight(HttpMethod.Post, 
-                FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.FirstOrDefault()), testStr);
+                FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.FirstOrDefault()), roadTraffic.ToUltraLightSyntax());
+            var success = response.IsSuccessStatusCode;
+
+            return Ok(success);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostTestRoadTrafficReport([FromBody] string payLoad)
+        {
+            using var fiwareClient = new FIWAREClient();
+            var response = await fiwareClient.SendUltraLight(HttpMethod.Post, 
+                FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.FirstOrDefault()), payLoad);
             var success = response.IsSuccessStatusCode;
 
             return Ok(success);
@@ -65,23 +86,45 @@ namespace FIWAREHub.Web.Controllers.Api
             var fileParser = new FileParser();
             var accidentDataset = fileParser.ParseAccidentsDataset().ToList();
 
-            var chunks = accidentDataset.Chunk(100);
+            var any = accidentDataset.Where(ar => ar.FiwareTrafficDataReport.ToUltraLightSyntax() == null);
+
+            var chunks = accidentDataset.Chunk(20);
+
+
+            var progress = 0;
+            var percentage = (decimal) 0 / accidentDataset.Count;
+            var taskList = new List<Task>();
 
             foreach (var chunk in chunks)
             {
-                using var weatherClient = new FIWAREClient();
-                using var trafficClient = new FIWAREClient();
+                using var fiwareClient = new FIWAREClient();
+                // index of iteration to select correct device
+                var index = 0;
+
                 foreach (var report in chunk)
                 {
-                    var weatherResponseMessage = await weatherClient.SendJson(HttpMethod.Post, 
-                        FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.FirstOrDefault()), report.FiwareWeatherReport);
-                    System.Threading.Thread.Sleep(80);
-                    var trafficResponseMessage = await trafficClient.SendUltraLight(HttpMethod.Post, 
-                        FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.FirstOrDefault()), report.FiwareTrafficDataReport.ToUltraLightSyntax());
-                    if (!trafficResponseMessage.IsSuccessStatusCode)
-                    {
-                        var messageSent = report.FiwareTrafficDataReport.ToUltraLightSyntax();
-                    }
+                    taskList.Add(fiwareClient.SendJson(HttpMethod.Post, 
+                        FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.Skip(index).FirstOrDefault()), report.FiwareWeatherReport));
+                    taskList.Add(Task.Delay(600));
+                    taskList.Add(fiwareClient.SendUltraLight(HttpMethod.Post, 
+                        FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.Skip(index).FirstOrDefault()), report.FiwareTrafficDataReport.ToUltraLightSyntax()));
+
+                    await Task.WhenAll(taskList);
+
+                    //var weatherResponseMessage = await weatherClient.SendJson(HttpMethod.Post, 
+                    //    FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.Skip(index).FirstOrDefault()), report.FiwareWeatherReport);
+                    //await Task.Delay(80);
+                    //var trafficResponseMessage = await trafficClient.SendUltraLight(HttpMethod.Post, 
+                    //    FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.Skip(index).FirstOrDefault()), report.FiwareTrafficDataReport.ToUltraLightSyntax());
+
+                    //if (!trafficResponseMessage.IsSuccessStatusCode)
+                    //{
+                    //    var messageSent = report.FiwareTrafficDataReport.ToUltraLightSyntax();
+                    //}
+
+
+                    index++;
+                    progress++;
                 }
             }
 

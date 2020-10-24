@@ -51,6 +51,34 @@ namespace FIWAREHub.Models.ParserModels
 
         private static Dictionary<string, string> _ultraLightMappings = null;
 
+        /// <summary>
+        /// Only used in test methods
+        /// </summary>
+        [Obsolete]
+        public FiwareTrafficReport()
+        {
+            
+        }
+
+        public FiwareTrafficReport(DatasetAccidentReport accidentReport)
+        {
+            StartTime = accidentReport.StartTime;
+            AddressNumber = accidentReport.AddressNumber;
+            Description = accidentReport.Description;
+            Distance = accidentReport.Distance;
+            Severity = accidentReport.Severity;
+            Side = accidentReport.Side;
+            StartLatitude = accidentReport.StartLatitude;
+            StartLongitude = accidentReport.StartLongitude;
+            Street = accidentReport.Street;
+
+            City = accidentReport.City;
+            Country = accidentReport.Country;
+            County = accidentReport.County;
+            State = accidentReport.State;
+            ZipCode = accidentReport.ZipCode;
+        }
+
         public string ToUltraLightSyntax()
         {
             if (_ultraLightMappings == null)
@@ -63,7 +91,8 @@ namespace FIWAREHub.Models.ParserModels
                     return (value != null && !string.IsNullOrWhiteSpace(value.ToString())) && _ultraLightMappings.ContainsKey(p.Name);
                 }).ToList();
 
-            var ulSyntax = string.Join("|", nonNullProperties.Select(nnp => $"{_ultraLightMappings[nnp.Name]}|{nnp.GetValue(this).ToString().Replace("#", "Nr.")}"));
+            var ulSyntax = string.Join("|",
+                nonNullProperties.Select(nnp => $"{_ultraLightMappings[nnp.Name]}|{nnp.GetValue(this)?.ToString()?.Replace("#", "Nr.").Replace("@", " at ")}"));
 
             return ulSyntax;
         }

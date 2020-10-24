@@ -46,6 +46,7 @@ namespace FIWAREHub.SynchronizerDaemon
 
                         if (!Daemon.Running)
                         {
+                            // TODO Improve
                             currentTask = Task.Factory.StartNew(async () => Daemon.ListenForMongoDBChanges(),
                                 TaskCreationOptions.LongRunning).GetAwaiter();
                         }
