@@ -17,6 +17,7 @@ namespace FIWAREHub.Web.Controllers.Api
 {
     public class IoTMeasurementController : ControllerBase
     {
+        // Unit of Work from Dependency Injection
         private readonly UnitOfWork _unitOfWork;
 
         public IoTMeasurementController(UnitOfWork unitOfWork)
