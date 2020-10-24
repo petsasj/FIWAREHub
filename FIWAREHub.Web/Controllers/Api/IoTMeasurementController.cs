@@ -113,7 +113,7 @@ namespace FIWAREHub.Web.Controllers.Api
             var fileParser = new FileParser();
 
             // Get predefined dataset results
-            var accidentDataset = fileParser.ParseAccidentsDataset().Take(100000).ToList();
+            var accidentDataset = fileParser.ParseAccidentsDataset().ToList();
 
             // Split into chunks of 20 for easier use with weather devices
             var chunks = accidentDataset.Chunk(20);

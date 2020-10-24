@@ -232,7 +232,7 @@ namespace FIWAREHub.SynchronizerDaemon
                 WeatherReports.Clear();
                 RoadTrafficReports.Clear();
 
-                Report("Unlocking Unit of Work");
+                Report("Lock released");
                 _unitOfWorkLock = false;
 
                 // Refresh unit of work due to large dataset
@@ -242,6 +242,7 @@ namespace FIWAREHub.SynchronizerDaemon
             else
             {
                 Report("No SQL items for saving");
+                Report("Lock released");
                 _unitOfWorkLock = false;
             }
 
