@@ -53,7 +53,7 @@ namespace FIWAREHub.SynchronizerDaemon
             // Helper class for connection to MongoDb
             var orionContext = new OrionContext();
 
-            // Change Stream API of MongoDB (based on optlog)
+            // Change Stream API of MongoDB (based on replica set oplog)
             // This is an async task and creates a thread for each change
             using (var cursor = await orionContext.Entities.WatchAsync())
             {
