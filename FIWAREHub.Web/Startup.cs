@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevExpress.Xpo;
+using DevExpress.Xpo.DB;
+using DevExpress.Xpo.Metadata;
+using FIWAREHub.Models.Sql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +27,22 @@ namespace FIWAREHub.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Sets up thread safe datalayer all units of work
+            var dictionary = PrepareDictionary();
+            static XPDictionary PrepareDictionary()
+            {
+                var dict = new ReflectionDictionary();
+                dict.GetDataStoreSchema(ConnectionHelper.GetPersistentTypes());
+                return dict;
+            }
+
+            IDataStore store = XpoDefault.GetConnectionProvider(
+                XpoDefault.GetConnectionPoolString(Configuration.GetConnectionString("DbConnectionString"), 5, 100),
+                AutoCreateOption.DatabaseAndSchema);
+            XpoDefault.DataLayer = new ThreadSafeDataLayer(dictionary, store);
+
+            services.AddScoped<UnitOfWork>();
+
             services.AddControllersWithViews();
         }
 

@@ -10,10 +10,11 @@ namespace FIWAREHub.SynchronizerDaemon
     public class Program
     {
         private static bool _keepWorking = true;
-        private static TaskAwaiter<Task<Task>> currentTask;
+        private static Task<Task> _currentTask;
 
         static void Main(string[] args)
         {
+            // Adding Dependency Injection if needed.
             //var serviceProvider = new ServiceCollection()
             //    .AddLogging()
             //    .AddSingleton<Daemon>()
@@ -30,6 +31,10 @@ namespace FIWAREHub.SynchronizerDaemon
             Stop();
         }
 
+        /// <summary>
+        /// Runs Daemon Synchronizer tool
+        /// Checks every minute if it has exited
+        /// </summary>
         public static void Start()
         {
             var cron = CrontabSchedule.Parse("* * * * *");
@@ -46,9 +51,8 @@ namespace FIWAREHub.SynchronizerDaemon
 
                         if (!Daemon.Running)
                         {
-                            // TODO Improve
-                            currentTask = Task.Factory.StartNew(async () => Daemon.ListenForMongoDBChanges(),
-                                TaskCreationOptions.LongRunning).GetAwaiter();
+                            _currentTask = Task.Factory.StartNew(Daemon.ListenForMongoDbChanges,
+                                TaskCreationOptions.LongRunning);
                         }
                     }
                 }
@@ -63,10 +67,13 @@ namespace FIWAREHub.SynchronizerDaemon
             }
         }
 
+        /// <summary>
+        /// Stop
+        /// </summary>
         public static void Stop()
         {
             _keepWorking = false;
-            if (!currentTask.IsCompleted)
+            if (!_currentTask.IsCompleted)
                 Thread.Sleep(250);
             Console.WriteLine("Stopped scheduling");
         }

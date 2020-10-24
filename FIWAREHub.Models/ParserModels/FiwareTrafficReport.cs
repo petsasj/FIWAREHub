@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace FIWAREHub.Models.ParserModels
 {
@@ -51,6 +52,8 @@ namespace FIWAREHub.Models.ParserModels
 
         private static Dictionary<string, string> _ultraLightMappings = null;
 
+        private static Dictionary<string, string> _escapeCharacters = null;
+
         /// <summary>
         /// Only used in test methods
         /// </summary>
@@ -64,7 +67,7 @@ namespace FIWAREHub.Models.ParserModels
         {
             StartTime = accidentReport.StartTime;
             AddressNumber = accidentReport.AddressNumber;
-            Description = accidentReport.Description;
+            Description = RemoveSpecialCharacters(accidentReport.Description);
             Distance = accidentReport.Distance;
             Severity = accidentReport.Severity;
             Side = accidentReport.Side;
@@ -88,11 +91,11 @@ namespace FIWAREHub.Models.ParserModels
                 .Where(p =>
                 {
                     var value = p.GetValue(this);
-                    return (value != null && !string.IsNullOrWhiteSpace(value.ToString())) && _ultraLightMappings.ContainsKey(p.Name);
+                    return (value != null && !string.IsNullOrWhiteSpace(value?.ToString())) && _ultraLightMappings.ContainsKey(p.Name);
                 }).ToList();
 
             var ulSyntax = string.Join("|",
-                nonNullProperties.Select(nnp => $"{_ultraLightMappings[nnp.Name]}|{nnp.GetValue(this)?.ToString()?.Replace("#", "Nr.").Replace("@", " at ")}"));
+                nonNullProperties.Select(nnp => $"{_ultraLightMappings[nnp.Name]}|{nnp.GetValue(this)}"));
 
             return ulSyntax;
         }
@@ -116,6 +119,33 @@ namespace FIWAREHub.Models.ParserModels
                 {nameof(Country), "c"}
             };
 
+            _escapeCharacters = new Dictionary<string, string>
+            {
+                {"#", " Number "},
+                {"@", " at "},
+                {"|", " or "},
+                {"&amp;", "and"},
+                {"(", " "},
+                {")", " "},
+                {"{", ""},
+                {"}", ""},
+                {"[", ""},
+                {"]", ""},
+                {"  ", " "}
+            };
+        }
+
+        private string RemoveSpecialCharacters(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                return str;
+
+            var sb = new StringBuilder();
+            foreach (var c in str.Where(c => (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_' || c == '-' || c == ' '))
+            {
+                sb.Append(c);
+            }
+            return sb.ToString();
         }
     }
 }

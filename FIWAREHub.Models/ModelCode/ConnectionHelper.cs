@@ -19,7 +19,8 @@ namespace FIWAREHub.Models.Sql
     {
         static Type[] persistentTypes = new Type[] {
             typeof(WeatherReport),
-            typeof(RoadTrafficReport)
+            typeof(RoadTrafficReport),
+            typeof(SyncOperation)
         };
         public static Type[] GetPersistentTypes()
         {

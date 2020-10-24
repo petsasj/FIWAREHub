@@ -34,11 +34,11 @@ namespace FIWAREHub.SynchronizerDaemon
         // 2 Thread-Safe Collections for WeatherData and RoadTrafficData
         // that submit every minute
         public static ConcurrentQueue<WeatherReport> WeatherReports { get; } = new ConcurrentQueue<WeatherReport>();
-        public static volatile int WeatherChangesReceived = 0;
+        public static volatile int WeatherChangesReceived;
         public static ConcurrentQueue<RoadTrafficReport> RoadTrafficReports { get; } = new ConcurrentQueue<RoadTrafficReport>();
-        public static volatile int RoadTrafficChangesReceived = 0;
+        public static volatile int RoadTrafficChangesReceived;
 
-        public static async Task ListenForMongoDBChanges()
+        public static async Task ListenForMongoDbChanges()
         {
             Report("Starting Listener");
             Running = true;
@@ -46,7 +46,7 @@ namespace FIWAREHub.SynchronizerDaemon
             // Task that runs SQL Syncing
             var timer = new System.Threading.Timer(async (e) =>
             {
-                await SetupSqlSyncing();   
+                await SqlSyncing();   
             }, null, Zero, SyncingPeriod);
 
 
@@ -54,12 +54,12 @@ namespace FIWAREHub.SynchronizerDaemon
             var orionContext = new OrionContext();
 
             // Change Stream API of MongoDB (based on optlog)
+            // This is an async task and creates a thread for each change
             using (var cursor = await orionContext.Entities.WatchAsync())
             {
                 Report("Cursor Watching started");
                 try
                 {
-                    cursor.GetResumeToken();
                     foreach (var change in cursor.ToEnumerable())
                     {
                         Report("Cursor Watch received update");
@@ -86,10 +86,12 @@ namespace FIWAREHub.SynchronizerDaemon
                         {
                             case "weatherReport":
                                 entityTypeEnum = EntityTypeEnum.WeatherReport;
+                                // Interlocked ensures atomicity of each incrementation
                                 Interlocked.Increment(ref WeatherChangesReceived);
                                 break;
                             case "roadTrafficReport":
                                 entityTypeEnum = EntityTypeEnum.RoadTrafficReport;
+                                // Interlocked ensures atomicity of each incrementation
                                 Interlocked.Increment(ref RoadTrafficChangesReceived);
                                 break;
                             default:
@@ -103,6 +105,7 @@ namespace FIWAREHub.SynchronizerDaemon
                         {
                             Report($"Received Weather Report from device {deviceId}");
                             
+                            // Deserialize to Typed object
                             var weatherUpdate = BsonSerializer.Deserialize<WeatherReportUpdate>(change.UpdateDescription.UpdatedFields);
 
                             if (weatherUpdate == null)
@@ -110,6 +113,7 @@ namespace FIWAREHub.SynchronizerDaemon
 
                             var uow = await getUnitOfWorkAsync();
 
+                            // Delay to ensure nothing gets added to lists while SQL Save Operation is happening
                             while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true|| uow.IsObjectsSaving)
                             {
                                 Report("Lists are locked, waiting");
@@ -123,6 +127,8 @@ namespace FIWAREHub.SynchronizerDaemon
                         else if (entityTypeEnum == EntityTypeEnum.RoadTrafficReport)
                         {
                             Report($"Received Road Traffic Report from device {deviceId}");
+
+                            // Deserialize to Typed object
                             var roadTrafficUpdate = BsonSerializer.Deserialize<RoadTrafficReportUpdate>(change.UpdateDescription.UpdatedFields);
 
                             if (roadTrafficUpdate == null)
@@ -130,6 +136,7 @@ namespace FIWAREHub.SynchronizerDaemon
 
                             var uow = await getUnitOfWorkAsync();
 
+                            // Delay to ensure nothing gets added to lists while SQL Save Operation is happening
                             while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true|| uow.IsObjectsSaving)
                             {
                                 Report("Lists are locked, waiting");
@@ -163,6 +170,7 @@ namespace FIWAREHub.SynchronizerDaemon
         /// <returns></returns>
         private static async Task<UnitOfWork> getUnitOfWorkAsync(bool overRideLock = false)
         {
+            // Delay to make sure no operations violate atomicity
             while (_unitOfWorkLock && !overRideLock)
             {
                 await Task.Delay(50);
@@ -173,6 +181,7 @@ namespace FIWAREHub.SynchronizerDaemon
                 return _unitOfWork;
 
             // Sets up thread safe datalayer all units of work
+            // All units of work with default datalayer are thread safe
             var dictionary = PrepareDictionary();
             static XPDictionary PrepareDictionary()
             {
@@ -192,7 +201,7 @@ namespace FIWAREHub.SynchronizerDaemon
             return _unitOfWork;
         }
 
-        private static async Task SetupSqlSyncing()
+        private static async Task SqlSyncing()
         {
             Report("Locking Unit of Work");
             // Locking lists to prevent addition while SQL Saving
@@ -216,12 +225,12 @@ namespace FIWAREHub.SynchronizerDaemon
                 var elapsedTime = stopwatch.ElapsedMilliseconds;
                 var totalItemCount = WeatherReports.Count + RoadTrafficReports.Count;
 
-                Report($"Database update took {elapsedTime}ms for {totalItemCount}.");
+                Report($"Database update took {elapsedTime}ms for {totalItemCount} items.");
 
                 // Renews lists
                 Report("Clearing Lists");
-                //WeatherReports.Clear();
-                //RoadTrafficReports.Clear();
+                WeatherReports.Clear();
+                RoadTrafficReports.Clear();
 
                 Report("Unlocking Unit of Work");
                 _unitOfWorkLock = false;

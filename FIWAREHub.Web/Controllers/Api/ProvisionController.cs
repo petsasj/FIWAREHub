@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FIWAREHub.Models.WebModels.ApiModels;
 using FIWAREHub.Web.Models;
@@ -17,12 +15,14 @@ namespace FIWAREHub.Web.Controllers.Api
     {
         public async Task<IActionResult> ProvisionJsonDevices()
         {
+            // Helper method to verify that services groups are created
             var serviceGroupsExist =
                 await CreateServiceGroups($"{FIWAREUrls.IoTAJsonNorth}{FIWAREUrls.ServiceGroupPath}");
 
             if (!serviceGroupsExist)
                 return Conflict("Error creating service groups");
 
+            // Entity attributes for given IoT Agent
             var entityAttributes = new List<(string name, string objectId, string type)>
             {
                 ("ReportTime", "rt", "string"),
@@ -45,6 +45,7 @@ namespace FIWAREHub.Web.Controllers.Api
                 ("Country", "c", "string")
             };
 
+            // POST Model for Provision of multiple devices
             var json = new ProvisionDevicesModel
             {
                 Devices = FIWAREUrls.WeatherDeviceIds.Select(id => new Device
@@ -77,12 +78,14 @@ namespace FIWAREHub.Web.Controllers.Api
 
         public async Task<IActionResult> ProvisionUltraLightDevices()
         {
+            // Helper method to verify that services groups are created
             var serviceGroupsExist =
                 await CreateServiceGroups($"{FIWAREUrls.IoTUltraLightNorth}{FIWAREUrls.ServiceGroupPath}");
 
             if (!serviceGroupsExist)
                 return Conflict("Error creating service groups");
 
+            // Entity attributes for given IoT Agent
             var entityAttributes = new List<(string name, string objectId, string type)>
             {
                 ("Severity", "sv", "string"),
@@ -100,6 +103,7 @@ namespace FIWAREHub.Web.Controllers.Api
                 ("Country", "c", "string")
             };
 
+            // POST Model for Provision of multiple devices
             var json = new ProvisionDevicesModel
             {
                 Devices = FIWAREUrls.RoadTrafficDeviceIds.Select(id => new Device

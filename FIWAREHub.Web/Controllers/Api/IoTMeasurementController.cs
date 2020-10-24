@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DevExpress.Xpo;
 using FIWAREHub.Models.ParserModels;
+using FIWAREHub.Models.Sql;
 using FIWAREHub.Parsers;
 using FIWAREHub.Web.Extensions;
 using FIWAREHub.Web.Models;
@@ -14,6 +17,17 @@ namespace FIWAREHub.Web.Controllers.Api
 {
     public class IoTMeasurementController : ControllerBase
     {
+        private readonly UnitOfWork _unitOfWork;
+
+        public IoTMeasurementController(UnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        /// <summary>
+        /// Test action for testing a single measurement post to JSON Devices
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> PostTestWeatherMeasurement()
         {
@@ -49,6 +63,10 @@ namespace FIWAREHub.Web.Controllers.Api
             return Ok(success);
         }
 
+        /// <summary>
+        /// Test action for testing a single measurement post to UL device
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> PostTestRoadTrafficReport()
         {
@@ -80,21 +98,36 @@ namespace FIWAREHub.Web.Controllers.Api
             return Ok(success);
         }
 
+
+        /// <summary>
+        /// Main Controller function
+        /// 1. Gets typed files from dataset
+        /// 2. Splits into chunks of 20
+        /// 3. Submits each part to appropriate IoT agent
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> SubmitCsvReadings()
+        public async Task<IActionResult> SubmitCsvReadings(int delay = 60)
         {
+            // Instance of File parser 
             var fileParser = new FileParser();
-            var accidentDataset = fileParser.ParseAccidentsDataset().ToList();
 
-            var any = accidentDataset.Where(ar => ar.FiwareTrafficDataReport.ToUltraLightSyntax() == null);
+            // Get predefined dataset results
+            var accidentDataset = fileParser.ParseAccidentsDataset().Take(100000).ToList();
 
+            // Split into chunks of 20 for easier use with weather devices
             var chunks = accidentDataset.Chunk(20);
 
-
+            // Diagnostics
             var progress = 0;
-            var percentage = (decimal) 0 / accidentDataset.Count;
+            var percentage = (decimal) progress / accidentDataset.Count;
+            var stopWatch = new System.Diagnostics.Stopwatch();
+            stopWatch.Start();
+
+            // Adds async Tasks to list for execution
             var taskList = new List<Task>();
 
+            // POST measurements to IoT devices
             foreach (var chunk in chunks)
             {
                 using var fiwareClient = new FIWAREClient();
@@ -103,30 +136,59 @@ namespace FIWAREHub.Web.Controllers.Api
 
                 foreach (var report in chunk)
                 {
-                    taskList.Add(fiwareClient.SendJson(HttpMethod.Post, 
-                        FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.Skip(index).FirstOrDefault()), report.FiwareWeatherReport));
-                    taskList.Add(Task.Delay(600));
-                    taskList.Add(fiwareClient.SendUltraLight(HttpMethod.Post, 
-                        FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.Skip(index).FirstOrDefault()), report.FiwareTrafficDataReport.ToUltraLightSyntax()));
+                    // POST to JSON
+                    taskList.Add(fiwareClient.SendJson(HttpMethod.Post,
+                        FIWAREUrls.JsonMeasurementUrl(
+                            FIWAREUrls.WeatherDeviceIds.Skip(index).FirstOrDefault()),
+                        report.FiwareWeatherReport));
+                    
+                    // Delay Task for operation completion
+                    taskList.Add(Task.Delay(delay));
 
+                    // POST to UL
+                    taskList.Add(fiwareClient.SendUltraLight(HttpMethod.Post,
+                        FIWAREUrls.UltraLightMeasurementUrl(
+                            FIWAREUrls.RoadTrafficDeviceIds.Skip(index).FirstOrDefault()),
+                        report.FiwareTrafficDataReport.ToUltraLightSyntax()));
+
+                    // await Task execution
                     await Task.WhenAll(taskList);
-
-                    //var weatherResponseMessage = await weatherClient.SendJson(HttpMethod.Post, 
-                    //    FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.Skip(index).FirstOrDefault()), report.FiwareWeatherReport);
-                    //await Task.Delay(80);
-                    //var trafficResponseMessage = await trafficClient.SendUltraLight(HttpMethod.Post, 
-                    //    FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.Skip(index).FirstOrDefault()), report.FiwareTrafficDataReport.ToUltraLightSyntax());
-
-                    //if (!trafficResponseMessage.IsSuccessStatusCode)
-                    //{
-                    //    var messageSent = report.FiwareTrafficDataReport.ToUltraLightSyntax();
-                    //}
-
-
                     index++;
                     progress++;
                 }
             }
+
+            // Diagnostics continued
+            stopWatch.Stop();
+            var elapsedTime = stopWatch.ElapsedMilliseconds / 1000 / 60;
+
+            return Ok($"Successfully sent {progress} within {elapsedTime} minutes.");
+        }
+
+
+        /// <summary>
+        /// Action was used for diagnostic purposes due to Count mismatch between sent
+        /// measurements and actually stored devices
+        /// Was only happening in UltraLight Devices
+        /// Further investigated that was down to reserved characters
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete]
+        public async Task<IActionResult> FindDifferences()
+        {
+            var fileParser = new FileParser();
+            var accidentDataset = fileParser.ParseAccidentsDataset().Take(2000).ToList();
+
+            var roadTrafficReports = await _unitOfWork.Query<RoadTrafficReport>().ToListAsync();
+
+            var missing = accidentDataset
+                .Where(ad => !roadTrafficReports.Any(rtr =>
+                    rtr.Country == ad.FiwareTrafficDataReport.Country &&
+                    rtr.City == ad.FiwareTrafficDataReport.City &&
+                    rtr.State == ad.FiwareTrafficDataReport.State &&
+                    rtr.StartTime == ad.FiwareTrafficDataReport.StartTime &&
+                    rtr.Street == ad.FiwareTrafficDataReport.Street))
+                .ToList();
 
             return Ok();
         }
