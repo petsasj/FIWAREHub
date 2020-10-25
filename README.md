@@ -48,6 +48,11 @@ docker-compose -d up
 
 Any measurement posted in either of the JSON Devices or UltraLight Devices will be synchronized both into Microsoft SQL Server and Apache-Superset.
 
+In order to access Apache-Superset:
+* Run docker-compose exec superset superset-init
+* Create a new user
+* Visit {localhost}:8088.
+* Import Dashboards from the corresponding folder.
 
 ## Development setup
 
