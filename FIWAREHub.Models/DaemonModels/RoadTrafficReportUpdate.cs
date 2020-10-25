@@ -43,5 +43,8 @@ namespace FIWAREHub.Models.DaemonModels
 
         [BsonElement("attrs.Country")]
         public UpdateValue Country { get; set; }
+
+        [BsonElement("attrs.UID")]
+        public UpdateValue UID { get; set; }
     }
 }

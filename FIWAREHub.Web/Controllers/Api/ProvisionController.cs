@@ -42,7 +42,8 @@ namespace FIWAREHub.Web.Controllers.Api
                 ("County", "cn", "string"),
                 ("State", "st", "string"),
                 ("ZipCode", "zc", "string"),
-                ("Country", "c", "string")
+                ("Country", "c", "string"),
+                ("UID", "uid", "int")
             };
 
             // POST Model for Provision of multiple devices
@@ -100,7 +101,8 @@ namespace FIWAREHub.Web.Controllers.Api
                 ("County", "cn", "string"),
                 ("State", "st", "string"),
                 ("ZipCode", "zc", "string"),
-                ("Country", "c", "string")
+                ("Country", "c", "string"),
+                ("UID", "uid", "int")
             };
 
             // POST Model for Provision of multiple devices

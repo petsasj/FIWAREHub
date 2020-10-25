@@ -18,11 +18,17 @@ namespace FIWAREHub.Models.Sql
 
     public partial class SyncOperation : XPObject
     {
-        DateTime? fDateStarted;
-        public DateTime? DateStarted
+        Guid fUniqueId;
+        public Guid UniqueId
+        {
+            get { return fUniqueId; }
+            set { SetPropertyValue<Guid>(nameof(UniqueId), ref fUniqueId, value); }
+        }
+        DateTime fDateStarted;
+        public DateTime DateStarted
         {
             get { return fDateStarted; }
-            set { SetPropertyValue<DateTime?>(nameof(DateStarted), ref fDateStarted, value); }
+            set { SetPropertyValue<DateTime>(nameof(DateStarted), ref fDateStarted, value); }
         }
         DateTime? fDateFinished;
         public DateTime? DateFinished
@@ -36,12 +42,32 @@ namespace FIWAREHub.Models.Sql
             get { return fDateModified; }
             set { SetPropertyValue<DateTime?>(nameof(DateModified), ref fDateModified, value); }
         }
-        int? fIterations;
-        public int? Iterations
+        long? fCurrentItem;
+        public long? CurrentItem
         {
-            get { return fIterations; }
-            set { SetPropertyValue<int?>(nameof(Iterations), ref fIterations, value); }
+            get { return fCurrentItem; }
+            set { SetPropertyValue<long?>(nameof(CurrentItem), ref fCurrentItem, value); }
         }
+        long? fTotalItemCount;
+        public long? TotalItemCount
+        {
+            get { return fTotalItemCount; }
+            set { SetPropertyValue<long?>(nameof(TotalItemCount), ref fTotalItemCount, value); }
+        }
+        double? fProgressPercentage;
+        public double? ProgressPercentage
+        {
+            get { return fProgressPercentage; }
+            set { SetPropertyValue<double?>(nameof(ProgressPercentage), ref fProgressPercentage, value); }
+        }
+        bool fIsRunning;
+        public bool IsRunning
+        {
+            get { return fIsRunning; }
+            set { SetPropertyValue<bool>(nameof(IsRunning), ref fIsRunning, value); }
+        }
+        [Association(@"SyncOperationExceptionReferencesSyncOperation"), Aggregated]
+        public XPCollection<SyncOperationException> SyncOperationExceptions { get { return GetCollection<SyncOperationException>(nameof(SyncOperationExceptions)); } }
     }
 
 }

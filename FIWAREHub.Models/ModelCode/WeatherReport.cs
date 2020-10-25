@@ -33,6 +33,7 @@ namespace FIWAREHub.Models.Sql
             City = weatherUpdate.City?.Value;
             State = weatherUpdate.State?.Value;
             ZipCode = weatherUpdate.ZipCode?.Value;
+            UID = long.Parse(weatherUpdate.UID.Value.ToString());
         }
     }
 

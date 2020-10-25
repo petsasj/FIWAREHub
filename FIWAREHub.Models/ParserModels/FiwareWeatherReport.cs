@@ -61,13 +61,19 @@ namespace FIWAREHub.Models.ParserModels
         [JsonProperty("c")]
         public string Country { get; set; }
 
+        [JsonProperty("uid")]
+        public long UID { get; set; }
+
         /// <summary>
         /// Used only for Test Actions
         /// </summary>
         [Obsolete]
-        public FiwareWeatherReport() { }
+        public FiwareWeatherReport(long uid)
+        {
+            UID = uid;
+        }
 
-        public FiwareWeatherReport(string weatherCondition, WeatherMappings weatherMappings, DatasetAccidentReport accidentReport)
+        public FiwareWeatherReport(string weatherCondition, WeatherMappings weatherMappings, DatasetAccidentReport accidentReport, long uid)
         {
             if (string.IsNullOrWhiteSpace(weatherCondition))
                 return;
@@ -89,6 +95,7 @@ namespace FIWAREHub.Models.ParserModels
             County = accidentReport.County;
             State = accidentReport.State;
             ZipCode = accidentReport.ZipCode;
+            UID = uid;
         }
 
 

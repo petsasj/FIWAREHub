@@ -8,14 +8,14 @@ using System.Reflection;
 namespace FIWAREHub.Models.Sql
 {
 
-    public partial class SyncOperation
+    public partial class SyncOperationException
     {
-        public SyncOperation(Session session) : base(session) { }
+        public SyncOperationException(Session session) : base(session) { }
 
         public override void AfterConstruction()
         {
-            base.AfterConstruction(); 
-            this.DateStarted = DateTime.UtcNow;
+            base.AfterConstruction();
+            this.DateOccurred = DateTime.UtcNow;
         }
     }
 

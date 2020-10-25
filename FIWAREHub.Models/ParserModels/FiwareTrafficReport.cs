@@ -50,6 +50,9 @@ namespace FIWAREHub.Models.ParserModels
         // c
         public string Country { get; set; }
 
+        //uid
+        public long UID { get; set; }
+
         private static Dictionary<string, string> _ultraLightMappings = null;
 
         private static Dictionary<string, string> _escapeCharacters = null;
@@ -58,12 +61,12 @@ namespace FIWAREHub.Models.ParserModels
         /// Only used in test methods
         /// </summary>
         [Obsolete]
-        public FiwareTrafficReport()
+        public FiwareTrafficReport(long uid)
         {
-            
+            UID = uid;
         }
 
-        public FiwareTrafficReport(DatasetAccidentReport accidentReport)
+        public FiwareTrafficReport(DatasetAccidentReport accidentReport, long uid)
         {
             StartTime = accidentReport.StartTime;
             AddressNumber = accidentReport.AddressNumber;
@@ -80,6 +83,7 @@ namespace FIWAREHub.Models.ParserModels
             County = accidentReport.County;
             State = accidentReport.State;
             ZipCode = accidentReport.ZipCode;
+            UID = uid;
         }
 
         public string ToUltraLightSyntax()
@@ -116,7 +120,8 @@ namespace FIWAREHub.Models.ParserModels
                 {nameof(County), "cn"},
                 {nameof(State), "st"},
                 {nameof(ZipCode), "zc"},
-                {nameof(Country), "c"}
+                {nameof(Country), "c"},
+                {nameof(UID), "uid"}
             };
 
             _escapeCharacters = new Dictionary<string, string>

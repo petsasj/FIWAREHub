@@ -18,6 +18,12 @@ namespace FIWAREHub.Models.Sql
 
     public partial class WeatherReport : XPObject
     {
+        long fUID;
+        public long UID
+        {
+            get { return fUID; }
+            set { SetPropertyValue<long>(nameof(UID), ref fUID, value); }
+        }
         string fDeviceId;
         public string DeviceId
         {

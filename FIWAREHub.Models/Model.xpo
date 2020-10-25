@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44f06be-70c9-4896-8814-5c73f84ff08d" namespace="FIWAREHub.Models.Sql" dataBaseShemaInfo="H4sIAAAAAAAEAN1abW/bRhL+XqD/wfDnjLXvL4Xs4iqnuaBtGkRu73DfZndnbeIkyiAlJ/n3N5QVN7bba4qwJhAYEMzZJciH8/Y8Q86/fbdeHd1Q1zeb9vRYnojjb8++/mr+Hfa03G46vKSXbd0c8a62/+Zd35weX22319/MZm/fvj15q0823eVMCSFn//7px2W+ojVC0/ZbbDMd351V/vysY77q0dH8AtOK+uGS++MPlo8MH0yvcE1n/yLcXlH3hq433XY++23hbu/zdrCdbbsdzWeHg7vF86YfDL9cF9zSWcVVz5vuG+/2vtg15WU5k1SxpqxAGoFgdHWQZElQvM/oMLiU/Hx22Hx38mKz2q3b/h6MPzTzwoDhdvHsn7t1U5rt+/nsI+O9zf8P4l+F+THUYIVFqgmEDBJMihpQegEObSo6lUDGPoLKp88+A+053TSZXpanR+slGWPZnSbkyj9CQJDCgHVWW528sNGNjfY2bi+aNU2AF6srIQsYXMl4i4CoQwSRUw7KepEQx8Z7SNfnN9Runx6xpFyC1gl8CgFMDhmCsAVq9Z50UTnUODbiJXFtnSR7o9KSKDpQJbN/U8qAulaIyWRTA2kRR8/en7vmsmlxdfDzOfW5a6633FqeHj8aJ50TFUomDUZ6A1hzhBiJhNU+ByPHxn9B62vqcLvrJkhoKWISyGlcrbFgCimINnM9MyqrkKzDasYG/Lqjvp8EbTAqCeEzeDWUa8cxjiooCMmnmmoQGsXYaH9t+iY1q0nSWetASZsCKlYuXo4rWLJVQyquFiO0qCaPjXex2uzKYsMVjGng00OuzkSVMjJQlbiCkYDE7Iqj2kfJldtb0qN3qKYt501HeZqi5TXqXCuBzpIhW8f1KvgCOXI54yCvqqi/A/LiqlmtJuhRiUlIJs7fJLhQFYUQLOd0Jg7wKmRSdvQeNcBdXhNNQDEzV2gZigTtSh3gckuuyYHPJqvEDwLt6N7lCp2b62aL0wS0xmpLigqSVp45l0WIJhBUWRl/0B7L6CxzMUmBppwMd9gKSg2pmy07N4YCohRnkhKeCefoSDe7dgqsnll0tUydBauEQRkmQFaDwMopSelkEuNzqyWH8BQyyYjqDXMpjmJmVcY7ZpBGs3JgM4osTHys9z8T6n+a68WmTABWF8pGeQRSmjVDZfUQswzAAewzs4wi9Ohg9zHcTcGorLIxKge2ykEOlgLRZQ3KahdiFJbSp8vB37Me5lGfPMx6s8Fy0WGtTX7CgVZK2tc4tCKRIlMOtICJA9wnZPIVVSzlcQ/+nIHWctsRTSD/lUox++pBBHa1kUUBukIgWQtjROXL+AV6unFWFrIW0h6qsgO12vPmnEBmHCZ3qEsZHe10w44pfMsNabLZHRcnnSTnrHSGm5JIzK80QUSLXhbMtoyujF7Q5sdNnohGCqpSYUkshAYaWZXiLsy63wbL8qEEHd34o+jm9jXGBNFskP+I3YtMPEwULItqYeZsbY7FkTCaxq9UE87qWOjLIkIAMRBobsUeBgoJzhmW/bZkkUZP33+UMgyvXu3WiboJ5ldahYScvYIy+9ix6sXkK8gSkWPdaCNHn9YtmylIJVNH5hLGABUuyyZkgmHIwW52XorIfvbjk8pJuhBqHbUtAmQkHKpUhEiMlMuTDKFmYfGLkYBVSEMOC5CO3HH1MI9UrgKSVM5J55X8UiSgRRGM1Bast9xtg5OQzEAuoilOK+9YRXwxEtBiJJkra3mbWe9KKyAaEcFXlvasDmqyo/t1MgmYmUNZHQh8DJywoiaGnTJoYSppY7Qs6Ukl4PJ9m3/ev0La9+EnkH/eCZljQlCMFwwWw9WZM5oqKVUMorKP+9DnyL9zvos9dZ5iAquYG3NrdaByJe5AwyCH6zRD1iQkuSRlGZ1Z8c1837RNfzUFYh+8Zlicyug4xCUOUw6dgaITWQkqOo/efQfEP21KU5spEEeP1Rsfgdzw2sgXCcEbAcMHD0YUq/4GxC+3h5ztJ2AdZJK1DLCq4W2v9hZCiA4IQ9TSOQz46Xg/pYgdjn/bMh++FKPyutvkvfFodmv+9fazsmEK8vzd9cC2Tzg08ORGiRP57OiwfDocnfgT8exosVsN785PW9ptO1w9O3q9S6sm/0DvLzb/pfY0hVAkN+HihSATcT77cIn99RYr7HvqBwe82d093Tkz/dcd1ebd4b5uTctdvWd6Q+vNDT3ceGt9uHeBPZ390uYrbC+HEN8f3z6a37uHOT8ZLurbZuJ7+4PbmL+gdghfjtr1mtptf4jRR+Z7m1kwNpf87/cNh8KDM+6v7U97tVuthqj5jq7wptl0HBQV2d2cLw9Xvv5qPnvw/eHZ/wAmRtTeqCgAAA==" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="FiwareHub" createdInVersion="20.1.7.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="true" lastModifiedInVersion="20.1.7.0" name="FiwareHub" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
+<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44f06be-70c9-4896-8814-5c73f84ff08d" namespace="FIWAREHub.Models.Sql" dataBaseShemaInfo="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" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="FiwareHub" createdInVersion="20.1.7.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="true" lastModifiedInVersion="20.1.7.0" name="FiwareHub" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
   <classes>
     <dataBaseObjectModelHasClasses Id="f6cb01a9-ef6f-4622-9cf5-da9040ebc454">
       <xpObject Id="1efafbc2-140a-43f6-b1db-d77ca6a86bb7" name="WeatherReport" baseClass="XPObject" userFileName="WeatherReport" designerFileName="WeatherReport.Designer" className="WeatherReport" virtualName="WeatherReport">
         <fields>
+          <generalXpObjectHasFields Id="61ff298c-827a-4fc1-933a-5f97f85bbba3">
+            <field Id="905d1291-973b-494d-9629-1892512b1a8c" name="UID" columnType="Int64" virtualColumnType="Int64" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="e4a1fea0-b5b7-4048-af70-0543dd086b35">
             <field Id="71e445f6-48cf-4800-8104-565353b70596" name="DeviceId" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
           </generalXpObjectHasFields>
@@ -67,6 +70,9 @@
     <dataBaseObjectModelHasClasses Id="c960c87d-fe4e-4671-9116-ad1cbc83f882">
       <xpObject Id="bb37f92c-a0b9-45a5-ab43-7ba2bc929dd5" name="RoadTrafficReport" baseClass="XPObject" userFileName="RoadTrafficReport" designerFileName="RoadTrafficReport.Designer" className="RoadTrafficReport" virtualName="RoadTrafficReport">
         <fields>
+          <generalXpObjectHasFields Id="b4df9bfb-b4b3-4ccc-8992-dc2c04b31d2f">
+            <field Id="3c73bb5b-7ce9-40ce-a061-5825820768bd" name="UID" columnType="Int64" virtualColumnType="Int64" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="be6e9690-35a6-429c-9f0e-4edf0ec4893e">
             <field Id="c01fde37-f256-4db7-95cb-1cabd8ea3dd8" name="DeviceId" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
           </generalXpObjectHasFields>
@@ -115,8 +121,11 @@
     <dataBaseObjectModelHasClasses Id="cc34de0d-83e7-416d-9457-20a6c88286d6">
       <xpObject Id="7601c9ba-2344-4ad4-a39d-efe22d4aa254" name="SyncOperation" baseClass="XPObject" userFileName="SyncOperation" designerFileName="SyncOperation.Designer" className="SyncOperation" virtualName="SyncOperation">
         <fields>
+          <generalXpObjectHasFields Id="611a8b97-766d-429d-a3b5-92ac452228b4">
+            <field Id="6b023a90-9bf0-40e9-937c-b1bfad6bfd57" name="UniqueId" columnType="Guid" virtualColumnType="Guid" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="f8e97674-4cdc-42f3-b82e-283aa9a9722a">
-            <field Id="2dac4346-2cfe-4c43-84f2-a33e01e6b11d" name="DateStarted" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="2dac4346-2cfe-4c43-84f2-a33e01e6b11d" name="DateStarted" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="f2c99d43-db06-4f8c-b711-dfe1262d81c7">
             <field Id="78736b15-4a6a-41ad-963c-e960c20ed3c7" name="DateFinished" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" isNullable="true" />
@@ -124,8 +133,42 @@
           <generalXpObjectHasFields Id="51264206-084c-4d8a-8a44-665afb48e6f0">
             <field Id="97af7479-e62b-47d1-8740-7af640d523c7" name="DateModified" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
-          <generalXpObjectHasFields Id="c3601a59-4f82-4197-ac14-29a5ec0d889c">
-            <field Id="ae4b5540-f2c6-4375-8896-ea893166a8a7" name="Iterations" columnType="Int32" virtualColumnType="Int32" delayedUpdateModifiedOnly="false" isNullable="true" />
+          <generalXpObjectHasFields Id="11c49739-7641-4116-b6c5-969dc3547c1a">
+            <field Id="ef1e4ac2-f8b0-4193-a6ea-abbd04cd8adb" name="CurrentItem" columnType="Int64" virtualColumnType="Int64" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="dfa20e25-5e83-46c9-8266-39c0cc21f50f">
+            <field Id="5e6762b1-0e1b-4ed7-9e3f-d932d0251a35" name="TotalItemCount" columnType="Int64" virtualColumnType="Int64" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="06b2b9d8-68ab-45fd-99c0-225bdfcf52ba">
+            <field Id="50e979d6-fdb2-4f95-b06c-51ad36a7e078" name="ProgressPercentage" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="d33f093a-9cf3-48e7-a5ea-8d7c3694cc45">
+            <field Id="666d9e4e-1e25-4e93-8803-038fd6001a01" name="IsRunning" columnType="Boolean" virtualColumnType="Boolean" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+        </fields>
+        <aggrTarget>
+          <aggregation Id="c49049b4-0e47-41ee-bf21-2661d3c6a2ce" sourceCollectionName="SyncOperationExceptions" name="SyncOperationExceptionReferencesSyncOperation" targetFieldName="SyncOperation">
+            <xpObjectMoniker Id="537dd1f5-1eec-4d03-a59c-0a389d01b18e" />
+          </aggregation>
+        </aggrTarget>
+        <collectionFields>
+          <xpObjectHasCollectionFields Id="8378c94f-b960-44c4-88b7-0f7255cde5f2">
+            <collectionField Id="0dce6831-d548-4c7a-bbe0-43c301c3c2a6" name="SyncOperationExceptions" />
+          </xpObjectHasCollectionFields>
+        </collectionFields>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+    <dataBaseObjectModelHasClasses Id="c2ad5a89-64ab-4dca-a006-60c1a5d4a68c">
+      <xpObject Id="537dd1f5-1eec-4d03-a59c-0a389d01b18e" name="SyncOperationException" baseClass="XPObject" userFileName="SyncOperationException" designerFileName="SyncOperationException.Designer" className="SyncOperationException" virtualName="SyncOperationException">
+        <fields>
+          <generalXpObjectHasFields Id="e4828545-5d28-42d2-b63d-04edf6f19580">
+            <field Id="ba382b27-893d-4232-964d-c9a8745ec1bb" name="SyncOperation" virtualColumnType="SyncOperation" logicalType="SyncOperation" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="bccac316-ecce-4ffa-a371-c1ed6e2e7f44">
+            <field Id="f5408c14-a340-4b78-a906-7300ddc2322c" name="Message" virtualColumnType="String" delayedUpdateModifiedOnly="false" size="Unlimited" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="d76171d8-46e0-4f1d-a63a-a6ebee84b458">
+            <field Id="d7e94495-1534-4bbb-a5a3-df47c1e2dcaf" name="DateOccurred" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" />
           </generalXpObjectHasFields>
         </fields>
       </xpObject>

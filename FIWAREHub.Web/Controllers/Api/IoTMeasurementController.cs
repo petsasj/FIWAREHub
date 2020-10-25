@@ -32,7 +32,7 @@ namespace FIWAREHub.Web.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> PostTestWeatherMeasurement()
         {
-            var weatherEvent = new FiwareWeatherReport
+            var weatherEvent = new FiwareWeatherReport(1)
             {
                 Temperature = 12,
                 WindChill = 0,
@@ -46,7 +46,7 @@ namespace FIWAREHub.Web.Controllers.Api
             };
 
             using var fiwareClient = new FIWAREClient();
-            var response = await fiwareClient.SendJson(HttpMethod.Post, 
+            var response = await fiwareClient.SendJson(HttpMethod.Post,
                 FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.FirstOrDefault()), weatherEvent);
             var success = response.IsSuccessStatusCode;
 
@@ -57,7 +57,7 @@ namespace FIWAREHub.Web.Controllers.Api
         public async Task<IActionResult> PostTestWeatherMeasurement(FiwareWeatherReport model)
         {
             using var fiwareClient = new FIWAREClient();
-            var response = await fiwareClient.SendJson(HttpMethod.Post, 
+            var response = await fiwareClient.SendJson(HttpMethod.Post,
                 FIWAREUrls.JsonMeasurementUrl(FIWAREUrls.WeatherDeviceIds.FirstOrDefault()), model);
             var success = response.IsSuccessStatusCode;
 
@@ -71,7 +71,7 @@ namespace FIWAREHub.Web.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> PostTestRoadTrafficReport()
         {
-            var roadTraffic = new FiwareTrafficReport
+            var roadTraffic = new FiwareTrafficReport(1)
             {
                 StartTime = DateTime.UtcNow,
                 City = "Random",
@@ -81,7 +81,7 @@ namespace FIWAREHub.Web.Controllers.Api
             };
 
             using var fiwareClient = new FIWAREClient();
-            var response = await fiwareClient.SendUltraLight(HttpMethod.Post, 
+            var response = await fiwareClient.SendUltraLight(HttpMethod.Post,
                 FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.FirstOrDefault()), roadTraffic.ToUltraLightSyntax());
             var success = response.IsSuccessStatusCode;
 
@@ -92,7 +92,7 @@ namespace FIWAREHub.Web.Controllers.Api
         public async Task<IActionResult> PostTestRoadTrafficReport([FromBody] string payLoad)
         {
             using var fiwareClient = new FIWAREClient();
-            var response = await fiwareClient.SendUltraLight(HttpMethod.Post, 
+            var response = await fiwareClient.SendUltraLight(HttpMethod.Post,
                 FIWAREUrls.UltraLightMeasurementUrl(FIWAREUrls.RoadTrafficDeviceIds.FirstOrDefault()), payLoad);
             var success = response.IsSuccessStatusCode;
 
@@ -107,62 +107,47 @@ namespace FIWAREHub.Web.Controllers.Api
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> SubmitCsvReadings(int delay = 60)
+        public async Task<IActionResult> SynchronizeReadings(int delay = 60)
         {
-            // Instance of File parser 
-            var fileParser = new FileParser();
+            var guid = Guid.NewGuid();
+            var measurementsSubmitter = new FIWAREMeasurementsSubmitter();
 
-            // Get predefined dataset results
-            var accidentDataset = fileParser.ParseAccidentsDataset().ToList();
+            var task = Task.Factory.StartNew(async () => await measurementsSubmitter.SubmitToAgentsAsyncTask(guid, delay),
+                TaskCreationOptions.LongRunning);
 
-            // Split into chunks of 20 for easier use with weather devices
-            var chunks = accidentDataset.Chunk(20);
+            return AcceptedAtAction(nameof(QueryTaskProgress), "IoTMeasurement", new { guid = guid.ToString() });
+        }
 
-            // Diagnostics
-            var progress = 0;
-            var percentage = (decimal) progress / accidentDataset.Count;
-            var stopWatch = new System.Diagnostics.Stopwatch();
-            stopWatch.Start();
+        /// <summary>
+        /// Queries Sync Operation Progress
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> QueryTaskProgress(string guid)
+        {
+            var successful = Guid.TryParse(guid, out var uniqueId);
 
-            // Adds async Tasks to list for execution
-            var taskList = new List<Task>();
+            if (!successful)
+                return BadRequest("Malformed GUID.");
 
-            // POST measurements to IoT devices
-            foreach (var chunk in chunks)
+            var syncOperation = await _unitOfWork.Query<SyncOperation>()
+                .Where(so => so.UniqueId == uniqueId)
+                .SingleOrDefaultAsync();
+
+            if (syncOperation == null)
+                return BadRequest("No progress found for GUID.");
+
+            var json = new
             {
-                using var fiwareClient = new FIWAREClient();
-                // index of iteration to select correct device
-                var index = 0;
+                DateStarted = syncOperation.DateStarted.ToString("yyyy-MM-dd HH:mm"),
+                DateLastModified = syncOperation.DateModified.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm"),
+                DateFinished = syncOperation.DateFinished.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm"),
+                Percentage = syncOperation.ProgressPercentage.GetValueOrDefault(),
+                IsRunning = syncOperation.IsRunning
+            };
 
-                foreach (var report in chunk)
-                {
-                    // POST to JSON
-                    taskList.Add(fiwareClient.SendJson(HttpMethod.Post,
-                        FIWAREUrls.JsonMeasurementUrl(
-                            FIWAREUrls.WeatherDeviceIds.Skip(index).FirstOrDefault()),
-                        report.FiwareWeatherReport));
-                    
-                    // Delay Task for operation completion
-                    taskList.Add(Task.Delay(delay));
-
-                    // POST to UL
-                    taskList.Add(fiwareClient.SendUltraLight(HttpMethod.Post,
-                        FIWAREUrls.UltraLightMeasurementUrl(
-                            FIWAREUrls.RoadTrafficDeviceIds.Skip(index).FirstOrDefault()),
-                        report.FiwareTrafficDataReport.ToUltraLightSyntax()));
-
-                    // await Task execution
-                    await Task.WhenAll(taskList);
-                    index++;
-                    progress++;
-                }
-            }
-
-            // Diagnostics continued
-            stopWatch.Stop();
-            var elapsedTime = stopWatch.ElapsedMilliseconds / 1000 / 60;
-
-            return Ok($"Successfully sent {progress} within {elapsedTime} minutes.");
+            return Ok(json);
         }
 
 
@@ -192,5 +177,6 @@ namespace FIWAREHub.Web.Controllers.Api
 
             return Ok();
         }
+
     }
 }

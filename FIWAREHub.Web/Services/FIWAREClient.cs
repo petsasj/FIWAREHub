@@ -54,7 +54,6 @@ namespace FIWAREHub.Web.Services
             foreach (var (key, value) in _headers) requestMessage.Content.Headers.Add(key, value);
 
             return await this.SendAsync(requestMessage);
-
         }
     }
 }

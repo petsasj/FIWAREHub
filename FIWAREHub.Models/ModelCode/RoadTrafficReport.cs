@@ -31,6 +31,7 @@ namespace FIWAREHub.Models.Sql
             GeoLocation = roadTrafficUpdate.GeoLocation?.Value;
             Distance = distance;
             Description = roadTrafficUpdate.Description?.Value;
+            UID = long.Parse(roadTrafficUpdate.UID.Value.ToString());
         }
     }
 

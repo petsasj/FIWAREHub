@@ -59,10 +59,10 @@ namespace FIWAREHub.Parsers
                 .OrderByDescending(g => g.Count())
                 .Take(2)
                 .SelectMany(g => g.ToList())
-                .Select(ar => new FiwareCombinedReport
+                .Select((ar, idx) => new FiwareCombinedReport
                 {
-                    FiwareWeatherReport = new FiwareWeatherReport(ar.WeatherCondition, weatherMappings, ar),
-                    FiwareTrafficDataReport = new FiwareTrafficReport(ar)
+                    FiwareWeatherReport = new FiwareWeatherReport(ar.WeatherCondition, weatherMappings, ar, idx + 1),
+                    FiwareTrafficDataReport = new FiwareTrafficReport(ar, idx + 1)
                 })
                 .ToList();
 
