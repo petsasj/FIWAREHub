@@ -12,25 +12,42 @@ The data was later imported into a SQL Database and analyzed further via the use
 
 ![](header.png)
 
+## Prerequisites
+This solution has been developed using Microsoft dotnet Core.
+Dotnet core in itself is cross-platform and should run on all OS environments.
+Make sure you have Visual Studio or Visual Studio Code installed.
+
+Also this solution is based on Docker and Docker-Compose. 
+
 ## Installation
 
 OS X & Linux:
 
 ```sh
-npm install my-crazy-module --save
+git clone https://github.com/apache/incubator-superset.git
 ```
 
 Windows:
+Download repository via Github and unzip.
 
+Navigate to the root of the folder. 
 ```sh
-edit autoexec.bat
+cd FIWAREHub.Docker
+docker-compose -d up
 ```
 
 ## Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+* Navigate into the FIWAREHub.Docker folder. Modify the .env file according to your needs.
+* Make sure that you modify the NETWORKMODE attribute. In its default setting it is setup for use in a custom Docker network. Default values are host or bridge.
+* Set Database passwords according to your needs
+* Make sure docker-compose is up
+* Open Visual Studio and run Both FIWAREHub.Web and FIWAREHub.SynchronizerDaemon.
+* Using the POSTMAN Collections below, provision both JSON and UltraLight devices
+* That's it!
 
-_For more examples and usage, please refer to the [Wiki][wiki]._
+Any measurement posted in either of the JSON Devices or UltraLight Devices will be synchronized both into Microsoft SQL Server and Apache-Superset.
+
 
 ## Development setup
 
@@ -50,7 +67,7 @@ npm test
 
 ## Meta
 
-Yiannis Petsas - el05628@ntua.gr
+Yiannis Petsas - el05628@mail.ntua.gr
 
  Distributed under the GPL license. See ``LICENSE`` for more information.
 
@@ -58,7 +75,7 @@ Yiannis Petsas - el05628@ntua.gr
 
 ## Contributing
 
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
+1. Fork it (<https://github.com/petsasj/FIWAREHub/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)

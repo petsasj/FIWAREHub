@@ -60,11 +60,6 @@ namespace FIWAREHub.Models.Sql
             get { return fIsRunning; }
             set { SetPropertyValue<bool>(nameof(IsRunning), ref fIsRunning, value); }
         }
-        [PersistentAlias("Iif([CurrentItem] <> null And [TotalItemCount] <> null, [CurrentItem] / [TotalItemCount], 0)")]
-        public double Percentage
-        {
-            get { return (double)(EvaluateAlias(nameof(Percentage))); }
-        }
         [Association(@"SyncOperationExceptionReferencesSyncOperation"), Aggregated]
         public XPCollection<SyncOperationException> SyncOperationExceptions { get { return GetCollection<SyncOperationException>(nameof(SyncOperationExceptions)); } }
     }

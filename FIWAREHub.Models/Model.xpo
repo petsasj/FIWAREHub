@@ -142,9 +142,6 @@
           <generalXpObjectHasFields Id="d33f093a-9cf3-48e7-a5ea-8d7c3694cc45">
             <field Id="666d9e4e-1e25-4e93-8803-038fd6001a01" name="IsRunning" columnType="Boolean" virtualColumnType="Boolean" delayedUpdateModifiedOnly="false" />
           </generalXpObjectHasFields>
-          <generalXpObjectHasFields Id="ba5b1fa6-6b7e-47c8-bd40-9a47ab0e6877">
-            <persistentAlias Id="13d681d7-fb78-4d02-a03b-f1dc523c68c6" name="Percentage" columnType="Double" virtualColumnType="Double" expression="Iif([CurrentItem] &lt;&gt; null And [TotalItemCount] &lt;&gt; null, [CurrentItem] / [TotalItemCount], 0)" />
-          </generalXpObjectHasFields>
         </fields>
         <aggrTarget>
           <aggregation Id="c49049b4-0e47-41ee-bf21-2661d3c6a2ce" sourceCollectionName="SyncOperationExceptions" name="SyncOperationExceptionReferencesSyncOperation" targetFieldName="SyncOperation">

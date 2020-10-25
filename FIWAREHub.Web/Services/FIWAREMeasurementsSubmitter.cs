@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -43,7 +44,9 @@ namespace FIWAREHub.Web.Services
 
             // Diagnostics
             var progress = 0;
-            
+
+
+
             // Procedure to Perform Progress Updates
             var timer = new System.Threading.Timer(async (e) =>
             {
@@ -64,6 +67,17 @@ namespace FIWAREHub.Web.Services
 
                 foreach (var report in chunk)
                 {
+                    // Adds pausing due to severe headover in node.js/async tasks line up
+                    // This pause allows for built-up entities to get cleared from the async queue
+                    if (progress % 20000 == 0 && progress > 0)
+                    {
+                        // wait 5 minutes every 20000
+                        const int time = 1000 * 60 * 5;
+                        Debug.WriteLine($"Progress at {progress}");
+                        Debug.WriteLine($"{DateTime.UtcNow:dd-MM-yyyy HH:mm:ss}: Waiting for 5 minutes");
+                        await Task.Delay(time);
+                    }
+
                     try
                     {
                         // POST to JSON

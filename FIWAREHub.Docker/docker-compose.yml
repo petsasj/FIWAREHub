@@ -2,9 +2,14 @@ version: "3.6"
 
 #must create docker volume with name set in .env
 volumes:
-    mongo_volume:
-      external:
-        name: ${EXTERNALVOLUMENAME}
+  postgres:
+  redis:
+  mongodb:
+  mongodbconfig:
+  sqlsrv:
+  supersetdata:
+  supersetetc:
+  supersethome:
 
 services:
   mongo:
@@ -17,7 +22,18 @@ services:
       - "27017:27017"    
     network_mode: ${NETWORKMODE}
     volumes:
-      - mongo_volume:/data
+      - mongodb:/data/db
+      - mongodbconfig:/data/configdb
+    environment:   
+      - MONGO_REPLICA_SET_NAME=rs0
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    healthcheck:
+      test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+    command: [ "--bind_ip", "0.0.0.0", "--replSet", "rs0", "--oplogSize", "100"]
     
   orion:
     image: fiware/orion:latest
@@ -30,14 +46,14 @@ services:
     network_mode: ${NETWORKMODE}
     ports:
       - "1026:1026"
-    command: -dbhost ${DBHOST} -logLevel WARN
+    command: -dbhost ${DBHOST} -dbuser ${MONGO_INITDB_ROOT_USERNAME} -dbpwd ${MONGO_INITDB_ROOT_PASSWORD} -logLevel WARN
     
   iot-agent-json:
     image: fiware/iotagent-json:latest
     hostname: iot-agent-json
     container_name: thesis-iota-json
     depends_on:
-      - mongo
+      - mongo 
       - orion
     links:
       - mongo
@@ -61,6 +77,9 @@ services:
       - IOTA_MONGO_HOST=${DBHOST}
       - IOTA_MONGO_PORT=27017
       - IOTA_MONGO_DB=${JSONDB}
+      - IOTA_MONGO_USER=${MONGO_INITDB_ROOT_USERNAME}
+      - IOTA_MONGO_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - IOTA_MONGO_AUTH_SOURCE=${MONGO_INITDB_DATABASE}
       - IOTA_HTTP_PORT=7896
       - IOTA_PROVIDER_URL=http://${JSONHOST}:4041/v2
       - IOTA_DEFAULT_RESOURCE=/iot/json
@@ -91,5 +110,67 @@ services:
       - IOTA_MONGO_HOST=${DBHOST}
       - IOTA_MONGO_PORT=27017
       - IOTA_MONGO_DB=${ULDB}
+      - IOTA_MONGO_USER=${MONGO_INITDB_ROOT_USERNAME}
+      - IOTA_MONGO_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - IOTA_MONGO_AUTH_SOURCE=${MONGO_INITDB_DATABASE}
       - IOTA_HTTP_PORT=7896
       - IOTA_PROVIDER_URL=http://${ULHOST}:4041/v2
+  
+  sql-server-db:
+    image: mcr.microsoft.com/mssql/server:2019-CU8-ubuntu-16.04
+    container_name: thesis_sqlsrv
+    hostname: sqlserver
+    network_mode: ${NETWORKMODE}
+    volumes:
+      - sqlsrv:/var/opt/mssql
+    expose:
+      - "1433"
+    ports:
+      - "1433:1433"
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_PID: Developer
+      ACCEPT_EULA: "Y"
+
+  redis:
+    image: redis
+    container_name: thesis_redis
+    hostname: redis
+    restart: always
+    network_mode: ${NETWORKMODE}
+    volumes:
+      - redis:/data
+
+  postgres:
+    image: postgres
+    container_name: thesis_postgres
+    hostname: postgres
+    restart: always
+    network_mode: ${NETWORKMODE}
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_PASSWORD: superset
+      POSTGRES_USER: superset
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  superset:
+    image: amancevice/superset
+    container_name: thesis_superset
+    hostname: superset
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      MAPBOX_API_KEY: ${MAPBOX_API_KEY}
+    ports:
+      - "8088:8088"
+    expose:
+      - "8088"
+    network_mode: ${NETWORKMODE}
+    volumes:
+      - ./superset_config.py:/etc/superset/superset_config.py
+      - supersetdata:/var/lib/superset
+      - supersetetc:/etc/superset
+      - supersethome:/home/superset
