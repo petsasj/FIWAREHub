@@ -24,7 +24,7 @@ Also this solution is based on Docker and Docker-Compose.
 OS X & Linux:
 
 ```sh
-git clone https://github.com/apache/incubator-superset.git
+git clone https://github.com/petsasj/FIWAREHub.git
 ```
 
 Windows:
@@ -54,7 +54,11 @@ In order to access Apache-Superset:
 * Visit {localhost}:8088.
 * Import Dashboards from the corresponding folder.
 
-## Development setup
+## POSTMAN Collections
+
+The following POSTMAN Corresponds to API Actions within the application FIWAREHub.Web
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/32def79f490a71477dc0)
 
 Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
 
