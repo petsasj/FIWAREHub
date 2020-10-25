@@ -143,7 +143,10 @@ namespace FIWAREHub.Web.Controllers.Api
                 DateStarted = syncOperation.DateStarted.ToString("yyyy-MM-dd HH:mm"),
                 DateLastModified = syncOperation.DateModified.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm"),
                 DateFinished = syncOperation.DateFinished.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm"),
-                Percentage = syncOperation.ProgressPercentage.GetValueOrDefault(),
+                TotalItems = syncOperation.TotalItemCount.GetValueOrDefault(),
+                CurrentCount = syncOperation.CurrentItem.GetValueOrDefault(),
+                EstimatedTimeLeft = syncOperation.EstimatedTimeLeft(),
+                Percentage = syncOperation.PercentageString,
                 IsRunning = syncOperation.IsRunning
             };
 

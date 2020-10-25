@@ -25,6 +25,12 @@ namespace FIWAREHub.Models.Sql
             get { return fSyncOperation; }
             set { SetPropertyValue<SyncOperation>(nameof(SyncOperation), ref fSyncOperation, value); }
         }
+        long fUID;
+        public long UID
+        {
+            get { return fUID; }
+            set { SetPropertyValue<long>(nameof(UID), ref fUID, value); }
+        }
         string fMessage;
         [Size(SizeAttribute.Unlimited)]
         public string Message

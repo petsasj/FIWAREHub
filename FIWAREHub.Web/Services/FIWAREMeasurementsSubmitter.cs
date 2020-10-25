@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DevExpress.Xpo;
 using FIWAREHub.Models.Sql;
@@ -44,14 +43,11 @@ namespace FIWAREHub.Web.Services
 
             // Diagnostics
             var progress = 0;
-            var percentage = (double) progress / accidentDataset.Count;
-            var stopWatch = new System.Diagnostics.Stopwatch();
-            stopWatch.Start();
             
             // Procedure to Perform Progress Updates
             var timer = new System.Threading.Timer(async (e) =>
             {
-                await ReportProgress(accidentDataset.Count,progress, percentage);   
+                await ReportProgress(accidentDataset.Count,progress);   
             }, null, _zero, _syncingPeriod);
 
             // Adds async Tasks to list for execution
@@ -60,13 +56,14 @@ namespace FIWAREHub.Web.Services
             // POST measurements to IoT devices
             foreach (var chunk in chunks)
             {
+                // each chunk uses its own fiware client
                 using var fiwareClient = new FIWAREClient();
+
                 // index of iteration to select correct device
                 var index = 0;
 
                 foreach (var report in chunk)
                 {
-
                     try
                     {
                         // POST to JSON
@@ -91,17 +88,13 @@ namespace FIWAREHub.Web.Services
                     }
                     catch (Exception ex)
                     {
-                        await ReportException(ex);
+                        await ReportException(ex, report.FiwareTrafficDataReport.UID);
                         continue;
                     }
                 }
             }
 
             await ReportEnd();
-
-            // Diagnostics continued
-            stopWatch.Stop();
-            var elapsedTime = stopWatch.ElapsedMilliseconds / 1000 / 60;
         }
 
         /// <summary>
@@ -132,14 +125,13 @@ namespace FIWAREHub.Web.Services
         /// <param name="currentItem"></param>
         /// <param name="percentage"></param>
         /// <returns></returns>
-        private async Task ReportProgress(long totalItemsCount, long currentItem, double percentage)
+        private async Task ReportProgress(long totalItemsCount, long currentItem)
         {
             using var uow = new UnitOfWork();
 
             var syncOperation = await GetSyncOperation(uow);
 
             syncOperation.CurrentItem = currentItem;
-            syncOperation.ProgressPercentage = percentage;
             syncOperation.DateModified = DateTime.UtcNow;
             syncOperation.TotalItemCount = totalItemsCount;
 
@@ -152,7 +144,7 @@ namespace FIWAREHub.Web.Services
         /// </summary>
         /// <param name="ex"></param>
         /// <returns></returns>
-        private async Task ReportException(Exception ex)
+        private async Task ReportException(Exception ex, long uid)
         {
             using var uow = new UnitOfWork();
 
@@ -160,7 +152,8 @@ namespace FIWAREHub.Web.Services
 
             syncOperation.SyncOperationExceptions.Add(new SyncOperationException(uow)
             {
-                Message = ex.Message
+                Message = ex.Message,
+                UID = uid
             });
             syncOperation.DateModified = DateTime.UtcNow;
 

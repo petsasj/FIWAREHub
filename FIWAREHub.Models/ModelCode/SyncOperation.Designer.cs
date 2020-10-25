@@ -54,17 +54,16 @@ namespace FIWAREHub.Models.Sql
             get { return fTotalItemCount; }
             set { SetPropertyValue<long?>(nameof(TotalItemCount), ref fTotalItemCount, value); }
         }
-        double? fProgressPercentage;
-        public double? ProgressPercentage
-        {
-            get { return fProgressPercentage; }
-            set { SetPropertyValue<double?>(nameof(ProgressPercentage), ref fProgressPercentage, value); }
-        }
         bool fIsRunning;
         public bool IsRunning
         {
             get { return fIsRunning; }
             set { SetPropertyValue<bool>(nameof(IsRunning), ref fIsRunning, value); }
+        }
+        [PersistentAlias("Iif([CurrentItem] <> null And [TotalItemCount] <> null, [CurrentItem] / [TotalItemCount], 0)")]
+        public double Percentage
+        {
+            get { return (double)(EvaluateAlias(nameof(Percentage))); }
         }
         [Association(@"SyncOperationExceptionReferencesSyncOperation"), Aggregated]
         public XPCollection<SyncOperationException> SyncOperationExceptions { get { return GetCollection<SyncOperationException>(nameof(SyncOperationExceptions)); } }
