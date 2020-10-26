@@ -107,7 +107,7 @@ namespace FIWAREHub.Web.Controllers.Api
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> SynchronizeReadings(int delay = 80)
+        public async Task<IActionResult> SynchronizeReadings(int delay = 50)
         {
             var guid = Guid.NewGuid();
             var measurementsSubmitter = new FIWAREMeasurementsSubmitter();

@@ -31,17 +31,20 @@ Windows:
 Download repository via Github and unzip.
 
 Navigate to the root of the folder. 
+
 ```sh
 cd FIWAREHub.Docker
-docker-compose -d up
+docker-compose up -d
 ```
 
 ## Usage example
 
-* Navigate into the FIWAREHub.Docker folder. Modify the .env file according to your needs.
+To get started, after cloning the git repository do the following:
+* Navigate into the FIWAREHub.Docker folder. 
+* Modify the .env file according to your needs.
 * Make sure that you modify the NETWORKMODE attribute. In its default setting it is setup for use in a custom Docker network. Default values are host or bridge.
 * Set Database passwords according to your needs
-* Make sure docker-compose is up
+* Run docker-compose up -d
 * Open Visual Studio and run Both FIWAREHub.Web and FIWAREHub.SynchronizerDaemon.
 * Using the POSTMAN Collections below, provision both JSON and UltraLight devices
 * That's it!
@@ -51,21 +54,26 @@ Any measurement posted in either of the JSON Devices or UltraLight Devices will 
 In order to access Apache-Superset:
 * Run docker-compose exec superset superset-init
 * Create a new user
+* Add datasources (both Database and Tables)
 * Visit {localhost}:8088.
 * Import Dashboards from the corresponding folder.
 
 ## POSTMAN Collections
 
-The following POSTMAN Corresponds to API Actions within the application FIWAREHub.Web
+The following POSTMAN Collection corresponds to the Web API Actions within the application FIWAREHub.Web
+
+Namely the most useful actions are:
+* Provision JSON Devices
+* Provision Ultralight Devices
+* Test Weather Measurement (via JSON)
+* Test Road Measurement (via Ultralight)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/32def79f490a71477dc0)
 
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
+The following POSTMAN Collection summarizes all requests for FIWARE IoT Agents and Orion.
+The names are pretty explanatory and descriptions have been added within them.
 
-```sh
-make install
-npm test
-```
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0366d7edf1b7f748dcd0)
 
 ## Release History
 

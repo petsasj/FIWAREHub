@@ -69,12 +69,14 @@ namespace FIWAREHub.Web.Services
                 {
                     // Adds pausing due to severe headover in node.js/async tasks line up
                     // This pause allows for built-up entities to get cleared from the async queue
-                    if (progress % 20000 == 0 && progress > 0)
+                    if (progress % 25000 == 0 && progress > 0)
                     {
-                        // wait 5 minutes every 20000
-                        const int time = 1000 * 60 * 5;
+                        const int minutes = 1;
+                        // wait 1 minute every 25000
+                        const int time = 1000 * 60 * minutes;
                         Debug.WriteLine($"Progress at {progress}");
-                        Debug.WriteLine($"{DateTime.UtcNow:dd-MM-yyyy HH:mm:ss}: Waiting for 5 minutes");
+                        Debug.WriteLine($"{DateTime.UtcNow:dd-MM-yyyy HH:mm:ss}: Waiting for {minutes} minute(s)");
+                        taskList = new List<Task>();
                         await Task.Delay(time);
                     }
 
@@ -97,6 +99,7 @@ namespace FIWAREHub.Web.Services
 
                         // await Task execution
                         await Task.WhenAll(taskList);
+                        taskList.Clear();
                         index++;
                         progress++;
                     }
@@ -108,7 +111,8 @@ namespace FIWAREHub.Web.Services
                 }
             }
 
-            await ReportEnd();
+            // Update sync operation with end values and attempt to stop timer
+            await ReportEnd(timer);
         }
 
         /// <summary>
@@ -179,7 +183,7 @@ namespace FIWAREHub.Web.Services
         /// Reports the end of the syncing operation
         /// </summary>
         /// <returns></returns>
-        private async Task ReportEnd()
+        private async Task ReportEnd(System.Threading.Timer timer)
         {
             using var uow = new UnitOfWork();
 
@@ -187,6 +191,10 @@ namespace FIWAREHub.Web.Services
 
             syncOperation.DateFinished = DateTime.UtcNow;
             syncOperation.IsRunning = false;
+
+            // Stop Threading timer
+            timer.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
+            await timer.DisposeAsync();
 
             await uow.CommitChangesAsync();
             uow.Dispose();
