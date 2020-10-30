@@ -64,6 +64,12 @@ namespace FIWAREHub.SynchronizerDaemon
                     {
                         Report("Cursor Watch received update");
 
+                        if (change.UpdateDescription == null)
+                        {
+                            Report("Update description, skipping cursor update");
+                            continue;
+                        }
+
                         // Getting id of device in safe manner
                         // Helps determine entity of receiving object
                         if (!(BsonSerializer.Deserialize<dynamic>(change.DocumentKey) is IDictionary<string, object> documentKey))

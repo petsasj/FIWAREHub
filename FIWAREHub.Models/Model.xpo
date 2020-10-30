@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44f06be-70c9-4896-8814-5c73f84ff08d" namespace="FIWAREHub.Models.Sql" dataBaseShemaInfo="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" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="FiwareHub" createdInVersion="20.1.7.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="true" lastModifiedInVersion="20.1.7.0" name="FiwareHub" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
+<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44f06be-70c9-4896-8814-5c73f84ff08d" namespace="FIWAREHub.Models.Sql" dataBaseShemaInfo="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" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="FiwareHub" createdInVersion="20.1.7.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="true" lastModifiedInVersion="20.1.7.0" name="FiwareHub" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
   <classes>
     <dataBaseObjectModelHasClasses Id="f6cb01a9-ef6f-4622-9cf5-da9040ebc454">
       <xpObject Id="1efafbc2-140a-43f6-b1db-d77ca6a86bb7" name="WeatherReport" baseClass="XPObject" userFileName="WeatherReport" designerFileName="WeatherReport.Designer" className="WeatherReport" virtualName="WeatherReport">
@@ -23,16 +23,16 @@
             <field Id="a461660f-dce3-4174-afc9-99ee0537c841" name="OriginalWeatherDescription" virtualColumnType="String" delayedUpdateModifiedOnly="false" size="Unlimited" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="82a8b754-3abe-4681-a8da-8c7a73276e79">
-            <field Id="109b0ad0-f545-4de2-95c6-442c28b56af4" name="Temperature" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="109b0ad0-f545-4de2-95c6-442c28b56af4" name="Temperature" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="455f3105-5c5f-4733-8bba-70bbe911ab90">
-            <field Id="8505aefb-0181-4b93-a170-6a5bd3bd8e45" name="Humidity" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="8505aefb-0181-4b93-a170-6a5bd3bd8e45" name="Humidity" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="1022b49e-1e3d-47ae-b7b7-390f0a16741f">
-            <field Id="842b007c-72cf-46cd-a282-8b7bfbf803a0" name="Pressure" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="842b007c-72cf-46cd-a282-8b7bfbf803a0" name="Pressure" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="46939cf5-6879-4e1b-9883-1fa8ebb2f982">
-            <field Id="338eb34d-29f8-4688-b5f3-bd6fd4030f4c" name="Visibility" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="338eb34d-29f8-4688-b5f3-bd6fd4030f4c" name="Visibility" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="92abb85b-8046-4271-8f4b-18b196c5ccfb">
             <field Id="f6492bca-b52b-4be0-bbb7-9579180575e3" name="CloudCoverage" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
@@ -41,13 +41,13 @@
             <field Id="73a3cffe-3c1b-4569-987d-c9a4646cf2d2" name="WindDirection" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="a24aa548-8ff8-425a-a15b-9cfabb81cc01">
-            <field Id="9baf6cef-4b06-4d2a-857c-ce468f01b255" name="WindChill" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="9baf6cef-4b06-4d2a-857c-ce468f01b255" name="WindChill" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="b0100013-4a42-45ff-af65-dec6d16363fb">
-            <field Id="c09b18d1-36df-4d2c-afb6-7c4c2b6cea52" name="WindSpeed" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="c09b18d1-36df-4d2c-afb6-7c4c2b6cea52" name="WindSpeed" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="bc2e0d7b-f618-45c9-87cc-d3bac86e1adc">
-            <field Id="3af5db92-b327-4c5a-948e-f1f4d2837ada" name="Precipitation" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="3af5db92-b327-4c5a-948e-f1f4d2837ada" name="Precipitation" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="350e6573-a38e-4156-9f31-c29a1f398be0">
             <field Id="ecb4af4f-221b-4c5c-a98d-0dd64b2074c8" name="City" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
@@ -77,7 +77,7 @@
             <field Id="c01fde37-f256-4db7-95cb-1cabd8ea3dd8" name="DeviceId" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="b189879e-6f7a-4909-812d-80aab38d0651">
-            <field Id="22b9c7f7-08dd-41d2-a6de-18e3a9a27dc8" name="Severity" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="22b9c7f7-08dd-41d2-a6de-18e3a9a27dc8" name="Severity" columnType="Int32" virtualColumnType="Int32" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="677aee56-d35c-4ef0-8f71-40b8e05893e5">
             <field Id="705e3b1c-a164-440b-b33e-9a5a71dac5d3" name="StartTime" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" isNullable="true" />
@@ -85,8 +85,14 @@
           <generalXpObjectHasFields Id="ba910d0c-1245-4b43-b621-865e884a87d0">
             <field Id="0ef12adb-c927-4f22-99cf-585cefd83965" name="GeoLocation" virtualColumnType="String" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="d4e3c6ae-b272-49ec-a7fc-d00741cd8423">
+            <field Id="71e4bce1-95c6-4a54-8516-69ded9e017d2" name="Latitude" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="981e7779-4cfc-43a0-bdce-eabafd28dddb">
+            <field Id="662ac6b5-42fb-40f2-9b29-a97d75f7253b" name="Longitude" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
+          </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="4bde5c01-3a8c-405b-8636-bafcace27931">
-            <field Id="24a4a4ec-aae2-490a-8fda-955c9d6e043e" name="Distance" columnType="Decimal" virtualColumnType="Decimal" delayedUpdateModifiedOnly="false" isNullable="true" />
+            <field Id="24a4a4ec-aae2-490a-8fda-955c9d6e043e" name="Distance" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" isNullable="true" />
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="bfcd865a-da81-43a6-90b4-ed6e03cc0802">
             <field Id="6491d088-0f4f-4cd7-b041-6644be5dc0b8" name="Description" virtualColumnType="String" delayedUpdateModifiedOnly="false" size="Unlimited" isNullable="true" />
@@ -169,6 +175,55 @@
           </generalXpObjectHasFields>
           <generalXpObjectHasFields Id="d76171d8-46e0-4f1d-a63a-a6ebee84b458">
             <field Id="d7e94495-1534-4bbb-a5a3-df47c1e2dcaf" name="DateOccurred" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+        </fields>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+    <dataBaseObjectModelHasClasses Id="4f3bc256-e027-454d-86d6-8db91964e188">
+      <xpObject Id="58e91944-0ff3-4e9e-9b11-ca5ed280696f" name="QuarterlyPeriod" baseClass="XPObject" userFileName="QuarterlyClusters" designerFileName="QuarterlyClusters.Designer" className="QuarterlyPeriod" virtualName="QuarterlyPeriod">
+        <fields>
+          <generalXpObjectHasFields Id="dd93da3f-3fc6-40a6-a300-eea84d1b06d3">
+            <field Id="da25a3e8-0c38-4c55-b1a2-0e1c219028f5" name="State" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="a72666ec-c88d-4212-a6af-6877adb216f3">
+            <field Id="640b176f-3959-489b-acb8-842e2d699dc5" name="DateFrom" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="2c194040-3520-477d-a7a7-4b695fa68995">
+            <field Id="2486bea6-2935-4d84-96e5-25a04508dd85" name="DateTo" columnType="DateTime" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="9b22fcd1-bc8f-438b-b0fb-4572572c073d">
+            <field Id="75dce518-d0af-4449-a67b-e377d2311a32" name="HumanReadableName" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="3f890c92-016e-4d0f-8bdd-cc9282c3090f">
+            <field Id="9f873172-305b-4c5a-b619-6808e7e23c00" name="Quarter" columnType="Int32" virtualColumnType="Int32" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="4fa8cc3f-fde7-48ce-890b-b6980e33dcfc">
+            <field Id="067ac886-e87d-4e26-8c39-ee04bbf2d487" name="Year" columnType="Int32" virtualColumnType="Int32" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+        </fields>
+        <aggrTarget>
+          <aggregation Id="7bc9b130-e0c6-4064-ae53-3d5ee4eaaf99" sourceCollectionName="ClusterCentroids" name="ClusterCentroidReferencesClusterPeriodCollection" targetFieldName="QuarterlyPeriod">
+            <xpObjectMoniker Id="57b488c6-5d4c-4c11-beb8-9528d6dcd550" />
+          </aggregation>
+        </aggrTarget>
+        <collectionFields>
+          <xpObjectHasCollectionFields Id="d16cb4fc-04ec-4205-a6e7-326f89674648">
+            <collectionField Id="cd400f21-01df-4166-8293-c71e5d4e81cc" name="ClusterCentroids" />
+          </xpObjectHasCollectionFields>
+        </collectionFields>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+    <dataBaseObjectModelHasClasses Id="cfd38b09-c44e-450f-865b-887bc006511f">
+      <xpObject Id="57b488c6-5d4c-4c11-beb8-9528d6dcd550" name="ClusterCentroid" baseClass="XPObject" userFileName="ClusterCentroid" designerFileName="ClusterCentroid.Designer" className="ClusterCentroid" virtualName="ClusterCentroid">
+        <fields>
+          <generalXpObjectHasFields Id="3620a5f9-36d4-41ed-a83e-8da6f7c1fb05">
+            <field Id="6bb5f7cd-7e3d-41b7-aa49-468ee8a447a2" name="QuarterlyPeriod" columnType="Char" virtualColumnType="QuarterlyPeriod" logicalType="QuarterlyPeriod" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="47dcf41d-4f04-428e-bf36-eca9ce4d1b61">
+            <field Id="35ade377-7d1c-4534-b5e2-30bfe31e4dd3" name="Latitude" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="f4a9dd21-0e27-4fda-a43c-700f5c58c573">
+            <field Id="84b92e21-6f4e-49a6-8ce5-20597c4e9d5e" name="Longitude" columnType="Double" virtualColumnType="Double" delayedUpdateModifiedOnly="false" />
           </generalXpObjectHasFields>
         </fields>
       </xpObject>

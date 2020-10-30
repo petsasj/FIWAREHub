@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Accord.MachineLearning" Version="3.8.0" />
     <PackageReference Include="DevExpress.Xpo" Version="20.1.8" />
   </ItemGroup>
 

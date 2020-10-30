@@ -21,7 +21,9 @@ namespace FIWAREHub.Models.Sql
             typeof(WeatherReport),
             typeof(RoadTrafficReport),
             typeof(SyncOperation),
-            typeof(SyncOperationException)
+            typeof(SyncOperationException),
+            typeof(QuarterlyPeriod),
+            typeof(ClusterCentroid)
         };
         public static Type[] GetPersistentTypes()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Accord.MachineLearning;
 using DevExpress.Xpo;
 using FIWAREHub.Models.ParserModels;
 using FIWAREHub.Models.Sql;
@@ -37,11 +38,11 @@ namespace FIWAREHub.Web.Controllers.Api
                 Temperature = 12,
                 WindChill = 0,
                 Humidity = 02,
-                Pressure = (decimal)33.33,
+                Pressure = (double)33.33,
                 Visibility = 100,
                 WindDirection = "NWD",
-                WindSpeed = (decimal)120.1,
-                Precipitation = (decimal)30.5,
+                WindSpeed = (double)120.1,
+                Precipitation = (double)30.5,
                 ReportTime = DateTime.UtcNow
             };
 
@@ -76,8 +77,8 @@ namespace FIWAREHub.Web.Controllers.Api
                 StartTime = DateTime.UtcNow,
                 City = "Random",
                 AddressNumber = "AddrNr",
-                StartLatitude = "37.9600965",
-                StartLongitude = "23.8576043"
+                StartLatitude = 37.9600965,
+                StartLongitude = 23.8576043
             };
 
             using var fiwareClient = new FIWAREClient();
@@ -107,7 +108,7 @@ namespace FIWAREHub.Web.Controllers.Api
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> SynchronizeReadings(int delay = 50)
+        public async Task<IActionResult> SynchronizeReadings(int delay = 45)
         {
             var guid = Guid.NewGuid();
             var measurementsSubmitter = new FIWAREMeasurementsSubmitter();
@@ -151,6 +152,65 @@ namespace FIWAREHub.Web.Controllers.Api
             };
 
             return Ok(json);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateClusterCentroids(int clustersNumber = 10)
+        {
+            // Fetch all RoadTrafficReports from Database
+            var results = _unitOfWork.Query<RoadTrafficReport>();
+
+            // Group By state
+            var groups = await results.GroupBy(g => g.State).ToListAsync();
+
+            foreach (var group in groups)
+            {
+                // Group by quarter
+                var quarters = group.GroupBy(g => g.StartTime.GetValueOrDefault().GetQuarter()).ToList();
+
+                foreach (var quarter in quarters)
+                {
+                    // Select Coordinates for K-Means algorithm
+                    var coordinates = quarter.Select(rtr => new double[]
+                        {rtr.Latitude.GetValueOrDefault(), rtr.Longitude.GetValueOrDefault()}).ToArray();
+
+                    // Reporting values for Quarterly Period entity
+                    var lowestTime = quarter.Min(rtr => rtr.StartTime.GetValueOrDefault());
+                    var largestTime = quarter.Max(rtr => rtr.StartTime.GetValueOrDefault());
+
+                    var kmeans = new KMeans(clustersNumber);
+                    var clusterCollection = kmeans.Learn(coordinates);
+
+                    //var locations = clusterCollection.Select(cc => new { Latitude = cc.Centroid[0], Longitude = cc.Centroid[1]});
+
+
+                    // Create DTO 
+                    var quarterPeriod = new QuarterlyPeriod(_unitOfWork)
+                    {
+                        DateFrom = lowestTime,
+                        DateTo = largestTime,
+                        State = group.Key,
+                        HumanReadableName = $"Quarter {quarter.Key}",
+                        Quarter = quarter.Key,
+                        Year = lowestTime.Year
+                    };
+
+                    clusterCollection.ToList().ForEach(cc =>
+                    {
+                        quarterPeriod.ClusterCentroids.Add(new ClusterCentroid(_unitOfWork)
+                        {
+                            Latitude = cc.Centroid[0],
+                            Longitude = cc.Centroid[1]
+                        });
+                    });
+
+                    await _unitOfWork.CommitChangesAsync();
+                }
+
+            }
+
+
+            return Ok();
         }
 
 

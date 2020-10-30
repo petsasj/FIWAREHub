@@ -12,7 +12,7 @@ namespace FIWAREHub.Models.ParserModels
 
         public string Tmc { get; set; }
 
-        public string Severity { get; set; }
+        public int Severity { get; set; }
 
         [FieldConverter(ConverterKind.Date, "yyyy-MM-dd HH:mm:ss")]
         public DateTime? StartTime { get; set; }
@@ -20,15 +20,15 @@ namespace FIWAREHub.Models.ParserModels
         [FieldConverter(ConverterKind.Date, "yyyy-MM-dd HH:mm:ss")]
         public DateTime? EndTime { get; set; }
 
-        public string StartLatitude { get; set; }
+        public double? StartLatitude { get; set; }
 
-        public string StartLongitude { get; set; }
+        public double? StartLongitude { get; set; }
 
         public string EndLatitude { get; set; }
 
         public string EndLongitude { get; set; }
 
-        public decimal? Distance { get; set; }
+        public double? Distance { get; set; }
 
         public string Description { get; set; }
 
@@ -55,21 +55,21 @@ namespace FIWAREHub.Models.ParserModels
         [FieldConverter(ConverterKind.Date, "yyyy-MM-dd HH:mm:ss")]
         public DateTime? WeatherTimestamp { get; set; }
 
-        public decimal? Temperature { get; set; }
+        public double? Temperature { get; set; }
 
-        public decimal? WindChill { get; set; }
+        public double? WindChill { get; set; }
 
-        public decimal? Humidity { get; set; }
+        public double? Humidity { get; set; }
 
-        public decimal? Pressure { get; set; }
+        public double? Pressure { get; set; }
 
-        public decimal? Visibility { get; set; }
+        public double? Visibility { get; set; }
 
         public string WindDirection { get; set; }
 
-        public decimal? WindSpeed { get; set; }
+        public double? WindSpeed { get; set; }
 
-        public decimal? Precipitation { get; set; }
+        public double? Precipitation { get; set; }
 
         public string WeatherCondition { get; set; }
 

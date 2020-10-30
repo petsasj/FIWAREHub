@@ -66,7 +66,6 @@ namespace FIWAREHub.Parsers
                 })
                 .ToList();
 
-
             return accidentsOfTwoTopStates;
         }
     }

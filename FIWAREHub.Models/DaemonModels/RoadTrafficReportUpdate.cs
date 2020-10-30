@@ -14,6 +14,12 @@ namespace FIWAREHub.Models.DaemonModels
         [BsonElement("attrs.Geolocation")]
         public UpdateValue GeoLocation { get; set; }
 
+        [BsonElement("attrs.Latitude")]
+        public UpdateValue Latitude { get; set; }
+
+        [BsonElement("attrs.Longitude")]
+        public UpdateValue Longitude { get; set; }
+
         [BsonElement("attrs.Distance")]
         public UpdateValue Distance { get; set; }
 

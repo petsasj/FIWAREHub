@@ -30,11 +30,11 @@ namespace FIWAREHub.Models.Sql
             get { return fDeviceId; }
             set { SetPropertyValue<string>(nameof(DeviceId), ref fDeviceId, value); }
         }
-        string fSeverity;
-        public string Severity
+        int? fSeverity;
+        public int? Severity
         {
             get { return fSeverity; }
-            set { SetPropertyValue<string>(nameof(Severity), ref fSeverity, value); }
+            set { SetPropertyValue<int?>(nameof(Severity), ref fSeverity, value); }
         }
         DateTime? fStartTime;
         public DateTime? StartTime
@@ -48,11 +48,23 @@ namespace FIWAREHub.Models.Sql
             get { return fGeoLocation; }
             set { SetPropertyValue<string>(nameof(GeoLocation), ref fGeoLocation, value); }
         }
-        decimal? fDistance;
-        public decimal? Distance
+        double? fLatitude;
+        public double? Latitude
+        {
+            get { return fLatitude; }
+            set { SetPropertyValue<double?>(nameof(Latitude), ref fLatitude, value); }
+        }
+        double? fLongitude;
+        public double? Longitude
+        {
+            get { return fLongitude; }
+            set { SetPropertyValue<double?>(nameof(Longitude), ref fLongitude, value); }
+        }
+        double? fDistance;
+        public double? Distance
         {
             get { return fDistance; }
-            set { SetPropertyValue<decimal?>(nameof(Distance), ref fDistance, value); }
+            set { SetPropertyValue<double?>(nameof(Distance), ref fDistance, value); }
         }
         string fDescription;
         [Size(SizeAttribute.Unlimited)]

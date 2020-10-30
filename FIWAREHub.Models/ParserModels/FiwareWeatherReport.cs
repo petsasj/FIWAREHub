@@ -20,19 +20,19 @@ namespace FIWAREHub.Models.ParserModels
         public string OriginalWeatherConditionDescription { get; private set; }
 
         [JsonProperty("tmp")]
-        public decimal? Temperature { get; set; }
+        public double? Temperature { get; set; }
 
         [JsonProperty("wch")]
-        public decimal? WindChill { get; set; }
+        public double? WindChill { get; set; }
 
         [JsonProperty("hm")]
-        public decimal? Humidity { get; set; }
+        public double? Humidity { get; set; }
 
         [JsonProperty("pr")]
-        public decimal? Pressure { get; set; }
+        public double? Pressure { get; set; }
 
         [JsonProperty("vs")]
-        public decimal? Visibility { get; set; }
+        public double? Visibility { get; set; }
 
         [JsonProperty("cc")]
         public string CloudCoverage { get; private set; }
@@ -41,10 +41,10 @@ namespace FIWAREHub.Models.ParserModels
         public string WindDirection { get; set; }
 
         [JsonProperty("ws")]
-        public decimal? WindSpeed { get; set; }
+        public double? WindSpeed { get; set; }
 
         [JsonProperty("pcpt")]
-        public decimal? Precipitation { get; set; }
+        public double? Precipitation { get; set; }
 
         [JsonProperty("ct")]
         public string City { get; set; }

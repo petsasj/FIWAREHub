@@ -55,29 +55,29 @@ namespace FIWAREHub.Models.Sql
             get { return fOriginalWeatherDescription; }
             set { SetPropertyValue<string>(nameof(OriginalWeatherDescription), ref fOriginalWeatherDescription, value); }
         }
-        decimal? fTemperature;
-        public decimal? Temperature
+        double? fTemperature;
+        public double? Temperature
         {
             get { return fTemperature; }
-            set { SetPropertyValue<decimal?>(nameof(Temperature), ref fTemperature, value); }
+            set { SetPropertyValue<double?>(nameof(Temperature), ref fTemperature, value); }
         }
-        decimal? fHumidity;
-        public decimal? Humidity
+        double? fHumidity;
+        public double? Humidity
         {
             get { return fHumidity; }
-            set { SetPropertyValue<decimal?>(nameof(Humidity), ref fHumidity, value); }
+            set { SetPropertyValue<double?>(nameof(Humidity), ref fHumidity, value); }
         }
-        decimal? fPressure;
-        public decimal? Pressure
+        double? fPressure;
+        public double? Pressure
         {
             get { return fPressure; }
-            set { SetPropertyValue<decimal?>(nameof(Pressure), ref fPressure, value); }
+            set { SetPropertyValue<double?>(nameof(Pressure), ref fPressure, value); }
         }
-        decimal? fVisibility;
-        public decimal? Visibility
+        double? fVisibility;
+        public double? Visibility
         {
             get { return fVisibility; }
-            set { SetPropertyValue<decimal?>(nameof(Visibility), ref fVisibility, value); }
+            set { SetPropertyValue<double?>(nameof(Visibility), ref fVisibility, value); }
         }
         string fCloudCoverage;
         public string CloudCoverage
@@ -91,23 +91,23 @@ namespace FIWAREHub.Models.Sql
             get { return fWindDirection; }
             set { SetPropertyValue<string>(nameof(WindDirection), ref fWindDirection, value); }
         }
-        decimal? fWindChill;
-        public decimal? WindChill
+        double? fWindChill;
+        public double? WindChill
         {
             get { return fWindChill; }
-            set { SetPropertyValue<decimal?>(nameof(WindChill), ref fWindChill, value); }
+            set { SetPropertyValue<double?>(nameof(WindChill), ref fWindChill, value); }
         }
-        decimal? fWindSpeed;
-        public decimal? WindSpeed
+        double? fWindSpeed;
+        public double? WindSpeed
         {
             get { return fWindSpeed; }
-            set { SetPropertyValue<decimal?>(nameof(WindSpeed), ref fWindSpeed, value); }
+            set { SetPropertyValue<double?>(nameof(WindSpeed), ref fWindSpeed, value); }
         }
-        decimal? fPrecipitation;
-        public decimal? Precipitation
+        double? fPrecipitation;
+        public double? Precipitation
         {
             get { return fPrecipitation; }
-            set { SetPropertyValue<decimal?>(nameof(Precipitation), ref fPrecipitation, value); }
+            set { SetPropertyValue<double?>(nameof(Precipitation), ref fPrecipitation, value); }
         }
         string fCity;
         public string City

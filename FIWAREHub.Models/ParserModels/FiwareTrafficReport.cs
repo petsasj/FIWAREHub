@@ -8,20 +8,22 @@ namespace FIWAREHub.Models.ParserModels
     public class FiwareTrafficReport
     {
         // sv
-        public string Severity { get; set; }
+        public int Severity { get; set; }
          
         // sdt
         public DateTime? StartTime { get; set; }
 
-        public string StartLatitude { get; set; }
+        // lat
+        public double? StartLatitude { get; set; }
 
-        public string StartLongitude { get; set; }
+        // lon
+        public double? StartLongitude { get; set; }
 
         // geo
         public string GeoLocation => $"{StartLatitude}, {StartLongitude}";
 
         // dis
-        public decimal? Distance { get; set; }
+        public double? Distance { get; set; }
 
         // desc
         public string Description { get; set; }
@@ -111,6 +113,8 @@ namespace FIWAREHub.Models.ParserModels
                 {nameof(Severity), "sv"},
                 {nameof(StartTime), "sdt"},
                 {nameof(GeoLocation), "geo"},
+                {nameof(StartLatitude), "lat"},
+                {nameof(StartLongitude), "lon"},
                 {nameof(Distance), "dis"},
                 {nameof(Description), "desc"},
                 {nameof(AddressNumber), "addrnr"},
