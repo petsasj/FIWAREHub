@@ -39,8 +39,8 @@ cd FIWAREHub.Docker
 docker-compose up -d
 ```
 
-A very important step is to make sure you download the Dataset files and place them in the FIWAREHub.Datasets folder.
-[Weather Dataset](https://drive.google.com/file/d/103v-GEh8QJS9pvsWb5d9xECDsSbWcTkM/view?usp=sharing)
+A very important step is to make sure you download the Dataset files and place them in the FIWAREHub.Datasets folder.  
+[Weather Dataset](https://drive.google.com/file/d/103v-GEh8QJS9pvsWb5d9xECDsSbWcTkM/view?usp=sharing)  
 [Accidents Dataset](https://drive.google.com/file/d/1T7HHim2xZnBN2-pEHqplzya2VOf1BQR-/view?usp=sharing)
 
 ## Usage example
