@@ -38,11 +38,11 @@ namespace FIWAREHub.Web.Controllers.Api
                 Temperature = 12,
                 WindChill = 0,
                 Humidity = 02,
-                Pressure = (double)33.33,
+                Pressure = 33.33,
                 Visibility = 100,
                 WindDirection = "NWD",
-                WindSpeed = (double)120.1,
-                Precipitation = (double)30.5,
+                WindSpeed = 120.1,
+                Precipitation = 30.5,
                 ReportTime = DateTime.UtcNow
             };
 
