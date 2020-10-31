@@ -55,7 +55,7 @@ namespace FIWAREHub.Web.Controllers
                 .Where(qp => qp.State.ToLower() == state.ToLower())
                 .SingleOrDefault()
                 .ClusterCentroids
-                .Select(cc => new Position {Latitude = cc.Longitude, Longitude = cc.Latitude})
+                .Select(cc => new Position {Latitude = cc.Latitude, Longitude = cc.Longitude})
                 .ToList();
 
             return Json(clusters);
