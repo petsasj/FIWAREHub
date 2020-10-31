@@ -154,6 +154,12 @@ namespace FIWAREHub.Web.Controllers.Api
             return Ok(json);
         }
 
+        /// <summary>
+        /// This API action analyzes data via Machine Learning and applies KMeans algorithm
+        /// to suggest cluster centroids for our data 
+        /// </summary>
+        /// <param name="clustersNumber"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> CreateClusterCentroids(int clustersNumber = 10)
         {

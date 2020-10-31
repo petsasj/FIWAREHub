@@ -19,6 +19,8 @@ Make sure you have Visual Studio or Visual Studio Code installed.
 
 Also this solution is based on Docker and Docker-Compose. 
 
+
+
 ## Installation
 
 OS X & Linux:
@@ -37,7 +39,13 @@ cd FIWAREHub.Docker
 docker-compose up -d
 ```
 
+A very important step is to make sure you download the Dataset files and place them in the FIWAREHub.Datasets folder.
+[Weather Dataset](https://drive.google.com/file/d/103v-GEh8QJS9pvsWb5d9xECDsSbWcTkM/view?usp=sharing)
+[Accidents Dataset](https://drive.google.com/file/d/1T7HHim2xZnBN2-pEHqplzya2VOf1BQR-/view?usp=sharing)
+
 ## Usage example
+
+After verifying that you are meeting all the installation requirements (and downloaded the datasets from the above links), proceed below.
 
 To get started, after cloning the git repository do the following:
 * Navigate into the FIWAREHub.Docker folder. 
