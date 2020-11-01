@@ -19,6 +19,7 @@ namespace FIWAREHub.Web.Controllers
             this._unitOfWork = unitOfWork;
         }
 
+        [Route("{controller}/{action}/{state}/{year}/{quarter}")]
         public IActionResult GeoCluster(int year, int quarter, string state)
         {
             var model = new GeoClusterViewModel
@@ -31,6 +32,7 @@ namespace FIWAREHub.Web.Controllers
             return View(model);
         }
 
+        [Route("{controller}/{action}/{state}/{year}/{quarter}")]
         public IActionResult GetAccidentData(int year, int quarter, string state)
         {
             var qt = this.quarterTuple(quarter);
@@ -47,6 +49,7 @@ namespace FIWAREHub.Web.Controllers
             return Json(roadAccidents);
         }
 
+        [Route("{controller}/{action}/{state}/{year}/{quarter}")]
         public IActionResult GetClusterData(int year, int quarter, string state)
         {
             var clusters = _unitOfWork.Query<QuarterlyPeriod>()

@@ -36,11 +36,11 @@ namespace FIWAREHub.Models.Sql
             get { return fDateTo; }
             set { SetPropertyValue<DateTime>(nameof(DateTo), ref fDateTo, value); }
         }
-        string fHumanReadableName;
-        public string HumanReadableName
+        string fName;
+        public string Name
         {
-            get { return fHumanReadableName; }
-            set { SetPropertyValue<string>(nameof(HumanReadableName), ref fHumanReadableName, value); }
+            get { return fName; }
+            set { SetPropertyValue<string>(nameof(Name), ref fName, value); }
         }
         int fQuarter;
         public int Quarter

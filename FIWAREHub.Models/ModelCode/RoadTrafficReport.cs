@@ -1,6 +1,7 @@
 ﻿using System;
 using DevExpress.Xpo;
 using FIWAREHub.Models.DaemonModels;
+using FIWAREHub.Models.Extensions;
 
 namespace FIWAREHub.Models.Sql
 {
@@ -10,6 +11,7 @@ namespace FIWAREHub.Models.Sql
         public RoadTrafficReport(Session session) : base(session) { }
         public override void AfterConstruction() { base.AfterConstruction(); }
 
+        public int Quarter => this.StartTime.GetValueOrDefault().GetQuarter();
 
         public RoadTrafficReport(Session session, RoadTrafficReportUpdate roadTrafficUpdate) : base(session)
         {

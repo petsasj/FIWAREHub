@@ -1,6 +1,7 @@
 ﻿using System;
 using DevExpress.Xpo;
 using FIWAREHub.Models.DaemonModels;
+using FIWAREHub.Models.Extensions;
 
 namespace FIWAREHub.Models.Sql
 {
@@ -9,6 +10,8 @@ namespace FIWAREHub.Models.Sql
     {
         public WeatherReport(Session session) : base(session) { }
         public override void AfterConstruction() { base.AfterConstruction(); }
+
+        public int Quarter => this.ReportTime.GetValueOrDefault().GetQuarter();
 
         public WeatherReport(Session session, WeatherReportUpdate weatherUpdate) : base(session)
         {

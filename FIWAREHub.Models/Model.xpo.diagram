@@ -63,7 +63,7 @@
         <elementListCompartment Id="fc816faf-c3b8-42fc-94d7-0ece069b5d01" absoluteBounds="7.3379165077209469, 2.9577669668197633, 1.4700000000000002, 0.2493896484375" name="Collections" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </xpObjectShape>
-    <aggregationConnector Id="f5decd54-966e-4098-86a2-e5e088519e69" edgePoints="[(5.5 : 2.42961999416351); (7.32291650772095 : 2.42961999416351)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <aggregationConnector Id="f5decd54-966e-4098-86a2-e5e088519e69" edgePoints="[(5.5 : 2.42961999416351); (7.32291650772095 : 2.42961999416351)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <aggregationMoniker Id="7bc9b130-e0c6-4064-ae53-3d5ee4eaaf99" />
       <relativeChildShapes />
       <nodes>

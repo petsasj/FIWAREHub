@@ -172,23 +172,24 @@ namespace FIWAREHub.Web.Controllers.Api
             foreach (var group in groups)
             {
                 // Group by quarter
-                var quarters = group.GroupBy(g => g.StartTime.GetValueOrDefault().GetQuarter()).ToList();
+                var quarters = group.GroupBy(g => new
+                {
+                    Quarter = g.Quarter, 
+                    Year = g.StartTime.GetValueOrDefault().Year
+                }).ToList();
 
-                foreach (var quarter in quarters)
+                foreach (var yearlyQuarter in quarters)
                 {
                     // Select Coordinates for K-Means algorithm
-                    var coordinates = quarter.Select(rtr => new double[]
+                    var coordinates = yearlyQuarter.Select(rtr => new double[]
                         {rtr.Latitude.GetValueOrDefault(), rtr.Longitude.GetValueOrDefault()}).ToArray();
 
                     // Reporting values for Quarterly Period entity
-                    var lowestTime = quarter.Min(rtr => rtr.StartTime.GetValueOrDefault());
-                    var largestTime = quarter.Max(rtr => rtr.StartTime.GetValueOrDefault());
+                    var lowestTime = yearlyQuarter.Min(rtr => rtr.StartTime.GetValueOrDefault());
+                    var largestTime = yearlyQuarter.Max(rtr => rtr.StartTime.GetValueOrDefault());
 
                     var kmeans = new KMeans(clustersNumber);
                     var clusterCollection = kmeans.Learn(coordinates);
-
-                    //var locations = clusterCollection.Select(cc => new { Latitude = cc.Centroid[0], Longitude = cc.Centroid[1]});
-
 
                     // Create DTO 
                     var quarterPeriod = new QuarterlyPeriod(_unitOfWork)
@@ -196,9 +197,9 @@ namespace FIWAREHub.Web.Controllers.Api
                         DateFrom = lowestTime,
                         DateTo = largestTime,
                         State = group.Key,
-                        HumanReadableName = $"Quarter {quarter.Key}",
-                        Quarter = quarter.Key,
-                        Year = lowestTime.Year
+                        Name = $"{yearlyQuarter.Key.Year} Q{yearlyQuarter.Key.Quarter}",
+                        Quarter = yearlyQuarter.Key.Quarter,
+                        Year = yearlyQuarter.Key.Year
                     };
 
                     clusterCollection.ToList().ForEach(cc =>
