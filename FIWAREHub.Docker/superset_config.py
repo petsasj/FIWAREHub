@@ -15,7 +15,8 @@ CACHE_CONFIG = {
 # superset metadata (slices, connections, tables, dashboards, ...).
 # Note that the connection information to connect to the datasources
 # you want to explore are managed directly in the web UI
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://superset:superset@postgres:5432/superset'
+POSTGRESHOST = os.getenv('POSTGRES_HOST', '')
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://superset:superset@' + POSTGRESHOST + ':5432/superset'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # Flask App Builder configuration
@@ -28,3 +29,4 @@ ROW_LIMIT = 500000
 # Set this API key to enable Mapbox visualizations
 # Gets it from environment values of os, hence the import os
 MAPBOX_API_KEY = os.getenv('MAPBOX_API_KEY', '')
+ENABLE_JAVASCRIPT_CONTROLS = True

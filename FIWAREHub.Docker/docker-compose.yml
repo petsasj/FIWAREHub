@@ -136,7 +136,6 @@ services:
     image: redis
     container_name: thesis_redis
     hostname: redis
-    restart: always
     network_mode: ${NETWORKMODE}
     volumes:
       - redis:/data
@@ -145,7 +144,6 @@ services:
     image: postgres
     container_name: thesis_postgres
     hostname: postgres
-    restart: always
     network_mode: ${NETWORKMODE}
     environment:
       POSTGRES_DB: superset
@@ -158,11 +156,11 @@ services:
     image: amancevice/superset
     container_name: thesis_superset
     hostname: superset
-    restart: always
     depends_on:
       - postgres
       - redis
     environment:
+      POSTGRES_HOST: ${POSTGRESHOST}
       MAPBOX_API_KEY: ${MAPBOX_API_KEY}
     ports:
       - "8088:8088"
