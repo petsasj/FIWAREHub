@@ -172,3 +172,15 @@ services:
       - supersetdata:/var/lib/superset
       - supersetetc:/etc/superset
       - supersethome:/home/superset
+      
+  fiwarehubweb:
+    image: fiwarehubweb:latest
+    container_name: thesis_fiwarehubweb
+    hostname: fiwarehubweb
+    depends_on:
+      - sql-server-db
+    ports:
+      - "8090:80"
+    expose:
+      - "80"
+    network_mode: ${NETWORKMODE}
