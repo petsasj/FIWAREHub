@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DevExpress.Xpo;
 using FIWAREHub.Models.Sql;
 using FIWAREHub.Models.WebModels.ViewModels;
+using FIWAREHub.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FIWAREHub.Web.Controllers
@@ -13,10 +14,12 @@ namespace FIWAREHub.Web.Controllers
     {
 
         private readonly UnitOfWork _unitOfWork;
+        private readonly CachingService _cachingService;
 
-        public GraphsController(UnitOfWork unitOfWork)
+        public GraphsController(UnitOfWork unitOfWork, CachingService cachingService)
         {
             this._unitOfWork = unitOfWork;
+            this._cachingService = cachingService;
         }
 
         [Route("{controller}/{action}/{state}/{year}/{quarter}")]
@@ -74,6 +77,24 @@ namespace FIWAREHub.Web.Controllers
                 4 => (10, 12),
                 _ => (0, 0),
             };
+        }
+
+        public async Task<IActionResult> ProbabilitiesQuery()
+        {
+            var test = _unitOfWork.Query<RoadTrafficReport>()
+                .Join(_unitOfWork.Query<WeatherReport>(),
+                    rtr => rtr.UID,
+                    wr => wr.UID,
+                    (rtr, wr) => new
+                    {
+                        RoadTrafficReport = rtr,
+                        WeatherReport = wr
+                    })
+                .Count(fr => fr.RoadTrafficReport.State == "CA" && fr.WeatherReport.Severity == "Heavy");
+
+            //var mleo = test.ToList();
+            
+            return View();
         }
     }
 }

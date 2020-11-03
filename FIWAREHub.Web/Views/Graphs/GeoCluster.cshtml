@@ -1,7 +1,8 @@
-﻿@model FIWAREHub.Models.WebModels.ViewModels.GeoClusterViewModel
+﻿@using System.Configuration
+@model FIWAREHub.Models.WebModels.ViewModels.GeoClusterViewModel
 
 @{
-    Layout = null;
+    Layout = "_PlainLayout";
     double longitude = 0;
     double latitude = 0;
     if (Model.State == "CA")
@@ -17,29 +18,32 @@
     }
 }
 
-
-<link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-
-<style scoped="">
-    body {
-        width: 100vw;
-        height: 100vh;
-        margin: 0;
-    }
-
-    #container {
-        width: 100%;
-        height: 100%;
-    }
-</style>
-
 <div id="container"></div>
 
-<script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-<script src="https://d3js.org/d3.v6.min.js"></script>
-<script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+@section Styles {
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
 
-<script type="text/javascript">
+    <style scoped="">
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+}
+
+@section Scripts {
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+
+    <script type="text/javascript">
     const deckgl = new deck.DeckGL({
         container: "container",
         mapboxApiAccessToken: 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA',
@@ -128,4 +132,5 @@
             //tooltip:
         });
     }
-</script>
+    </script>
+}

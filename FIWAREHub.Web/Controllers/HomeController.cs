@@ -7,20 +7,24 @@ using FIWAREHub.Parsers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FIWAREHub.Web.Models;
+using FIWAREHub.Web.Services;
 
 namespace FIWAREHub.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CachingService _cachingService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, CachingService cachingService)
         {
             _logger = logger;
+            this._cachingService = cachingService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await _cachingService.InitializeAsync();
             return View();
         }
 

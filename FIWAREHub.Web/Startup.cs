@@ -6,6 +6,7 @@ using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using DevExpress.Xpo.Metadata;
 using FIWAREHub.Models.Sql;
+using FIWAREHub.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,6 +43,7 @@ namespace FIWAREHub.Web
             XpoDefault.DataLayer = new ThreadSafeDataLayer(dictionary, store);
 
             services.AddScoped<UnitOfWork>();
+            services.AddSingleton<CachingService>();
 
             services.AddControllersWithViews();
         }
