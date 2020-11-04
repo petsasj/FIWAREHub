@@ -1,0 +1,65 @@
+﻿@model FIWAREHub.Models.WebModels.ViewModels.ProbabilitiesViewModel
+
+@{
+    Layout = "_PlainLayout";
+}
+
+<div id="container">
+    <div class="col">
+        <h2>After</h2>
+        <label for="Cities">Cities</label>
+        <select name="City" id="Cities"></select>
+
+        @*<label for="Streets">Streets</label>
+        <select name="Streets" id="Streets"></select>*@
+    </div>
+</div>
+
+
+@section Styles {
+    <link href="/lib/chosen-js/chosen.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <style scoped>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    <script src="/lib/chosen-js/chosen.jquery.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            //$("#Cities").chosen({ no_results_text: "Oops, nothing found!" });
+            //$("#Streets").chosen({ no_results_text: "Oops, nothing found!" });
+
+            $("#Cities").select2({
+                ajax: {
+                    url: "/graphs/GetStateCities",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            state: 'CA',
+                            search: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    placeholder: 'Search for a repository',
+                    minimumInputLength: 3
+                }
+            });
+        });
+    </script>
+
+}

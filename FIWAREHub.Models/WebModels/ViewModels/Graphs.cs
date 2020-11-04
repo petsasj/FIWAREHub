@@ -23,4 +23,17 @@ namespace FIWAREHub.Models.WebModels.ViewModels
 
         public double Longitude { get; set; }
     }
+
+    public class ProbabilitiesViewModel
+    {
+        public List<string> States { get; set; }
+
+        public List<(string city, string state)> StateCities { get; set; }
+
+        public List<(string street, string state)> StateStreets { get; set; }
+
+        public List<string> WeatherEvents { get; set; }
+
+        public List<string> WeatherSeverities { get; set; }
+    }
 }

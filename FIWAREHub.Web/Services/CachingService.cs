@@ -43,6 +43,7 @@ namespace FIWAREHub.Web.Services
         private async Task PopulateCities(UnitOfWork uow)
         {
             var stateCities = await uow.Query<RoadTrafficReport>()
+                .Where(rtr => rtr.City != null)
                 .Select(rtr => new {rtr.City, rtr.State})
                 .Distinct()
                 .ToListAsync();
@@ -55,6 +56,7 @@ namespace FIWAREHub.Web.Services
         private async Task PopulateStreets(UnitOfWork uow)
         {
             var stateStreets = await uow.Query<RoadTrafficReport>()
+                .Where(rtr => rtr.Street != null)
                 .Select(rtr => new { rtr.Street, rtr.State})
                 .Distinct()
                 .ToListAsync();

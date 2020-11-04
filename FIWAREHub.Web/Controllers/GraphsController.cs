@@ -79,6 +79,16 @@ namespace FIWAREHub.Web.Controllers
             };
         }
 
+        public async Task<IActionResult> Probabilities()
+        {
+            return View(new ProbabilitiesViewModel
+            {
+                States = _cachingService.States,
+                WeatherEvents = _cachingService.WeatherEvents,
+                WeatherSeverities = _cachingService.WeatherSeverities
+            });
+        }
+
         public async Task<IActionResult> ProbabilitiesQuery()
         {
             var test = _unitOfWork.Query<RoadTrafficReport>()
@@ -92,9 +102,30 @@ namespace FIWAREHub.Web.Controllers
                     })
                 .Count(fr => fr.RoadTrafficReport.State == "CA" && fr.WeatherReport.Severity == "Heavy");
 
+
+
             //var mleo = test.ToList();
             
             return View();
+        }
+
+        public IActionResult GetStateCities(string state, string search, int page)
+        {
+            var objectsPerPage = 100;
+            var skip = objectsPerPage * page - 1;
+
+            // Initialize search term if null
+            search ??= string.Empty;
+
+            var results = _cachingService.StateCities
+                .Where(sc => sc.state == state)
+                .Where(sc => sc.city.Contains(search))
+                .Skip(skip)
+                .Take(objectsPerPage);
+
+            var obj = new {results = results, pagination = new {more = true}};
+
+            return Json(obj);
         }
     }
 }
