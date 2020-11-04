@@ -89,7 +89,8 @@ namespace FIWAREHub.Web.Controllers
             });
         }
 
-        public async Task<IActionResult> ProbabilitiesQuery()
+        [HttpPost]
+        public async Task<IActionResult> ProbabilitiesQuery(string state, string city, string street, string weatherEvent, string weatherSeverity)
         {
             var test = _unitOfWork.Query<RoadTrafficReport>()
                 .Join(_unitOfWork.Query<WeatherReport>(),
@@ -120,10 +121,41 @@ namespace FIWAREHub.Web.Controllers
             var results = _cachingService.StateCities
                 .Where(sc => sc.state == state)
                 .Where(sc => sc.city.Contains(search))
+                .Select(sc => new { id = sc.city, text= sc.city})
                 .Skip(skip)
-                .Take(objectsPerPage);
+                .Take(objectsPerPage + 1)
+                .ToList();
 
-            var obj = new {results = results, pagination = new {more = true}};
+            var obj = new
+            {
+                results = results.Take(objectsPerPage),
+                pagination = new {more = results.Count == objectsPerPage + 1}
+            };
+
+            return Json(obj);
+        }
+
+        public IActionResult GetStateStreets(string state, string search, int page)
+        {
+            var objectsPerPage = 100;
+            var skip = objectsPerPage * page - 1;
+
+            // Initialize search term if null
+            search ??= string.Empty;
+
+            var results = _cachingService.StateStreets
+                .Where(sc => sc.state == state)
+                .Where(sc => sc.street.Contains(search))
+                .Select(sc => new { id = sc.street, text= sc.street})
+                .Skip(skip)
+                .Take(objectsPerPage + 1)
+                .ToList();
+
+            var obj = new
+            {
+                results = results.Take(objectsPerPage),
+                pagination = new {more = results.Count == objectsPerPage + 1}
+            };
 
             return Json(obj);
         }
