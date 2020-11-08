@@ -37,8 +37,17 @@ namespace FIWAREHub.Web
                 return dict;
             }
 
+            var connectionString = string.Empty;
+
+#if DEBUG
+            connectionString = Configuration.GetConnectionString("DbConnectionString");
+#endif
+#if !DEBUG
+            connectionString = Configuration.GetConnectionString("Release");
+#endif
+
             IDataStore store = XpoDefault.GetConnectionProvider(
-                XpoDefault.GetConnectionPoolString(Configuration.GetConnectionString("DbConnectionString"), 5, 100),
+                XpoDefault.GetConnectionPoolString(connectionString, 5, 100),
                 AutoCreateOption.DatabaseAndSchema);
             XpoDefault.DataLayer = new ThreadSafeDataLayer(dictionary, store);
 
