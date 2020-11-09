@@ -35,7 +35,7 @@ Download repository via Github and unzip.
 Navigate to the root of the folder. 
 
 ```sh
-cd FIWAREHub.Docker
+docker-compose build
 docker-compose up -d
 ```
 
@@ -48,12 +48,12 @@ A very important step is to make sure you download the Dataset files and place t
 After verifying that you are meeting all the installation requirements (and downloaded the datasets from the above links), proceed below.
 
 To get started, after cloning the git repository do the following:
-* Navigate into the FIWAREHub.Docker folder. 
+* Navigate into the root folder. 
 * Modify the .env file according to your needs.
 * Make sure that you modify the NETWORKMODE attribute. In its default setting it is setup for use in a custom Docker network. Default values are host or bridge.
 * Set Database passwords according to your needs
+* Run docker-compose build
 * Run docker-compose up -d
-* Open Visual Studio and run Both FIWAREHub.Web and FIWAREHub.SynchronizerDaemon.
 * Using the POSTMAN Collections below, provision both JSON and UltraLight devices
 * That's it!
 
