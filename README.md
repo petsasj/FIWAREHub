@@ -32,16 +32,16 @@ git clone https://github.com/petsasj/FIWAREHub.git
 Windows:
 Download repository via Github and unzip.
 
-Navigate to the root of the folder. 
+Download the Dataset files and place them in the FIWAREHub.Datasets folder.  
+[Weather Dataset](https://drive.google.com/file/d/103v-GEh8QJS9pvsWb5d9xECDsSbWcTkM/view?usp=sharing)  
+[Accidents Dataset](https://drive.google.com/file/d/1T7HHim2xZnBN2-pEHqplzya2VOf1BQR-/view?usp=sharing)
+
+Open terminal/console targetting the root folder. 
 
 ```sh
 docker-compose build
 docker-compose up -d
 ```
-
-A very important step is to make sure you download the Dataset files and place them in the FIWAREHub.Datasets folder.  
-[Weather Dataset](https://drive.google.com/file/d/103v-GEh8QJS9pvsWb5d9xECDsSbWcTkM/view?usp=sharing)  
-[Accidents Dataset](https://drive.google.com/file/d/1T7HHim2xZnBN2-pEHqplzya2VOf1BQR-/view?usp=sharing)
 
 ## Usage example
 
