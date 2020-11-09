@@ -46,7 +46,7 @@ namespace FIWAREHub.SynchronizerDaemon
             // Task that runs SQL Syncing
             var timer = new System.Threading.Timer(async (e) =>
             {
-                await SqlSyncing();   
+                await SqlSyncing();
             }, null, Zero, SyncingPeriod);
 
 
@@ -66,7 +66,7 @@ namespace FIWAREHub.SynchronizerDaemon
 
                         if (change.UpdateDescription == null)
                         {
-                            Report("Update description, skipping cursor update");
+                            Report("Update description missing, skipping cursor update");
                             continue;
                         }
 
@@ -78,7 +78,7 @@ namespace FIWAREHub.SynchronizerDaemon
                         var hasId = documentKey.TryGetValue("_id", out var _id);
                         if (!hasId)
                             continue;
-                        
+
                         if (!(_id is IDictionary<string, object> idRow))
                             continue;
 
@@ -110,7 +110,7 @@ namespace FIWAREHub.SynchronizerDaemon
                         if (entityTypeEnum == EntityTypeEnum.WeatherReport)
                         {
                             Report($"Received Weather Report from device {deviceId}");
-                            
+
                             // Deserialize to Typed object
                             var weatherUpdate = BsonSerializer.Deserialize<WeatherReportUpdate>(change.UpdateDescription.UpdatedFields);
 
@@ -120,13 +120,13 @@ namespace FIWAREHub.SynchronizerDaemon
                             var uow = await getUnitOfWorkAsync();
 
                             // Delay to ensure nothing gets added to lists while SQL Save Operation is happening
-                            while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true|| uow.IsObjectsSaving)
+                            while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true || uow.IsObjectsSaving)
                             {
                                 Report("Lists are locked, waiting");
                                 await Task.Delay(50);
                             }
 
-                            var weatherReport = new WeatherReport(uow, weatherUpdate) {DeviceId = deviceId?.ToString()};
+                            var weatherReport = new WeatherReport(uow, weatherUpdate) { DeviceId = deviceId?.ToString() };
 
                             WeatherReports.Enqueue(weatherReport);
                         }
@@ -143,13 +143,13 @@ namespace FIWAREHub.SynchronizerDaemon
                             var uow = await getUnitOfWorkAsync();
 
                             // Delay to ensure nothing gets added to lists while SQL Save Operation is happening
-                            while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true|| uow.IsObjectsSaving)
+                            while (_unitOfWorkLock || _unitOfWork?.IsObjectsSaving == true || uow.IsObjectsSaving)
                             {
                                 Report("Lists are locked, waiting");
                                 await Task.Delay(50);
                             }
 
-                            var roadTrafficReport = new RoadTrafficReport(uow, roadTrafficUpdate) {DeviceId = deviceId?.ToString()};
+                            var roadTrafficReport = new RoadTrafficReport(uow, roadTrafficUpdate) { DeviceId = deviceId?.ToString() };
 
                             RoadTrafficReports.Enqueue(roadTrafficReport);
                         }
@@ -195,6 +195,15 @@ namespace FIWAREHub.SynchronizerDaemon
                 dict.GetDataStoreSchema(ConnectionHelper.GetPersistentTypes());
                 return dict;
             }
+
+            string connectionString;
+#if DEBUG
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FiwareHub"]
+                .ConnectionString;
+#endif
+#if !DEBUG
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FiwareHubRelease"].ConnectionString;
+#endif
 
             IDataStore store = XpoDefault.GetConnectionProvider(
                 XpoDefault.GetConnectionPoolString(ConnectionHelper.ConnectionString, 5, 100),

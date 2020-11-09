@@ -5,12 +5,25 @@ namespace FIWAREHub.SynchronizerDaemon
     public class OrionContext
     {
         private static readonly MongoCredential Credentials = MongoCredential.CreateCredential("admin", "admin", "epu_ntua_2020");
-        //private static readonly MongoServerAddress MongoServerAddress = new MongoServerAddress("213.239.196.253", 27017);
-        private static readonly MongoServerAddress MongoServerAddress = new MongoServerAddress("192.168.10.254", 27017);
+
+        private static MongoServerAddress MongoServerAddress()
+        {
+            string connectionString;
+
+#if DEBUG
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["Mongo"]
+                .ConnectionString;
+#endif
+#if !DEBUG
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MongoRelease"].ConnectionString;
+#endif
+
+            return new MongoServerAddress(connectionString, 27017);
+        } 
         private static readonly MongoClientSettings MongoClientSettings = new MongoClientSettings
         {
             Credential = Credentials,
-            Server = MongoServerAddress,
+            Server = MongoServerAddress(),
             //ReplicaSetName = "rs0",
             //WriteConcern = WriteConcern.W1,
             //ReadPreference = ReadPreference.Primary

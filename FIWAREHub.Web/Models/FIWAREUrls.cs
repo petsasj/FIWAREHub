@@ -7,17 +7,63 @@ namespace FIWAREHub.Web.Models
 {
     public static class FIWAREUrls
     {
-        private static string baseUrl => "http://192.168.10.254";
+        private static string baseUrl(string connType)
+        {
+            var connectionString = string.Empty;
+
+#if DEBUG
+            connectionString = "http://192.168.10.254";
+#endif
+#if !DEBUG
+            connectionString = connType switch
+            {
+                "json" => "http://thesis-iota-json",
+                "ultralight" => "http://thesis-iota-ul",
+                "orion" => "http://thesis_orion",
+                _ => string.Empty
+            };
+#endif
+            return connectionString;
+        }
+
+        private static string port(string connType)
+        {
+            var port = string.Empty;
+#if DEBUG
+            port = connType switch
+            {
+                "json-north" => "4041",
+                "json-south" => "7896",
+                "ul-north" => "4061",
+                "ul-south" => "7897",
+                "orion" => "1026",
+                _ => string.Empty
+            };
+#endif
+#if !DEBUG
+            port = connType switch
+            {
+                "json-north" => "4041",
+                "json-south" => "7896",
+                "ul-north" => "4041",
+                "ul-south" => "7896",
+                "orion" => "1026",
+                _ => string.Empty
+            };
+#endif
+
+            return port;
+        }
 
         public static string DeviceProvisionPath => "/iot/devices";
 
         public static string ServiceGroupPath => "/iot/services";
 
-        public static string OrionUrl => $"{baseUrl}:1026";
+        public static string OrionUrl => $"{baseUrl("orion")}:{port("orion")}";
 
-        public static string IoTAJsonNorth => $"{baseUrl}:4041";
+        public static string IoTAJsonNorth => $"{baseUrl("json")}:{port("json-north")}";
 
-        public static string IoTAJsonSouth => $"{baseUrl}:7896";
+        public static string IoTAJsonSouth => $"{baseUrl("json")}:{port("json-south")}";
 
         public static string JsonKey => $"JSONKEY.EPU.NTUA";
 
@@ -25,9 +71,9 @@ namespace FIWAREHub.Web.Models
 
         public static string JsonMeasurementUrl(string deviceId) => $"{IoTAJsonSouth}{JsonServiceGroupResource}?k={JsonKey}&i={deviceId}";
 
-        public static string IoTUltraLightNorth => $"{baseUrl}:4061";
+        public static string IoTUltraLightNorth => $"{baseUrl("ultralight")}:{port("ul-north")}";
 
-        public static string IoTUltraLightSouth => $"{baseUrl}:7897";
+        public static string IoTUltraLightSouth => $"{baseUrl("ultralight")}:{port("ul-south")}";
 
         public static string UltraLightKey => $"ULKEY.EPU.NTUA";
 

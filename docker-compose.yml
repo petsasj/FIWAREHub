@@ -175,6 +175,10 @@ services:
       
   fiwarehubweb:
     image: fiwarehubweb:latest
+    build:
+      context: .
+      dockerfile: FIWAREHub.Web/Dockerfile
+      network: host
     container_name: thesis_fiwarehubweb
     hostname: fiwarehubweb
     depends_on:
@@ -183,4 +187,16 @@ services:
       - "8090:80"
     expose:
       - "80"
+    network_mode: ${NETWORKMODE}
+
+  fiwarehubdaemon:
+    image: fiwarehubdaemon:latest
+    build:
+      context: .
+      dockerfile: FIWAREHub.SynchronizerDaemon/Dockerfile
+      network: host
+    container_name: thesis_fiwarehubdaemon
+    hostname: fiwarehubdaemon
+    depends_on:
+      - sql-server-db
     network_mode: ${NETWORKMODE}
