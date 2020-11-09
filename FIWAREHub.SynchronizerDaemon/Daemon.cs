@@ -198,15 +198,14 @@ namespace FIWAREHub.SynchronizerDaemon
 
             string connectionString;
 #if DEBUG
-            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FiwareHub"]
-                .ConnectionString;
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FiwareHub"].ConnectionString;
 #endif
 #if !DEBUG
             connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FiwareHubRelease"].ConnectionString;
 #endif
 
             IDataStore store = XpoDefault.GetConnectionProvider(
-                XpoDefault.GetConnectionPoolString(ConnectionHelper.ConnectionString, 5, 100),
+                XpoDefault.GetConnectionPoolString(connectionString, 5, 100),
                 AutoCreateOption.DatabaseAndSchema);
             XpoDefault.DataLayer = new ThreadSafeDataLayer(dictionary, store);
 

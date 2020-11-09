@@ -11,8 +11,7 @@ namespace FIWAREHub.SynchronizerDaemon
             string connectionString;
 
 #if DEBUG
-            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["Mongo"]
-                .ConnectionString;
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["Mongo"].ConnectionString;
 #endif
 #if !DEBUG
             connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MongoRelease"].ConnectionString;

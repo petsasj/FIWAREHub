@@ -9,6 +9,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["FIWAREHub.Web/FIWAREHub.Web.csproj", "FIWAREHub.Web/"]
 COPY ["FIWAREHub.Parsers/FIWAREHub.Parsers.csproj", "FIWAREHub.Parsers/"]
+COPY ["FIWAREHub.Datasets/FIWAREHub.Datasets.csproj", "FIWAREHub.Datasets/"]
 COPY ["FIWAREHub.Models/FIWAREHub.Models.csproj", "FIWAREHub.Models/"]
 RUN dotnet restore "FIWAREHub.Web/FIWAREHub.Web.csproj"
 COPY . .

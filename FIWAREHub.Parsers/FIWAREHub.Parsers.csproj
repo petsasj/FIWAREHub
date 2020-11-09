@@ -14,7 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FIWAREHub.Datasets\FIWAREHub.Datasets.csproj" />
     <ProjectReference Include="..\FIWAREHub.Models\FIWAREHub.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="WeatherMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

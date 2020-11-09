@@ -11,13 +11,23 @@ namespace FIWAREHub.Parsers
 {
     public class FileParser
     {
-        private const string ExtractLocation = @"..\..\..\..\FIWAREHub.Datasets\extracted\";
+        private const string ExtractLocationDebug = @"..\..\..\..\FIWAREHub.Datasets\extracted\";
 
-        private const string AccidentZip = @"..\..\..\..\FIWAREHub.Datasets\US_Accidents_Dataset_2016_2020.zip";
+        private const string ExtractLocationRelease = @"/ssapp/extracted";
+
+        private const string AccidentZipDebug = @"..\..\..\..\FIWAREHub.Datasets\US_Accidents_Dataset_2016_2020.zip";
+
+        private const string AccidentZipRelease = @"US_Accidents_Dataset_2016_2020.zip";
 
         private const string AccidentCsv = "US_Accidents_June20.csv";
 
-        private const string WeatherZip = @"..\..\..\..\FIWAREHub.Datasets\US_Weather_Events.zip";
+        private const string MappingsLocationDebug = @"..\..\..\..\FIWAREHub.Parsers\WeatherMapping.json";
+
+        private const string MappingsLocationRelease = @"WeatherMapping.json";
+
+        private const string WeatherZipDebug = @"..\..\..\..\FIWAREHub.Datasets\US_Weather_Events.zip";
+
+        private const string WeatherZipRelease = @"US_Weather_Events.zip";
 
         private const string WeatherCsv = "US_WeatherEvents_2016-2019.csv";
 
@@ -30,22 +40,45 @@ namespace FIWAREHub.Parsers
                 throw new System.IO.FileNotFoundException("Current Directory is null");
 
             // Check if csv exists
+
+#if DEBUG
             var weatherReportCsvFullLocation =
-                System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocation, WeatherCsv));
+                System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationDebug, WeatherCsv));
+#endif
+
+#if !DEBUG
+            var weatherReportCsvFullLocation =
+                System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationRelease, WeatherCsv));
+#endif
+            
             var csvExists = System.IO.File.Exists(weatherReportCsvFullLocation);
 
             // if csv is missing, extract it from the zip
             if (!csvExists)
             {
                 // Check if zip exists
+#if DEBUG
                 var weatherReportZipLocation =
-                    System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, WeatherZip));
+                    System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, WeatherZipDebug));
+#endif
+
+#if !DEBUG
+                var weatherReportZipLocation =
+                    System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, WeatherZipRelease));
+#endif
+
                 var zipExists = System.IO.File.Exists(weatherReportZipLocation);
 
                 if (!zipExists)
                     throw new System.IO.FileNotFoundException("Zip is missing from the folder FIWAREHub.Datasets");
 
-                var extractLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocation));
+#if DEBUG
+                var extractLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationDebug));
+#endif
+
+#if !DEBUG
+                var extractLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationRelease));
+#endif
                 System.IO.Compression.ZipFile.ExtractToDirectory(weatherReportZipLocation, extractLocation);
 
                 csvExists = System.IO.File.Exists(weatherReportCsvFullLocation);
@@ -73,22 +106,40 @@ namespace FIWAREHub.Parsers
                 throw new System.IO.FileNotFoundException("Current Directory is null");
 
             // Check if csv exists
+#if DEBUG
             var accidentCsvFullLocation =
-                System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocation, AccidentCsv));
+                System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationDebug, AccidentCsv));
+#endif
+#if !DEBUG
+            var accidentCsvFullLocation =
+      System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationRelease, AccidentCsv));
+#endif
             var csvExists = System.IO.File.Exists(accidentCsvFullLocation);
 
             // if csv is missing, extract it from the zip
             if (!csvExists)
             {
                 // Check if zip exists
+#if DEBUG
                 var accidentZipFullLocation =
-                    System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, AccidentZip));
+    System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, AccidentZipDebug));
+#endif
+#if !DEBUG
+                var accidentZipFullLocation =
+                    System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, AccidentZipRelease));
+#endif
+
                 var zipExists = System.IO.File.Exists(accidentZipFullLocation);
 
                 if (!zipExists)
                     throw new System.IO.FileNotFoundException("Zip is missing from the folder FIWAREHub.Datasets");
 
-                var extractLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocation));
+#if DEBUG
+                var extractLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationDebug));
+#endif
+#if !DEBUG
+                var extractLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, ExtractLocationRelease));
+#endif
                 System.IO.Compression.ZipFile.ExtractToDirectory(accidentZipFullLocation, extractLocation);
 
                 csvExists = System.IO.File.Exists(accidentCsvFullLocation);
@@ -97,7 +148,13 @@ namespace FIWAREHub.Parsers
             }
 
             // Deserialization of statistic-friendly weather mappings
-            var mappingsFileLocation = @"..\..\..\..\FIWAREHub.Parsers\WeatherMapping.json";
+#if DEBUG
+            var mappingsFileLocation = MappingsLocationDebug;
+#endif
+
+#if !DEBUG
+            var mappingsFileLocation = MappingsLocationRelease;
+#endif
             var mappingsFullLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, mappingsFileLocation));
             var mappingExists = System.IO.File.Exists(mappingsFullLocation);
 
@@ -118,7 +175,7 @@ namespace FIWAREHub.Parsers
             // Two top states with most accidents
             var accidentsOfTwoTopStates = accidents
                 // Year 2017, 2018
-                .Where(a => new[] {2017, 2018}.Contains(a.StartTime.GetValueOrDefault().Year))
+                .Where(a => new[] { 2017, 2018 }.Contains(a.StartTime.GetValueOrDefault().Year))
                 // Omits accident reports without weather condition
                 .Where(a => !string.IsNullOrWhiteSpace(a.WeatherCondition))
                 .GroupBy(a => a.State)
