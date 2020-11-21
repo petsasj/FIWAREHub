@@ -24,7 +24,6 @@ namespace FIWAREHub.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await _cachingService.InitializeAsync();
             return View();
         }
 

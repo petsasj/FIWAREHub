@@ -75,6 +75,8 @@ namespace FIWAREHub.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.ApplicationServices.GetService<CachingService>().InitializeAsync().GetAwaiter().GetResult();
+
             app.UseRouting();
 
             app.UseAuthorization();

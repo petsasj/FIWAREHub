@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Accord.MachineLearning;
+using Accord.Math.Distances;
+using Accord.Statistics;
 using DevExpress.Xpo;
+using FIWAREHub.Models.Extensions;
 using FIWAREHub.Models.Sql;
 using FIWAREHub.Models.WebModels.ViewModels;
 using FIWAREHub.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Device.Location;
+using System.Globalization;
 
 namespace FIWAREHub.Web.Controllers
 {
@@ -312,6 +318,51 @@ namespace FIWAREHub.Web.Controllers
             };
 
             return Json(obj);
+        }
+
+        #endregion
+
+        #region ClusterFinder
+
+        [HttpGet]
+        public async Task<IActionResult> ClusterFinder()
+        {
+            var model = new GeoClusterViewModel
+            {
+                Year = 2017,
+                Quarter = 1,
+                State = "CA"
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetNearestCluster(DateTime incidentDay, double? latitude, double? longitude)
+        {
+            if (incidentDay.Equals(DateTime.MinValue) || !latitude.HasValue || !longitude.HasValue)
+                return null;
+
+            var clusterCentroids = await _unitOfWork.Query<QuarterlyPeriod>()
+                .Where(qp => qp.Quarter == incidentDay.GetQuarter())
+                .SelectMany(qp => qp.ClusterCentroids)
+                .ToListAsync();
+
+            var coordinate = new GeoCoordinate(latitude.Value, longitude.Value);
+            var orderedCoordinates = clusterCentroids.Select(x => new GeoCoordinate(x.Latitude, x.Longitude))
+                .OrderBy(x => x.GetDistanceTo(coordinate));
+            var nearest = orderedCoordinates.First();
+
+            var result = clusterCentroids.FirstOrDefault(cc =>
+                cc.Latitude == nearest.Latitude && cc.Longitude == nearest.Longitude);
+
+            if (result == null)
+                throw new ArgumentException("Could not calculate the nearest coordinate");
+
+            var red = 178;
+            var green = 34;
+            var blue = 34;
+            return Json(new {result.Latitude, result.Longitude, red, green, blue, tooltip = "Nearest Ambulance"});
         }
 
         #endregion

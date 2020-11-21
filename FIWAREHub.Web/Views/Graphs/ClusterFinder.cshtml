@@ -1,0 +1,397 @@
+﻿@using System.Configuration
+@model FIWAREHub.Models.WebModels.ViewModels.GeoClusterViewModel
+
+@{
+    Layout = "_PlainLayout";
+    double longitude = 0;
+    double latitude = 0;
+    if (Model.State == "CA")
+    {
+        longitude = -118.719269;
+        latitude = 36.667214;
+    }
+    // TX
+    else
+    {
+        longitude = -99.9018;
+        latitude = 31.9686;
+    }
+}
+
+<form id="form">
+    <div id="control-panel">
+        <div>
+            <label>State</label>
+            <select name="State" id="stateSelect">
+                <option value="CA">California</option>
+                <option value="TX">Texas</option>
+            </select>
+        </div>
+        <div>
+            <label>Date</label>
+            <input type="text" required="" class="input-field datepicker" placeholder="Incident Date">
+        </div>
+        <div>
+            <label>Latitude</label>
+            <input type="number" step="any" required="" name="latitude" id="latitude" placeholder="Pin map or set" />
+        </div>
+        <div>
+            <label>Longitude</label>
+            <input type="number" step="any" required="" name="longitude" id="longitude" placeholder="Pin map or set" />
+        </div>
+
+        <button type="button" class="btn btn-outline-warning btn-sm" id="btnReset">Reset</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary" id="btnSubmit">Submit</button>
+    </div>
+</form>
+
+@section Styles {
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet" />
+
+    <style scoped="">
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #control-panel {
+            font-family: Helvetica, Arial, sans-serif;
+            position: absolute;
+            background: #fff;
+            top: 0;
+            left: 0;
+            margin: 12px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        label {
+            display: inline-block;
+            width: 140px;
+        }
+
+        *, *::before, *::after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            list-style: none;
+            list-style-type: none;
+            text-decoration: none;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            font-weight: normal;
+            line-height: 1.5;
+            color: #353535;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 75rem;
+            width: 100%;
+            padding: 0 2rem;
+            margin: 0 auto;
+        }
+
+        .wrapper {
+            max-width: 40rem;
+            padding: 2rem;
+            margin: 4rem auto;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            border-radius: 4px;
+        }
+
+        .form-group .input-field {
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            display: block;
+            width: 100%;
+            height: auto;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            color: #353535;
+            outline: none;
+            border: none;
+            border-radius: 0.2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+            .form-group .input-field:focus {
+                outline: none;
+            }
+
+        .ui-datepicker {
+            display: none;
+            background-color: #fff;
+            box-shadow: 0 0.125rem 0.3rem rgba(0, 0, 0, 0.2);
+            margin-top: 0.25rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .ui-datepicker-calendar table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .ui-datepicker-calendar thead th {
+            padding: 0.25rem 0;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #353535;
+        }
+
+        .ui-datepicker-calendar tbody td {
+            width: 2.5rem;
+            text-align: center;
+            padding: 0;
+        }
+
+            .ui-datepicker-calendar tbody td a {
+                display: block;
+                border-radius: 50%;
+                line-height: 2rem;
+                transition: 0.3s all;
+                color: #353535;
+                font-size: 0.875rem;
+                text-decoration: none;
+                width: 2rem;
+                height: 2rem;
+                line-height: 2rem;
+            }
+
+                .ui-datepicker-calendar tbody td a:hover {
+                    background: #e17981;
+                    color: #fff;
+                }
+
+                .ui-datepicker-calendar tbody td a.ui-state-active {
+                    background: #d33a47;
+                    color: #fff;
+                }
+
+                .ui-datepicker-calendar tbody td a.ui-state-highlight {
+                    color: #d33a47;
+                    border: 1px solid #d33a47;
+                }
+
+        .ui-datepicker-header a span {
+            display: none;
+        }
+
+        .ui-datepicker-header a.ui-corner-all {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            margin: 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .ui-datepicker-header a.ui-datepicker-prev {
+            left: 0;
+        }
+
+            .ui-datepicker-header a.ui-datepicker-prev::after {
+                font-family: "Material Icons";
+                content: "\e314";
+                font-size: 1.5rem;
+                color: #353535;
+            }
+
+        .ui-datepicker-header a.ui-datepicker-next {
+            right: 0;
+        }
+
+            .ui-datepicker-header a.ui-datepicker-next::after {
+                font-family: "Material Icons";
+                content: "\e315";
+                font-size: 1.5rem;
+                color: #353535;
+            }
+
+        .ui-datepicker-title {
+            text-align: center;
+            line-height: 2rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding-bottom: 0.25rem;
+        }
+
+        .ui-datepicker-week-col {
+            color: #353535;
+            font-weight: 400;
+            font-size: 0.75rem;
+        }
+    </style>
+}
+
+@section Scripts {
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy/mm/dd",
+                duration: "medium"
+            });
+
+            $("#form").on("submit", (e) => {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+
+                var validState = $("#stateSelect").val() != "";
+                var validDate = $(".datepicker").val() != "";
+                var validLat = $("#latitude").val() != "";
+                var validLong = $("#longitude").val() != "";
+
+                if (!validState || !validDate || !validLat || !validLong)
+                    return;
+
+                var state = $("#stateSelect").val();
+                var date = $(".datepicker").val();
+                var latitude = $("#latitude").val();
+                var longitude = $("#longitude").val();
+                var color = [33, 91, 173];
+                var tooltip = "Accident Location";
+
+                $.ajax({
+                    url: "/graphs/GetNearestCluster/?incidentDay=" + date + "&latitude=" + latitude + "&longitude=" + longitude,
+                    type: 'post',
+                    //dataType: 'json',
+                    contentType: 'application/json; charset=utf-8', // serializes the form's elements.
+                    success: function (data) {
+                        clusterData = [];
+                        console.log(data);
+                        var resLat = data.latitude;
+                        var resLong = data.longitude;
+                        var resColor = [data.red, data.green, data.blue];
+                        var resTooltip = data.tooltip;
+
+                        clusterData.push({ latitude:parseFloat(latitude), longitude: parseFloat(longitude), color, tooltip });
+                        clusterData.push({ latitude: resLat, longitude: resLong, color: resColor, tooltip: resTooltip });
+                        renderIconLayer();
+                    }
+                });
+            });
+
+            $("#stateSelect").on("change",
+                () => {
+                    if ($("#stateSelect").val() == "CA") {
+                        mapLatitude = 36.667214;
+                        mapLongitude = -118.719269;
+                    } else {
+                        mapLongitude = -99.9018;
+                        mapLatitude = 31.9686;
+                    }
+                    changeViewState();
+                });
+
+            $("#btnReset").on("click",
+                () => {
+                    $(".datepicker").val("");
+                    $("#latitude").val("");
+                    $("#longitude").val("");
+                    clusterData = [];
+                    renderIconLayer();
+                });
+        });
+
+        var clusterData = [];
+        var mapLatitude = 36.667214;
+        var mapLongitude = -118.719269;
+        const deckgl = new deck.DeckGL({
+            mapboxApiAccessToken: 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA',
+            mapStyle: 'mapbox://styles/mapbox/dark-v9',
+            initialViewState: {
+                longitude: mapLongitude,
+                latitude: mapLatitude,
+                zoom: 5.7,
+                minZoom: 4,
+                maxZoom: 15,
+                pitch: 20
+            },
+            controller: true,
+            onClick: (event) => {
+                clusterData = [];
+                var latitude = event.coordinate[1];
+                var longitude = event.coordinate[0];
+                $("#longitude").val(longitude);
+                $("#latitude").val(latitude);
+                var color = [33, 91, 173];
+                var tooltip = "Accident Location";
+                clusterData.push({ latitude, longitude, color, tooltip });
+                renderIconLayer();
+                return true;
+            }
+        });
+
+        const COLOR_RANGE = [
+            [1, 152, 189],
+            [73, 227, 206],
+            [216, 254, 181],
+            [254, 237, 177],
+            [254, 173, 84],
+            [209, 55, 78]
+        ];
+
+        const ICON_MAPPING = {
+            marker: { x: 0, y: 0, width: 128, height: 128, mask: true }
+        };
+
+        function renderIconLayer() {
+            const iconLayer = new deck.IconLayer({
+                id: 'icon-layer',
+                data: clusterData,
+                pickable: true,
+                autoHighlight: true,
+                // iconAtlas and iconMapping are required
+                // getIcon: return a string
+                iconAtlas: '/img/icon-atlas.png',
+                iconMapping: ICON_MAPPING,
+                getIcon: d => 'marker',
+                alphaCutoff: 0.2,
+                sizeScale: 15,
+                getPosition: d => [d.longitude, d.latitude],
+                getSize: d => 5,
+                getColor: d => d.color,
+                getTooltip: d => d.tooltip
+            });
+            deckgl.setProps({
+                layers: [iconLayer]
+            });
+        }
+
+        function changeViewState() {
+            var viewState = {
+                longitude: mapLongitude,
+                latitude: mapLatitude,
+                zoom: 5.7,
+                minZoom: 4,
+                maxZoom: 15,
+                pitch: 20
+            }
+
+            deckgl.setProps({
+                initialViewState: viewState
+            });
+        }
+    </script>
+}
