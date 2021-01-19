@@ -61,7 +61,6 @@ namespace FIWAREHub.Web.Controllers.Api
                         Type = ea.type
                     }).ToList()
                 }).ToList()
-                    
             };
 
             using var fiwareClient = new FIWAREClient();

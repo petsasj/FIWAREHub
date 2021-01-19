@@ -45,8 +45,6 @@ namespace FIWAREHub.Web.Services
             // Diagnostics
             var progress = 0;
 
-
-
             // Procedure to Perform Progress Updates
             var timer = new System.Threading.Timer(async (e) =>
             {

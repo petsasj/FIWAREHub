@@ -15,7 +15,7 @@ The data was later imported into a SQL Database and analyzed further via the use
 ## Prerequisites
 This solution has been developed using Microsoft dotnet Core.
 Dotnet core in itself is cross-platform and should run on all OS environments.
-Make sure you have Visual Studio or Visual Studio Code installed.
+There are no extra requirements, other than the Docker-Engine
 
 Also this solution is based on Docker and Docker-Compose. 
 
@@ -32,7 +32,7 @@ git clone https://github.com/petsasj/FIWAREHub.git
 Windows:
 Download repository via Github and unzip.
 
-Download the Dataset files and place them in the FIWAREHub.Datasets folder.  
+Download the Dataset files and place the archives in the FIWAREHub.Datasets folder.  
 [Weather Dataset](https://drive.google.com/file/d/103v-GEh8QJS9pvsWb5d9xECDsSbWcTkM/view?usp=sharing)  
 [Accidents Dataset](https://drive.google.com/file/d/1T7HHim2xZnBN2-pEHqplzya2VOf1BQR-/view?usp=sharing)
 
