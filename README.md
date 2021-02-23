@@ -1,10 +1,6 @@
 # FIWAREHub
 > FIWARE as a means of big data analysis.
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
-
 FIWAREHub was released as a dissertation for my academic studies.
 It serves the purpose of creating a FIWARE ecosystem in order to analyze big data.
 In my case, FIWARE IoT agents were provisioned as a simulation layer for big data, fed from a dataset store.
@@ -16,9 +12,6 @@ The data was later imported into a SQL Database and analyzed further via the use
 This solution has been developed using Microsoft dotnet Core.
 Dotnet core in itself is cross-platform and should run on all OS environments.
 There are no extra requirements, other than the Docker-Engine
-
-Also this solution is based on Docker and Docker-Compose. 
-
 
 
 ## Installation
@@ -84,7 +77,8 @@ The names are pretty explanatory and descriptions have been added within them.
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0366d7edf1b7f748dcd0)
 
 ## Release History
-
+* 1.0.0
+	* Initial Release
 * 0.2.0
 	* Software architecture implemented
 * 0.0.1
